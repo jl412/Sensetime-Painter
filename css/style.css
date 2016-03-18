@@ -17,6 +17,7 @@ a{
 
 .headline{
 	text-transform: uppercase;
+	margin-top: -40px;
 	margin-bottom: 35px;
 	font-size: 48px;
 	text-align: center;
@@ -31,7 +32,6 @@ a{
 
 .content-text{
 	font-size: 18px;
-	margin-top: 20px;
 	margin-bottom: 20px;
 	padding: 15px;
 	background-color: rgba(0,0,0, 0.0);
@@ -192,7 +192,7 @@ li:hover .menu-underline{
 
 .content-img{
 	width: auto;
-	margin-top: 20px;
+	margin-top: 40px;
 	margin-bottom: 70px;
 	font-size: 72px;
 	text-align: center;
@@ -231,7 +231,6 @@ li:hover .menu-underline{
 
 .zone{
 	/*padding: 50px !important;*/
-	padding-top: 50% !important;
 	height: 100% !important;
 	max-height: 500px !important; 
 	border-radius: 15px !important;
@@ -246,7 +245,9 @@ li:hover .menu-underline{
 }
 
 .dz-message{
-	margin: 0 !important;
+	margin-top: 0 !important;
+	position: relative;
+	top: 50%;
 	-ms-transform: translateY(-50%); /* IE 9 */
    	-webkit-transform: translateY(-50%); /* Safari */
     transform: translateY(-50%); 
@@ -382,6 +383,12 @@ li:hover .menu-underline{
 
 }
 
+@media only screen and (max-device-width: 992px){
+	.page-btn-wrapper{
+		height: 60px;
+	}
+}
+
 @media only screen and (max-device-width: 736px){
 
 	.content-text{
@@ -402,9 +409,7 @@ li:hover .menu-underline{
 	width: auto;
 	height: 100px;
 }
-	.page-btn-wrapper{
-		height: 60px;
-	}
+
 
 	#art-lib-content{
 		height: 400px;
