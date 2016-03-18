@@ -24,20 +24,18 @@ a{
 }
 
 .subheadline{
-	margin-top: 50px;
+	text-transform: uppercase;
 	margin-bottom: 20px;
 	font-size: 22px;
-	text-align: center;
 }
 
 .content-text{
 	font-size: 18px;
+	margin-top: 15px;
 	margin-bottom: 20px;
 	padding: 15px;
 	background-color: rgba(0,0,0, 0.0);
-	border-radius: 15px;
-	/*margin-bottom: 160px;*/
-	border: 2px solid #fff;
+	
 }
 
 .centered-md{
@@ -183,11 +181,26 @@ li:hover .menu-underline{
 	padding-right: 15%;
 }
 
+.snap-left{
+	vertical-align: middle;
+	color: #111;
+	padding: 15px;
+	padding-top: 75px;
+	position: fixed;
+	left: 0;
+	top: 0;
+	margin-top: 50px;
+	height: 100%;
+	width: 250px;
+	background-color: rgba(255,255,255,0.8);
+}
+
 .page{
 	position: absolute;
 	float: left;
 	height: 100%;
 	width: 100%;
+	overflow: auto;
 }
 
 .content-img{
@@ -200,10 +213,8 @@ li:hover .menu-underline{
 
 .content-img img{
 	width: auto;
-	height: 150px;
+	height: 200px;
 }
-
-
 
 
 .content-wrapper{
@@ -213,15 +224,29 @@ li:hover .menu-underline{
 }
 
 .tiltLeft{
+	transition: transform 0.3s;
     -ms-transform: rotate(7deg); /* IE 9 */
     -webkit-transform: rotate(7deg); /* Chrome, Safari, Opera */
     transform: rotate(7deg);
 }
 
 .tiltRight{
+	transition: transform 0.3s;
     -ms-transform: rotate(-7deg); /* IE 9 */
     -webkit-transform: rotate(-7deg); /* Chrome, Safari, Opera */
     transform: rotate(-7deg);
+}
+
+.tiltLeft:hover{
+	transform: rotate(9deg) scale(1.2,1.2);
+	-ms-transform: rotate(9deg) scale(1.2,1.2);
+	-webkit-transform: rotate(9deg) scale(1.2,1.2);
+}
+
+.tiltRight:hover{
+	transform: rotate(-9deg) scale(1.1,1.1);
+	-ms-transform: rotate(-9deg) scale(1.1,1.1);
+	-webkit-transform: rotate(-9deg) scale(1.1,1.1);
 }
 
 
@@ -263,9 +288,11 @@ li:hover .menu-underline{
 }
 
 .dropzone .dz-preview{
+	position: relative;
+	top: 50%;
 	-ms-transform: translateY(-50%); /* IE 9 */
    	-webkit-transform: translateY(-50%); /* Safari */
-    transform: translateY(-50%); 
+    transform: translateY(-50%);  
 }
 
 .browse-btn{
@@ -297,7 +324,7 @@ li:hover .menu-underline{
 	width: 100%;
 	padding-left: 15%;
 	padding-right: 15%;
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	height: 140px;
 }
@@ -375,6 +402,14 @@ li:hover .menu-underline{
     display: none;
 }
 
+.fadeChain {
+	position:relative;
+	top: 50px;
+	opacity: 0;
+    visibility: hidden;
+}
+
+
 @media only screen and (max-device-width: 1600px){
 	.content-img img{
 	width: auto;
@@ -384,6 +419,11 @@ li:hover .menu-underline{
 }
 
 @media only screen and (max-device-width: 992px){
+	.content-text{
+		border-radius: 15px;
+		border: 2px solid #fff;
+	}
+
 	.page-btn-wrapper{
 		height: 60px;
 	}
@@ -391,7 +431,12 @@ li:hover .menu-underline{
 
 @media only screen and (max-device-width: 736px){
 
+	.headline{
+		margin-top: 90px;
+	}
+
 	.content-text{
+		font-size: 14px;
 		margin-bottom: 75px;
 	}
 
