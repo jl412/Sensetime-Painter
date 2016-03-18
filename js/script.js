@@ -1,6 +1,6 @@
 
 function snapContent() {
-    if ($('.page-btn-wrapper').css("height") == "140px") {
+    if ($('.page-btn-wrapper').css("content") == "") {
         $('#page0 .content-text').addClass("snap-left");
     }else{
         $('#page0 .content-text').removeClass("snap-left");
