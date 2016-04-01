@@ -39,12 +39,35 @@ function showImg() {
     }
 }
 
+function showOutput() {
+    // Hide to left / show from left
+    $(this).parents(".page:first").hide("slide", {direction: "left"}, 500);
+
+    // Show from right / hide to right
+    $("#page3").show("slide", {direction: "right"}, 500);
+
+    $('.result-img').delay(500).show("slide", {direction: "down"}, 300);
+}
+
+function restart(){
+    $(this).parents(".page:first").hide("slide", {direction: "right"}, 80);
+    $("#page2").show("slide", {easing: "linear",direction: "left"}, 80);
+    $("#page2").delay(80).hide("slide", {easing: "linear", direction: "right"}, 80);
+    $("#page1").delay(80).show("slide", {easing: "linear", direction: "left"}, 80);
+    $("#page1").delay(240).hide("slide", {easing: "linear", direction: "right"}, 80);
+    $("#page0").delay(360).show("slide", {easing: "linear", direction: "left"}, 80);
+    $(".result-img").delay(400).css({"display" : "none"});
+}
+
 snapContent();
 showImg();
 
 
 $('.next-step').click(moveRight);
 $('.back-step').click(moveLeft);
+$('.submit').click(showOutput);
+$('.restart').click(restart);
 $('.back-step').click(showImg);
+
 
 $( window ).resize(snapContent);

@@ -1,0 +1,52 @@
+{
+	"items": [
+	{
+		"name": "black",
+		"value": 1,
+		"thumbnail": "url('img/frames/01.png')",
+		"padding": {
+			"left": 59,
+			"right": 62,
+			"top": 68,
+			"bottom": 68
+		},
+		"size":{
+			"width" : 700,
+			"height": 494
+		},
+		"description": ""
+	},
+	{
+		"name": "thick",
+		"value": 2,
+		"thumbnail": "url('img/frames/02.png')",
+		"padding": {
+			"left": 125,
+			"right": 125,
+			"top": 125,
+			"bottom": 125
+		},
+		"size":{
+			"width" : 1000,
+			"height": 797
+		},
+		"description": ""
+	},
+	{
+		"name": "gold-thin",
+		"value": 3,
+		"thumbnail": "url('img/frames/03.png')",
+		"padding": {
+			"left": 164,
+			"right": 173,
+			"top": 172,
+			"bottom": 170
+		},
+		"size":{
+			"width" : 1748,
+			"height": 1238
+		},
+		"description": ""
+	},
+]
+}

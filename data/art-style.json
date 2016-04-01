@@ -1,42 +1,45 @@
 {
-	"name" : "Oil Paint"
-	"thumbnail" : "url()",
-	"value" : 102,
-	"description" : ""
-},
+	"items": [
+	{
+		"name": "Oil Paint",
+		"thumbnail": "url('img/Art-Styles/oil.jpg')",
+		"value": 102,
+		"description": ""
+	},
 
-{
-	"name" : "Gouache Paint"
-	"thumbnail" : "url()",
-	"value" : 301,
-	"description" : ""
-},
+	{
+		"name": "Gouache Paint",
+		"thumbnail": "url('img/Art-Styles/gouache.jpg')",
+		"value": 301,
+		"description": ""
+	},
 
-{
-	"name" : "Line Watercolor"
-	"thumbnail" : "url()",
-	"value" : 305,
-	"description" : ""
-},
+	{
+		"name": "Line Watercolor",
+		"thumbnail": "url('img/Art-Styles/line.jpg')",
+		"value": 305,
+		"description": ""
+	},
 
-{
-	"name" : "Pure Watercolor"
-	"thumbnail" : "url()",
-	"value" : 306,
-	"description" : ""
-},
+	{
+		"name": "Pure Watercolor",
+		"thumbnail": "url('img/Art-Styles/water.jpg')",
+		"value": 306,
+		"description": ""
+	},
 
-{
-	"name" : "Black & White Silouette"
-	"thumbnail" : "url()",
-	"value" : 501,
-	"description" : ""
-},
+	{
+		"name": "Black & White Silouette",
+		"thumbnail": "url('img/Art-Styles/bw.jpg')",
+		"value": 501,
+		"description": ""
+	},
 
-{
-	"name" : "Ad Poster"
-	"thumbnail" : "url()",
-	"value" : 601,
-	"description" : ""
-},
-
+	{
+		"name": "Ad Poster",
+		"thumbnail": "url('img/Art-Styles/ad.jpg')",
+		"value": 601,
+		"description": ""
+	}
+]
+}
