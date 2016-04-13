@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="css/dropzone.css">
 
 	<link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/slider.css">
 
 	<script src="js/dropzone.js"></script>
 
@@ -45,6 +46,11 @@
 
 			</div>
 		</div>
+
+    <div id="preview-scene" class="carousel slide nodisplay" data-ride="carousel" data-interval="false">
+      <div class="carousel-inner" role="listbox" id="show-scene">
+      </div>
+    </div>
 
 		<!-- Nav Bar -->
 		<nav class="navbar navbar-default">
@@ -92,7 +98,7 @@
               </div>
   					</div>
   					<div class="row">
-  						<div class="content-text snap-left">
+  						<div class="content-text snap snap-left">
   							<p class="subheadline">Create your own arts with 3 steps!</p> 
   							<ul>
   								<li>First, simply upload a photo you want to get painted.</li>
@@ -217,19 +223,50 @@
 
   		<!-- page 3 -->
       <div class="page nodisplay" role="page" id="page3" value="3">
+
         <div class="valign-p">
           <div class="valign-c page-padding contaier-fluid">
-            <div class="content-wrapper">
-              <div class="row dz-container">
+              <div class="row">
                 <div class="dz-header">
                   <p>Choose your frame</p>
                 </div>
-                <div class="result-img nodisplay"><img src="output/result.jpg"></div>
+                <div class="frame-wrapper" id="show-frame">
+                  <div class="frame-control">
+                    <a class="left carousel-control" href="#" role="button">
+                      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#" role="button">
+                      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
+                </div>
+                
               </div>
+
+            </div>
+        </div>
+
+        <div class="row visible-lg-block">
+          <div class="content-text snap snap-right expand">
+            <div id="frame-carousel" class="carousel slide vertical" data-interval="false">
+            <div class="toggle-horizontal" role="button">
+              <span class="glyphicon glyphicon-arrow-right rotate2"></span>
+            </div>
+            <a class="carousel-control" href="#frame-carousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-menu-up"></span>
+            </a>
+              <div class="carousel-inner">
+                
+              </div>
+              <a class="carousel-control" href="#frame-carousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-menu-down"></span>
+            </a>
             </div>
           </div>
         </div>
-        
+          
         <div class="page-btn-wrapper">
           <div class="centered-md">
             <div class="row">
@@ -237,23 +274,50 @@
                 <a href="#"><div type="button" class="page-btn restart"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>Start Over</div></a>
               </div>
               <div class="right-button clearfloat">
-              <a href="#"><div type="button" class="page-btn">Submit!</div></a>
+              <a href="#"><div type="button" class="page-btn">Confirm</div></a>
               </div>
             </div>
           </div>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="resultImgZoom" tabindex="-1" role="dialog" aria-labelledby="resultImageLebal">
+        </div>
+
+        <div class="switch-to-scene" role="button">
+          <p>preview in scene</p>
+          <p class="nodisplay"></br>back</p>
+          <span class="glyphicon glyphicon-download rotate2"></span>
+        </div>
+
+        <div class="scene-carousel-wrapper hidden-xs hidden-sm nodisplay expand">
+          <div id="scene-carousel" class="carousel slide" data-interval="false">
+            <div class="toggle-scene-carousel"><span class="glyphicon glyphicon-menu-down rotate2" role="button"></span></div>
+            <div class="toggle-btn-plate"></div>
+            <div class="carousel-inner">
+              <a class="left carousel-control" href="#scene-carousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+              </a>
+              <a class="right carousel-control" href="#scene-carousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+              </a>
+            </div><!-- /carousel-inner -->
+            
+          </div>
+        </div>
       </div>
+
 
   	</div>
 
     <!-- JQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"   integrity="sha256-WyjlLy3rvVSitHOXMctYkMCOU6GAletPg+qniNKLCQM="   crossorigin="anonymous"></script>
+  <script src="js/painter.js"></script>
+  <script src="js/script.js"></script>
+
   
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-	<script src="js/script.js"></script>
-  <script src="js/painter.js"></script>
   <script src="js/uploader.js"></script>
   <script src="js/execute.js"></script>
 </body>

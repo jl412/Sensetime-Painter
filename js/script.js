@@ -1,9 +1,9 @@
 
 function snapContent() {
     if ($('.page-btn-wrapper').css("content") == "") {
-        $('#page0 .content-text').addClass("snap-left");
+        $('#page0 .content-text').addClass("snap snap-left");
     }else{
-        $('#page0 .content-text').removeClass("snap-left");
+        $('#page0 .content-text').removeClass("snap-left snap");
     }
 }
 
@@ -46,7 +46,7 @@ function showOutput() {
     // Show from right / hide to right
     $("#page3").show("slide", {direction: "right"}, 500);
 
-    $('.result-img').delay(500).show("slide", {direction: "down"}, 300);
+    $('.result-img').delay(600).css({"visibility":"visible"}).animate({opacity: "1"}, 700, "swing");
 }
 
 function restart(){
@@ -56,8 +56,9 @@ function restart(){
     $("#page1").delay(80).show("slide", {easing: "linear", direction: "left"}, 80);
     $("#page1").delay(240).hide("slide", {easing: "linear", direction: "right"}, 80);
     $("#page0").delay(360).show("slide", {easing: "linear", direction: "left"}, 80);
-    $(".result-img").delay(400).css({"display" : "none"});
+    $(".result-img").delay(400).css({"visibility" : "hidden", "opacity" : "0"});
 }
+
 
 snapContent();
 showImg();
@@ -68,6 +69,16 @@ $('.back-step').click(moveLeft);
 $('.submit').click(showOutput);
 $('.restart').click(restart);
 $('.back-step').click(showImg);
+$('.toggle-horizontal').click(function () {
+    $(this).children('span').toggleClass('rotate');
+    $(this).children('span').toggleClass('rotate2');
+    $(this).toggleClass('clicked');
+    $(this).parents('.snap:first').toggleClass('shrink');
+    $(this).parents('.snap:first').toggleClass('expand');
+    $("#page3 #scene-carousel").toggleClass("nomargin");
+});
+
+
 
 
 $( window ).resize(snapContent);
