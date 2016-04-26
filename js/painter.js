@@ -4,7 +4,6 @@ var numOfFrame;
 var frames = [];
 var scenes = [];
 var sceneLocations = [];
-var framesLocations = [];
 var conetentMaxWidth = 600;
 var frameHeight = 100000;
 var wrapperWidth = 0;
@@ -113,8 +112,19 @@ function setFrame(){
         var displayWidth = conetentMaxWidth + displayPaddingLeft + displayPaddingRight;
         var displayHeight = contentHeight + displayPaddingTop + displayPaddingBottom;
 
-        frames[i] = {value: i, contentHeight: contentHeight, contentWidth: conetentMaxWidth, displayHeight: displayHeight, displayWidth: displayWidth, resHeight: data.items[i].size.height, resWidth: data.items[i].size.width, paddingTop: data.items[i].padding.top, paddingLeft: data.items[i].padding.left};
-        framesLocations[i] = locateFrame(sceneLocations[$('#show-scene .item.active').attr("value")], frames[i]);
+        frames[i] = {
+          value: i, 
+          contentHeight: contentHeight, 
+          contentWidth: conetentMaxWidth, 
+          displayHeight: displayHeight, 
+          displayWidth: displayWidth,
+          resContentWidth: data.items[i].size.width - data.items[i].padding.left - data.items[i].padding.right,
+          resContentHeight: data.items[i].size.height - data.items[i].padding.top - data.items[i].padding.bottom,
+          resHeight: data.items[i].size.height, 
+          resWidth: data.items[i].size.width, 
+          paddingTop: data.items[i].padding.top, 
+          paddingLeft: data.items[i].padding.left};
+        
 
         if (displayHeight > wrapperHeight) {
           wrapperHeight = displayHeight;
@@ -152,8 +162,143 @@ function setFrame(){
     });
 }
 
-function locateFrame(scenelocation, frame){
-  return {value: frame.value, }
+function repositionFrame(){
+  for (var i = 0; i < frames.length; i++) {
+
+    if (i != currentFrame) {
+      $("#frame" + i +" .frame-item").css({
+        left: "50%", 
+        top: "50%", 
+        width: frames[i].displayWidth + "px", 
+        height: frames[i].displayHeight + "px"});
+
+      $("#frame" + i +" .frame-item").css({"transform": "translate(-50%, -50%)"});
+
+      $("#frame" + i +" .framebase").css({
+        "width": (frames[i].contentWidth + 2) + "px", 
+        "height": (frames[i].contentHeight + 2) + "px", 
+        "left": "50%", 
+        "top": "50%"});
+      $("#frame" + i +" .framebase").css({"transform": "translate(-50%, -50%)"});
+    }  
+
+  }
+
+  $(".frame-control").animate({
+    "width": wrapperWidth + "px", 
+    "height": "100%", 
+    "left": "0", 
+    "top": "0"}, 500, "swing");
+
+  $(".frame-control").css({"position": "relative"});
+
+  $("#frame" + currentFrame +" .frame-item").animate({
+    left: "50%", 
+    top: "50%", 
+    width: frames[currentFrame].displayWidth + "px", 
+    height: frames[currentFrame].displayHeight + "px"}, 500, "swing");
+
+  $("#frame" + currentFrame +" .frame-item").css({"transform": "translate(-50%, -50%)"});
+
+  $("#frame" + currentFrame +" .framebase, .result-img, .toggle-result-img").animate({
+    "width": (frames[currentFrame].contentWidth + 2) + "px", 
+    "height": (frames[currentFrame].contentHeight + 2) + "px", 
+    "left": "50%", 
+    "top": "50%"}, 500, "swing");
+
+  $("#frame" + currentFrame +" .framebase, .result-img, .toggle-result-img").css({"transform": "translate(-50%, -50%)"});
+
+}
+
+function locateFrame(sceneLocation, frame){
+  
+  var extraMarginTop;
+  var extraMarginLeft;
+  var displayHeight;
+  var displayWidth;
+  var proportion;
+  var actualPaddingTop;
+  var actualPaddingLeft;
+  var frameMarginTop;
+  var frameMarginLeft;
+  var contentWidth;
+  var contentHeight;
+  var widerThenLoacation = (sceneLocation.sceneContentWidth / sceneLocation.sceneContentHeight) < (frame.resWidth / frame.resHeight);
+
+  if (widerThenLoacation) {
+    proportion = sceneLocation.sceneContentWidth / frame.resWidth;
+    displayHeight = proportion*frame.resHeight;
+    displayWidth = sceneLocation.sceneContentWidth;
+    extraMarginTop = (sceneLocation.sceneContentHeight - displayHeight) / 2;
+    extraMarginLeft = 0;
+  }else{
+    proportion = sceneLocation.sceneContentHeight / frame.resHeight;
+    displayWidth = proportion*frame.resWidth;
+    displayHeight = sceneLocation.sceneContentHeight;
+    extraMarginTop = 0;
+    extraMarginLeft = (sceneLocation.sceneContentWidth - frame.displayWidth) / 2;
+  }
+  contentWidth = proportion*frame.resContentWidth;
+  contentHeight = proportion*frame.resContentHeight;
+  frameMarginTop =  extraMarginTop + sceneLocation.sceneActualPaddingTop;
+  frameMarginLeft = extraMarginLeft + sceneLocation.sceneActualPaddingLeft;
+  actualPaddingTop = frameMarginTop + (frame.paddingTop * proportion);
+  actualPaddingLeft = frameMarginLeft + (frame.paddingLeft * proportion);
+
+  return {value: frame.value, displayHeight: displayHeight, displayWidth: displayWidth, actualPaddingTop: actualPaddingTop, actualPaddingLeft: actualPaddingLeft, frameMarginTop: frameMarginTop, frameMarginLeft: frameMarginLeft, contentWidth: contentWidth, contentHeight: contentHeight };
+}
+
+function relocateFrame(sceneLocation, frameLocation){
+  $(".frame-control").animate({
+    "width": sceneLocation.sceneContentWidth + "px", 
+    "height": sceneLocation.sceneContentHeight + "px", 
+    "left": sceneLocation.sceneActualPaddingLeft + "px", 
+    "top": sceneLocation.sceneActualPaddingTop + "px"}, 500, "swing");
+
+  $(".frame-control").css({"position": "absolute"});
+
+  $("#frame" + currentFrame +" .frame-item").animate({
+    left: frameLocation.frameMarginLeft + "px", 
+    top: frameLocation.frameMarginTop + "px", 
+    width: frameLocation.displayWidth + "px", 
+    height: frameLocation.displayHeight + "px"}, 500, "swing");
+
+  $("#frame" + currentFrame +" .frame-item").css({"transform": "initial"});
+
+  $("#frame" + currentFrame +" .framebase, .result-img, .toggle-result-img").animate({
+    "width": (frameLocation.contentWidth + 2) + "px", 
+    "height": (frameLocation.contentHeight + 2) + "px", 
+    "left": (frameLocation.actualPaddingLeft - 1) + "px", 
+    "top": (frameLocation.actualPaddingTop - 1) + "px"}, 500, "swing");
+
+  $("#frame" + currentFrame +" .framebase, .result-img, .toggle-result-img").css({"transform": "initial"});
+}
+
+function resizeFrame(sceneLocation, frameLocation, frameID){
+
+  console.log("resizing frame" + frameID);
+  $(".frame-control").css({
+    "width": sceneLocation.sceneContentWidth + "px", 
+    "height": sceneLocation.sceneContentHeight + "px", 
+    "left": sceneLocation.sceneActualPaddingLeft + "px", 
+    "top": sceneLocation.sceneActualPaddingTop + "px"});
+  $(".frame-control").css({"position": "absolute"});
+
+  $("#frame" + frameID +" .frame-item").css({
+    left: frameLocation.frameMarginLeft + "px", 
+    top: frameLocation.frameMarginTop + "px", 
+    width: frameLocation.displayWidth + "px", 
+    height: frameLocation.displayHeight + "px"});
+
+  $("#frame" + frameID +" .frame-item").css({"transform": "initial"});
+
+  $("#frame" + frameID +" .framebase, .result-img, .toggle-result-img").css({
+    "width": (frameLocation.contentWidth + 2) + "px", 
+    "height": (frameLocation.contentHeight + 2) + "px", 
+    "left": (frameLocation.actualPaddingLeft - 1) + "px", 
+    "top": (frameLocation.actualPaddingTop - 1) + "px"});
+  $("#frame" + frameID +" .framebase, .result-img, .toggle-result-img").css({"transform": "initial"});
+
 }
 
 function locate(scene){
@@ -194,6 +339,7 @@ function relocate(sceneLocation, resize){
     sceneLocations[sceneLocation.value] = locate(scenes[sceneLocation.value]);
   }else if(sceneLocation.widerThenWindow && (windowWidth!=$(window).width())){
     sceneLocations[sceneLocation.value].sceneActualPaddingLeft = sceneLocation.sceneActualPaddingLeft -  ( (windowWidth - $(window).width()) / 2 );
+
   }else if ( (!sceneLocation.widerThenWindow) && (windowHeight!=$(window).height()) ){
     sceneLocations[sceneLocation.value].sceneActualPaddingTop = sceneLocation.sceneActualPaddingTop - ( (windowHeight - $(window).height()) / 2 );
   }
@@ -227,11 +373,11 @@ function setScene(){
           previewContent += '<div class="item" id="row' + Math.floor(i / itemInRow) + '">';
         };
         previewContent += '<div class="scene-thumb-wrapper"><div class="thumb" value="' + i + '" style="background-image: '+ data.items[i].sceneImg + '" data-target="#preview-scene" data-slide-to="'+ i +'"></div></div>';
-        if ( ( (i + 1) % itemInRow == 0) || ( (i + 1) ==  numOfFrame) ) {
+        if ( ( (i + 1) % itemInRow == 0) || ( (i + 1) ==  numOfFrame
+        
+) ) {
           previewContent += '</div>';
         };
-
-        
 
 
       }
@@ -250,26 +396,46 @@ function setScene(){
 
 function moveFrameLeft(frameToShow){
 
-  // alert("frameToshow:" + frameToShow);
-    // Hide to left / show from left
-    $("#frame" + currentFrame).hide("slide", {direction: "right"}, 500);
-
-    // Show from right / hide to right
-    $("#frame" + frameToShow).show("slide", {direction: "left"}, 500);
+  if ($(".switch-to-scene span").hasClass("rotate")) {
+    console.log("not in scene");
+    var newFrameLocation = locateFrame(sceneLocations[$("#preview-scene .item.active").attr("value")], frames[frameToShow]);
+    resizeFrame(sceneLocations[$("#preview-scene .item.active").attr("value")], newFrameLocation, frameToShow);
+  }else{
     $(".toggle-result-img").css({width: (frames[frameToShow].contentWidth+2) + 'px', height: (frames[frameToShow].contentHeight+2) + 'px'});
     $(".result-img").animate({width: (frames[frameToShow].contentWidth+2) + 'px', height: (frames[frameToShow].contentHeight+2) + 'px'}, 500, "swing");
-    currentFrame = frameToShow;
+  }
+
+  // alert("frameToshow:" + frameToShow);
+    // Hide to left / show from left
+  $("#frame" + currentFrame).hide("slide", {direction: "right"}, 500);
+
+    // Show from right / hide to right
+  $("#frame" + frameToShow).show("slide", {direction: "left"}, 500);
+  currentFrame = frameToShow;
 }
 
 function moveFrameRight(frameToShow){
-    // Hide to left / show from left
-    $("#frame" + currentFrame).hide("slide", {direction: "left"}, 500);
 
-    // Show from right / hide to right
-    $("#frame" + frameToShow).show("slide", {direction: "right"}, 500);
+  if ($(".switch-to-scene span").hasClass("rotate")) {
+    console.log("in scene");
+    var newFrameLocation = locateFrame(sceneLocations[$("#preview-scene .item.active").attr("value")], frames[frameToShow]);
+    resizeFrame(sceneLocations[$("#preview-scene .item.active").attr("value")], newFrameLocation, frameToShow);
+  }else{
+    console.log("not in scene");
     $(".toggle-result-img").css({width: (frames[frameToShow].contentWidth+2) + 'px', height: (frames[frameToShow].contentHeight+2) + 'px'});
     $(".result-img").animate({width: (frames[frameToShow].contentWidth+2) + 'px', height: (frames[frameToShow].contentHeight+2) + 'px'}, 500, "swing");
-    currentFrame = frameToShow; 
+  }
+    // Hide to left / show from left
+  $("#frame" + currentFrame).hide("slide", {direction: "left"}, 500);
+
+    // Show from right / hide to right
+  $("#frame" + frameToShow).show("slide", {direction: "right"}, 500);
+  
+  currentFrame = frameToShow; 
+}
+
+function moveFrameScene(){
+
 }
 
 function modDecrease(dividend, divisor){
@@ -297,11 +463,13 @@ function zoomImgModal(){
     '<img src="/output/result.jpg" class="img-responsive" data-dismiss="modal">');
 };
 
+// toggle scene
 $('.switch-to-scene').click(function(){
     $(this).children('span').toggleClass('rotate');
     $(this).children('span').toggleClass('rotate2');
     $(this).children('p:first').fadeToggle();
     $(this).children('p:last').fadeToggle();
+    $("#page3 .dz-header").fadeToggle();
 
     $("#background-slide").toggle("slide", {direction: "up"}, 500);
     $("#preview-scene").toggle("slide", {direction: "down"}, 500);
@@ -319,8 +487,19 @@ $('.switch-to-scene').click(function(){
 
     }
 
+    $(".frame-wrapper .toggle-result-img, .frame-wrapper .carousel-control").toggleClass('in-scene');
     $("#page3 .snap-right, #page3 .toggle-horizontal").toggleClass("nomargin");
     $("#bg-wrapper>.navbar").toggle("slide", {direction: "up"}, 300);
+
+    //transform scene
+    if ($(".switch-to-scene span").hasClass("rotate")){
+      console.log("transform frame");
+      var newFrameLocation = locateFrame(sceneLocations[$("#preview-scene .item.active").attr("value")], frames[currentFrame]);
+      relocateFrame(sceneLocations[$("#preview-scene .item.active").attr("value")], newFrameLocation);
+    }else if($(".switch-to-scene span").hasClass("rotate2")){
+      console.log("reposition frame");
+      repositionFrame();
+    }
 });
 
 $(".toggle-scene-carousel span").click(function(){
@@ -329,8 +508,11 @@ $(".toggle-scene-carousel span").click(function(){
   $(".scene-carousel-wrapper").addClass("temp-transition");
   $(".scene-carousel-wrapper").toggleClass('expand');
   $(".scene-carousel-wrapper").toggleClass('shrink');
-})
+  $('.toggle-btn-plate').fadeToggle(200);
+});
 
+
+// json fuctions
 $(document).on('ready', function(){
   $('#frame-carousel').on("click",".frame-thumb-wrapper .thumb", function(){
     var frameToShow = $(this).attr("value");
@@ -340,22 +522,42 @@ $(document).on('ready', function(){
       moveFrameLeft(frameToShow);
     }
   });
+
+  $('#scene-carousel').on("click", ".thumb", function(){
+    var newFrameLocation = locateFrame(sceneLocations[$(this).attr("value")], frames[currentFrame]);
+    console.log($(this).attr("value"));
+    relocateFrame(sceneLocations[$(this).attr("value")], newFrameLocation);
+  });
+
+  $(".frame-wrapper").on("mouseenter", ".in-scene", function(){
+    console.log("entered");
+    $(".frame-wrapper .carousel-control").toggleClass('transparent');
+  }).on("mouseleave", ".in-scene", function(){
+    console.log("leaved");
+    $(".frame-wrapper .carousel-control").toggleClass('transparent');
+  });
     
 });
 
+
 $(window).on('resize', function(){
+  if ($(".switch-to-scene span").hasClass("rotate")){
+    console.log($("#show-scene .active>div").attr("value"));
+    for (var i = 0; i < sceneLocations.length; i++) {
+      relocate(sceneLocations[i]);
+      $('#location' + sceneLocations[i].value).css({"height":sceneLocations[i].sceneContentHeight+"px", "width":sceneLocations[i].sceneContentWidth+"px", "top": sceneLocations[i].sceneActualPaddingTop+"px", "left": sceneLocations[i].sceneActualPaddingLeft+"px"});
+      sceneLocations[i].widerThenWindow = ($(window).width() / $(window).height()) < (scenes[i].resWidth / scenes[i].resHeight);
+    }
 
-  for (var i = 0; i < sceneLocations.length; i++) {
-    relocate(sceneLocations[i]);
-    $('#location' + sceneLocations[i].value).css({"height":sceneLocations[i].sceneContentHeight+"px", "width":sceneLocations[i].sceneContentWidth+"px", "top": sceneLocations[i].sceneActualPaddingTop+"px", "left": sceneLocations[i].sceneActualPaddingLeft+"px"});
-    sceneLocations[i].widerThenWindow = ($(window).width() / $(window).height()) < (scenes[i].resWidth / scenes[i].resHeight);
+    var newFrameLocation = locateFrame(sceneLocations[$("#preview-scene .item.active").attr("value")], frames[currentFrame]);
+    resizeFrame(sceneLocations[$("#preview-scene .item.active").attr("value")], newFrameLocation, currentFrame);
+    // console.log("Width" + windowWidth + ":" + $(window).width());
+    // console.log("Height" + windowHeight + ":" + $(window).height());
+    windowHeight = $(window).height();
+    windowWidth = $(window).width();
   }
-
-  console.log("Width" + windowWidth + ":" + $(window).width());
-  console.log("Height" + windowHeight + ":" + $(window).height());
-  windowHeight = $(window).height();
-  windowWidth = $(window).width();
 });
+
 
 zoomImgModal();
 setScene();

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Semsetime: Style Your Image - Gallery</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="css/dropzone.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+	<link rel="stylesheet" href="css/bootstrap-image-gallery.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/gallery.css">
+  	<link rel="stylesheet" href="css/slider.css">
+  	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+	<script src="js/dropzone.js"></script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+
+
+<body>
+	<div class="container-fluid" id="bg-wrapper">
+
+		<!-- Background Slides -->
+		<div id="background-slide" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<!-- <ol class="carousel-indicators hidden-xs">
+				<li data-target="#background-slide" data-slide-to="0" class="active"></li>
+				<li data-target="#background-slide" data-slide-to="1"></li>
+				<li data-target="#background-slide" data-slide-to="2"></li>
+				<li data-target="#background-slide" data-slide-to="3"></li>
+				<li data-target="#background-slide" data-slide-to="4"></li>
+			</ol> -->
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+				<div id="bg1" class="item active"></div>
+				<div id="bg2" class="item"></div>
+				<div id="bg3" class="item"></div>
+				<div id="bg4" class="item"></div>
+				<div id="bg5" class="item"></div>
+				<div id="bg6" class="item"></div>
+				<div id="bg7" class="item"></div>
+				<div id="bg8" class="item"></div>
+				<div id="bg9" class="item"></div>
+				<div id="bg10" class="item"></div>
+				<div id="bg11" class="item"></div>
+
+			</div>
+		</div>
+
+		<!-- Nav Bar -->
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-item" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">
+						<img alt="Brand" src="http://sensetime-website.oss-cn-hangzhou.aliyuncs.com/homepage/sensetime-logo.png">
+					</a>
+				</div>
+				<div class="collapse navbar-collapse" id="collapse-item">
+					<ul class="nav navbar-nav navbar-right">
+						<li><div class="menu-underline"></div><a href="#">Create</a></li>
+						<li><div class="menu-underline"></div><a href="#">Purchase</a></li>
+						<li><div class="menu-underline"></div><a href="#">Gallery</a></li>
+						<li><div class="menu-underline"></div><a href="#">About</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<!-- main content -->
+		<div class="container">
+		<div class="hide-scroll-p">
+			<div class="hide-scroll-c">
+			<h1>Gallery</h1>
+			<div class="gallery-control-wrapper">
+				<label for="sortby" class="gallery-control"></label>
+				<select id="sortby" class="gallery-control">
+					<option value="latest" selected>latest</option>
+					<option value="stlye">style</option>
+					<option value="rating">rating</option>
+					<option value="popular">popular</option>
+				</select>
+			</div>
+					<div id="links">
+
+					</div>
+			</div>
+			</div>
+		</div> 
+
+
+
+
+
+
+
+	</div>
+
+		<!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+		<div id="blueimp-gallery" class="blueimp-gallery" data-use-bootstrap-modal="false">
+			<!-- The container for the modal slides -->
+			<div class="slides"></div>
+			<!-- Controls for the borderless lightbox -->
+			<h3 class="title"></h3>
+			<a class="prev">‹</a>
+			<a class="next">›</a>
+			<a class="close">×</a>
+			<a class="play-pause"></a>
+			<ol class="indicator"></ol>
+			<!-- The modal dialog, which will be used to wrap the lightbox content -->
+			<div class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" aria-hidden="true">&times;</button>
+							<h4 class="modal-title"></h4>
+						</div>
+						<div class="modal-body next"></div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default pull-left prev">
+								<i class="glyphicon glyphicon-chevron-left"></i>
+								Previous
+							</button>
+							<button type="button" class="btn btn-primary next">
+								Next
+								<i class="glyphicon glyphicon-chevron-right"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+	    <!-- JQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"   integrity="sha256-WyjlLy3rvVSitHOXMctYkMCOU6GAletPg+qniNKLCQM="   crossorigin="anonymous"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/script.js"></script>
+
+
+  <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+  <script src="js/bootstrap-image-gallery.min.js"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="js/uploader.js"></script>
+  <script src="js/execute.js"></script>
+</body>
+
+
+
+</html>

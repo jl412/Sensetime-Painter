@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:500,100,300,700,400);
 
 html, body{
 	font-weight: 250;
@@ -267,6 +268,19 @@ li:hover .menu-underline{
 	margin-top:0; 
 }
 
+
+.hide-scroll-p{
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.hide-scroll-c{
+    height: 100%;
+    overflow: auto;
+    padding-right: 100px;
+    margin-right: -100px; /* exact value is given in JavaScript code */
+}
 
 
 .page{
@@ -557,6 +571,7 @@ li:hover .menu-underline{
 
 .frame-control .carousel-control{
 	background-image: none !important;
+	transition: .2s;
 }
 
 .frame-control .left{
@@ -567,8 +582,11 @@ li:hover .menu-underline{
 	right: -115px !important;
 }
 
-.carousel-control.right{
+.carousel-control.in-scene{
+}
 
+.carousel-control.in-scene.transparent{
+	opacity: 0;
 }
 
 .frame-item-container{
@@ -836,10 +854,10 @@ li:hover .menu-underline{
 	overflow: visible;
 }
 
-.testEle{
+/*.testEle{
 	position: absolute;
 	background-color: rgba(0,0,255, 0.6);
-}
+}*/
 
 
 #show-style .ui-selecting { background: #FECA40; }

@@ -1,4 +1,8 @@
 
+// var hideScrollC = $('.hide-scroll-c');
+// hideScrollC.style.paddingRight = hideScrollC.offsetWidth - hideScrollC.clientWidth + "px";
+
+
 function snapContent() {
     if ($('.page-btn-wrapper').css("content") == "") {
         $('#page0 .content-text').addClass("snap snap-left");
@@ -6,6 +10,7 @@ function snapContent() {
         $('#page0 .content-text').removeClass("snap-left snap");
     }
 }
+
 
 function moveLeft(pageToShow){
 	var pageToShow = "page" + (parseInt($(this).parents(".page:first").attr("value")) - 1);
