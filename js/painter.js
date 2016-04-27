@@ -466,22 +466,33 @@ $('#show-frame .left').click(function(){
 
 
 $('.submit').click(function(){
-  var formdata = new FormData();
-  formdata.append("id", res.id.toString());
-  formdata.append("style", styleCode.toString());
+
+  var formdata = {
+      id: res.id,
+      style: styleCode
+  }
+
+  console.log(IsJsonString(JSON.stringify({formdata})));
   $.ajax({
     url: "paint",
     method: "post",
-    data:{
-      id: res.id,
-      style: styleCode
-    },
-    dataType: "json"
-  }).done(function(dir){
-    console.log(dir);
+    data:JSON.stringify({formdata}),
+    dataType: "json",
+    success: function(dir){
+      console.log(dir);
+    }
   });
-
 });
+
+
+function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
 
 function zoomImgModal(){
   $('#resultImgZoom').html(
