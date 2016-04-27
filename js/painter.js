@@ -22,6 +22,12 @@ Dropzone.options.uploadImage = {
   thumbnailHeight: 250
 };
 
+$('#upload-image').on('success', function(file, response) {
+  var res = response;
+
+  console.log(res);
+});
+
 
 $('#toggle-art-style').click(function () {
 
@@ -70,6 +76,7 @@ $('#toggle-art-style').click(function () {
     $("#apply-style").click(function(){
       if (!$(this).hasClass("disabled")) {
         styleCode = $(".ui-selected").attr("value");
+  
 
         $("#art-style-modal").modal('hide');
         for (var i = 0; i < styles.length; i++) {

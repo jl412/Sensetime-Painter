@@ -24,10 +24,10 @@ function moveLeft(pageToShow){
 function moveRight() {
 	var pageToShow = "page" + (parseInt($(this).parents(".page:first").attr("value")) + 1);
     // Hide to left / show from left
-    $(this).parents(".page:first").hide("slide", {direction: "left"}, 500);
+    $(this).parents(".page:first").hide("fade", {direction: "left"}, 500);
 
     // Show from right / hide to right
-    $("#" + pageToShow).show("slide", {direction: "right"}, 500);
+    $("#" + pageToShow).show("fade", {direction: "right"}, 500);
 }
 
 
@@ -82,7 +82,6 @@ $('.toggle-horizontal').click(function () {
     $(this).parents('.snap:first').toggleClass('expand');
     $("#page3 #scene-carousel").toggleClass("nomargin");
 });
-
 
 
 
