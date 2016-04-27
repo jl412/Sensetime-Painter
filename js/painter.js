@@ -19,14 +19,13 @@ Dropzone.options.uploadImage = {
   acceptedFiles: "image/*",
   maxFiles: 1,
   thumbnailWidth: 250,
-  thumbnailHeight: 250
+  thumbnailHeight: 250,
+  init: function() {
+        this.on("success", function(file, response) {
+            console.log(response);
+        })
+    }
 };
-
-$('#upload-image').on('success', function(file, response) {
-  var res = response;
-
-  console.log(res);
-});
 
 
 $('#toggle-art-style').click(function () {
@@ -569,3 +568,4 @@ $(window).on('resize', function(){
 zoomImgModal();
 setScene();
 setFrame();
+$('#upload-image').dropzone();
