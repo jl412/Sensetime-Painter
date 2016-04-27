@@ -1,5 +1,5 @@
 var uploadedImg;
-var styleCode;
+var styleCode = 301;
 var numOfFrame;
 var frames = [];
 var scenes = [];
@@ -13,7 +13,7 @@ var itemInRow = 4;
 var carouselItemHeight = 150;
 var windowWidth = $(window).width();
 var windowHeight = $(window).height();
-var res;
+var res = {"id": "1234" };
 
 
 Dropzone.options.uploadImage = { 
@@ -23,7 +23,7 @@ Dropzone.options.uploadImage = {
   thumbnailHeight: 250,
   init: function() {
         this.on("success", function(file, response) {
-          res = JSON.parse(response);
+          // res = JSON.parse(response);
           console.log(response);
           console.log(res.id);
         })
@@ -467,18 +467,21 @@ $('#show-frame .left').click(function(){
 
 $('.submit').click(function(){
   var formdata = new FormData();
-  formdata.append("id", res.id);
-  formdata.append("style", styleCode);
+  formdata.append("id", res.id.toString());
+  formdata.append("style", styleCode.toString());
   $.ajax({
     url: "paint",
     method: "post",
-    data:formdata,
+    data:{
+      id: res.id,
+      style: styleCode
+    },
     dataType: "json"
   }).done(function(dir){
     console.log(dir);
   });
-});
 
+});
 
 function zoomImgModal(){
   $('#resultImgZoom').html(
