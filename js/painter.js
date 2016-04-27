@@ -466,13 +466,16 @@ $('#show-frame .left').click(function(){
 
 
 $('.submit').click(function(){
-  var formdata = new FormData();
-  formdata.append("id", res.id);
-  formdata.append("style", styleCode);
+  // var formdata = new FormData();
+  // formdata.append("id", res.id);
+  // formdata.append("style", styleCode);
   $.ajax({
     url: "paint",
     method: "post",
-    data:formdata,
+    data:{
+      "id": res.id,
+      "style": styleCode
+    },
     dataType: "json"
   }).done(function(dir){
     console.log(dir);
