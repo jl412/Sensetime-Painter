@@ -13,7 +13,7 @@ var itemInRow = 4;
 var carouselItemHeight = 150;
 var windowWidth = $(window).width();
 var windowHeight = $(window).height();
-var res
+var res;
 
 
 Dropzone.options.uploadImage = { 
@@ -24,7 +24,8 @@ Dropzone.options.uploadImage = {
   init: function() {
         this.on("success", function(file, response) {
           res = response;
-            console.log(response);
+          console.log(response);
+          console.log(res.id);
         })
     }
 };
@@ -465,13 +466,13 @@ $('#show-frame .left').click(function(){
 
 
 $('.submit').click(function(){
+  var formdata = new FormData();
+  formdata.append("id", res.id);
+  formdata.append("style", styleCode);
   $.ajax({
     url: "paint",
     method: "post",
-    data: {
-      "id": res.id,
-      "style": styleCode
-    },
+    data:formdata,
     dataType: "json"
   }).done(function(dir){
     console.log(dir);
