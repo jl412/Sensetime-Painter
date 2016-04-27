@@ -13,6 +13,7 @@ var itemInRow = 4;
 var carouselItemHeight = 150;
 var windowWidth = $(window).width();
 var windowHeight = $(window).height();
+var res
 
 
 Dropzone.options.uploadImage = { 
@@ -22,6 +23,7 @@ Dropzone.options.uploadImage = {
   thumbnailHeight: 250,
   init: function() {
         this.on("success", function(file, response) {
+          res = response;
             console.log(response);
         })
     }
@@ -462,6 +464,19 @@ $('#show-frame .left').click(function(){
 });
 
 
+$('.submit').click(function(){
+  $.ajax({
+    url: "paint",
+    method: "post",
+    data: {
+      "id": res.id,
+      "style": styleCode
+    },
+    dataType: "json"
+  }).done(function(dir){
+    console.log(dir);
+  });
+});
 
 
 function zoomImgModal(){
@@ -565,7 +580,8 @@ $(window).on('resize', function(){
 });
 
 
+
+
 zoomImgModal();
 setScene();
 setFrame();
-$('#upload-image').dropzone();

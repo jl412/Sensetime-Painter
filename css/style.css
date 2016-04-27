@@ -343,6 +343,7 @@ li:hover .menu-underline{
 }
 
 .zone{
+	cursor: pointer;
 	/*padding: 50px !important;*/
 	height: 100% !important;
 	max-height: 500px !important; 
@@ -358,6 +359,7 @@ li:hover .menu-underline{
 }
 
 .dz-message{
+	text-align: center;
 	margin-top: 0 !important;
 	position: relative;
 	top: 50%;
