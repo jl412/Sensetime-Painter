@@ -34,9 +34,9 @@ Dropzone.options.uploadImage = {
           alert("upload was unsuccessful");
         });
 
-        $('.restart').on("click", function(){
-          $(this).removeAllFiles(true);
-        });
+        // $('.restart').on("click", function(){
+        //   $(this).removeAllFiles(true);
+        // });
     }
 };
 
@@ -509,6 +509,7 @@ function modDecrease(dividend, divisor){
 function restart(){
      window.location.hash = "#page0";
     $(".result-img").delay(400).css({"visibility" : "hidden", "opacity" : "0"});
+    Dropzone.forElement("#upload-image").removeAllFiles(true);
     res = '';
     styleCode = '';
     console.log("res: " + res + ", styleCode: " + styleCode);
