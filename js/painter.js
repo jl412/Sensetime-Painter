@@ -124,6 +124,7 @@ function submitImg(){
         movePage(1);
         $('.result-img').delay(600).css({"visibility":"visible"}).animate({opacity: "1"}, 700, "swing");
         $('.result-img').css({"background-image" : "url(data:image/jpg;base64," +imgStr + ")"});
+        $('#resultImgZoom').attr("src","data:image/jpg;base64," + imgStr);
         console.log(imgStr);
       }
     });
@@ -500,7 +501,7 @@ $('#show-frame .left').click(function(){
 
 function zoomImgModal(){
   $('#resultImgZoom').html(
-    '<img src="/output/result.jpg" class="img-responsive" data-dismiss="modal">');
+    '<img class="img-responsive" data-dismiss="modal">');
 };
 
 $('.submit').click(submitImg);

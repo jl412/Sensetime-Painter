@@ -76,12 +76,7 @@ function showOutput() {
 }
 
 function restart(){
-    $(this).parents(".page:first").hide("slide", {direction: "right"}, 80);
-    $("#page2").show("slide", {easing: "linear",direction: "left"}, 80);
-    $("#page2").delay(80).hide("slide", {easing: "linear", direction: "right"}, 80);
-    $("#page1").delay(80).show("slide", {easing: "linear", direction: "left"}, 80);
-    $("#page1").delay(240).hide("slide", {easing: "linear", direction: "right"}, 80);
-    $("#page0").delay(360).show("slide", {easing: "linear", direction: "left"}, 80);
+     window.location.hash = "#page0";
     $(".result-img").delay(400).css({"visibility" : "hidden", "opacity" : "0"});
 }
 
