@@ -33,10 +33,6 @@ Dropzone.options.uploadImage = {
         this.on("error", function(errorMessage){
           alert("upload was unsuccessful");
         });
-
-        // $('.restart').on("click", function(){
-        //   $(this).removeAllFiles(true);
-        // });
     }
 };
 
@@ -512,6 +508,7 @@ function restart(){
     Dropzone.forElement("#upload-image").removeAllFiles(true);
     res = '';
     styleCode = '';
+    $("#toggle-art-style").html('<div class="dz-message"><img src="img/art-styles.jpg" class="zone-img"><br/><span>Choose an art style from our library</span><div class="browse-btn"><span>browse</span></div></div>');
     console.log("res: " + res + ", styleCode: " + styleCode);
 
 }

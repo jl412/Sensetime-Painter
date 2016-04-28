@@ -210,6 +210,10 @@ li:hover .menu-underline{
     overflow: hidden;
 }
 
+#page1 .valign-c, #page2 .valign-c{
+	height: 55%;
+}
+
 .vcenter{
 	position: relative;
 	top: 50%;

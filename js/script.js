@@ -28,11 +28,24 @@ function render(url){
     var temp = url.split('/')[0];
     console.log($(currentPage).attr("value"));
     console.log($(temp).attr("value"));
-    if (temp == ''){
-        $("#page0").show();
-    }else if(temp.length && !currentPage.length){
-        $(temp).show();
-    }else{
+    // if (temp == ''){
+    //     $("#page0").show();
+    // }else if(temp.length && !currentPage.length){
+    //     $(temp).show();
+    // }else{
+    //     if ($(currentPage).attr("value") < $(temp).attr("value")){
+    //         $(currentPage).hide("slide", {direction: "left"}, 500);
+    //         $(temp).show("slide", {direction: "right"}, 500);
+    //     }else if ($(currentPage).attr("value") > $(temp).attr("value")) {
+    //         $(currentPage).hide("slide", {direction: "right"}, 500);
+    //         $(temp).show("slide", {direction: "left"}, 500);
+    //     }
+    // }
+
+    if (currentPage.length) {
+        if (temp == ''){
+            temp = "#page0";
+        }
         if ($(currentPage).attr("value") < $(temp).attr("value")){
             $(currentPage).hide("slide", {direction: "left"}, 500);
             $(temp).show("slide", {direction: "right"}, 500);
@@ -40,6 +53,10 @@ function render(url){
             $(currentPage).hide("slide", {direction: "right"}, 500);
             $(temp).show("slide", {direction: "left"}, 500);
         }
+    }else if (temp == '') {
+        $("#page0").show();
+    }else{
+        $(temp).show();
     }
 
     showImg();
