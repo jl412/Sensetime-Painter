@@ -577,11 +577,11 @@ li:hover .menu-underline{
 }
 
 .frame-control .left{
-	left: -115px !important;
+	left: -100px !important;
 }
 
 .frame-control .right{
-	right: -115px !important;
+	right: -100px !important;
 }
 
 .carousel-control.in-scene{
@@ -885,6 +885,14 @@ li:hover .menu-underline{
 		content: "";
 		height: 60px;
 	}
+
+	.frame-control .left{
+		left: -85px !important;
+	}
+
+	.frame-control .right{
+		right: -85px !important;
+	}
 }
 
 @media only screen and (max-device-width: 736px){
@@ -907,15 +915,15 @@ li:hover .menu-underline{
 	}
 
 	.content-img .glyphicon{
-	-ms-transform: rotate(90deg) translate(45px,-15px); /* IE 9 */
-    -webkit-transform: rotate(90deg) translate(45px,-15px); /* Chrome, Safari, Opera */
-    transform: rotate(90deg) translate(45px,-15px);
-}
+		-ms-transform: rotate(90deg) translate(45px,-15px); /* IE 9 */
+		-webkit-transform: rotate(90deg) translate(45px,-15px); /* Chrome, Safari, Opera */
+    	transform: rotate(90deg) translate(45px,-15px);
+	}
 
 	.content-img img{
-	width: auto;
-	height: 100px;
-}
+		width: auto;
+		height: 100px;
+	}
 
 
 	#art-lib-content{
@@ -926,6 +934,13 @@ li:hover .menu-underline{
 		display: block;
 	}
 
+	.frame-control .left{
+		left: -30px !important;
+	}
+
+	.frame-control .right{
+		right: -30px !important;
+	}
 
 }
 

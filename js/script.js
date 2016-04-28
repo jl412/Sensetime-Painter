@@ -43,13 +43,15 @@ function render(url){
     }
 
     showImg();
+    if(currentPage == '#page3'){
+        removeScene();
+    }
 
     var url = decodeURI(window.location.hash);
     currentPage = url.split('/')[0];
     if (currentPage == '') {
         currentPage = "#page0";
     }
-
 }
     
 function showImg() {

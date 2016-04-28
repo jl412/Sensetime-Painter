@@ -4,7 +4,7 @@ var numOfFrame;
 var frames = [];
 var scenes = [];
 var sceneLocations = [];
-var conetentMaxWidth = 600;
+var conetentMaxWidth = Math.min($(window).width()* 0.55, 600);
 var frameHeight = 100000;
 var wrapperWidth = 0;
 var wrapperHeight = 0;
@@ -14,13 +14,14 @@ var carouselItemHeight = 150;
 var windowWidth = $(window).width();
 var windowHeight = $(window).height();
 var res;
+var queueTime;
 var resultImg;
 
 
 Dropzone.options.uploadImage = { 
   acceptedFiles: "image/*",
   maxFiles: 1,
-  maxFilesize: 1000,
+  maxFilesize: 8,
   thumbnailWidth: 250,
   thumbnailHeight: 250,
   init: function() {
@@ -112,29 +113,40 @@ function submitImg(){
     alert("Please choose an art style to continue");
   }else{
 
-    var formdata = {
-      id: res.id,
-      style: styleCode,
-      ext: res.ext
-      
-    }
-
     $.ajax({
-      url: "paint",
-      method: "post",
-      data:JSON.stringify(formdata),
-      success: function(imgStr){
-        resultImg = imgStr;
-        movePage(1);
-        $('.result-img').delay(600).css({"visibility":"visible"}).animate({opacity: "1"}, 700, "swing");
-        $('.result-img').css({"background-image" : "url(data:image/jpg;base64," +imgStr + ")"});
-        $('#resultImgZoom').attr("src","data:image/jpg;base64," + imgStr);
-        console.log(imgStr);
+      url: "queue",
+      method: "get",
+      success: function(qT){
+        queueTime = qT;
+        console.log(queueTime);
+        getResult();
       }
     });
   }
 };
 
+function getResult(){
+
+  var formdata = {
+    id: res.id,
+    style: styleCode,
+    ext: res.ext
+      
+  }
+
+  $.ajax({
+      url: "paint",
+      method: "post",
+      data:JSON.stringify(formdata),
+      success: function(imgStr){
+        resultImg = imgStr;
+        window.location.hash = "#page3";
+        $('.result-img').delay(600).css({"visibility":"visible"}).animate({opacity: "1"}, 700, "swing");
+        $('.result-img').css({"background-image" : "url(data:image/jpg;base64," +imgStr + ")"});
+        $('#resultImgZoom').attr("src","data:image/jpg;base64," + imgStr);
+      }
+  });
+}
 
 function setFrame(){
   var showFrame = $('#show-frame');
@@ -510,6 +522,29 @@ function zoomImgModal(){
 
 $('.submit').click(submitImg);
 
+// force removing scene: not usually called
+function removeScene(){
+  $('.switch-to-scene').children('span').removeClass('rotate');
+  $('.switch-to-scene').children('span').addClass('rotate2');
+  $('.switch-to-scene').children('p:first').fadeIn();
+  $('.switch-to-scene').children('p:last').fadeOut();
+  $("#page3 .dz-header").fadeIn();
+
+  $("#background-slide").show("slide", {direction: "up"}, 500);
+  $("#preview-scene").hide("slide", {direction: "down"}, 500);
+  $("#page3 .page-btn-wrapper").show("slide", {direction: "down"}, 500);
+  $(".scene-carousel-wrapper").removeClass("temp-transition");
+  $("#page3 .scene-carousel-wrapper").hide("slide", {direction: "down"}, 500);
+
+
+  $(".frame-wrapper .toggle-result-img, .frame-wrapper .carousel-control").removeClass('in-scene');
+  $("#page3 .snap-right, #page3 .toggle-horizontal").removeClass("nomargin");
+  $("#bg-wrapper>.navbar").show("slide", {direction: "up"}, 300);
+
+  repositionFrame();
+}
+
+
 // toggle scene
 $('.switch-to-scene').click(function(){
     $(this).children('span').toggleClass('rotate');
@@ -527,8 +562,8 @@ $('.switch-to-scene').click(function(){
       $("#page3 .snap-right").toggleClass('expand');
       $("#page3 .snap-right").toggleClass('shrink');
       $("#page3 .snap-right .toggle-horizontal").toggleClass('clicked');
-      $("#page3 .snap-right .toggle-horizontal").toggleClass('rotate');
-      $("#page3 .snap-right .toggle-horizontal").toggleClass('rotate2');
+      $("#page3 .snap-right .toggle-horizontal").children('span').toggleClass('rotate');
+      $("#page3 .snap-right .toggle-horizontal").children('span').toggleClass('rotate2');
       $("#page3 #scene-carousel").toggleClass("nomargin");
       // $("#show-frame").toggle("slide", {direction: "up"}, 500);
 
@@ -606,8 +641,6 @@ $(window).on('resize', function(){
     windowWidth = $(window).width();
   }
 });
-
-
 
 
 zoomImgModal();
