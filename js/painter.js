@@ -33,6 +33,10 @@ Dropzone.options.uploadImage = {
         this.on("error", function(errorMessage){
           alert("upload was unsuccessful");
         });
+
+        $('.restart').on("click", function(){
+          $(this).removeAllFiles(true);
+        });
     }
 };
 
@@ -107,9 +111,9 @@ $('#toggle-art-style').click(function () {
 
 function submitImg(){
 
-  if (typeof res === "undefined") {
+  if ((typeof res === "undefined") || res == '') {
     alert("Please upload an image!");
-  }else if (typeof styleCode === "undefined") {
+  }else if ((typeof styleCode === "undefined") || styleCode == '')  {
     alert("Please choose an art style to continue");
   }else{
 
@@ -143,7 +147,7 @@ function getResult(){
         window.location.hash = "#page3";
         $('.result-img').delay(600).css({"visibility":"visible"}).animate({opacity: "1"}, 700, "swing");
         $('.result-img').css({"background-image" : "url(data:image/jpg;base64," +imgStr + ")"});
-        $('#resultImgZoom').attr("src","data:image/jpg;base64," + imgStr);
+        $('#resultImgZoom img').attr("src","data:image/jpg;base64," + imgStr);
       }
   });
 }
@@ -493,9 +497,6 @@ function moveFrameRight(frameToShow){
   currentFrame = frameToShow; 
 }
 
-function moveFrameScene(){
-
-}
 
 function modDecrease(dividend, divisor){
   if ((dividend - 1) < 0) {
@@ -503,6 +504,15 @@ function modDecrease(dividend, divisor){
   }else{
     return dividend -1;
   }
+}
+
+function restart(){
+     window.location.hash = "#page0";
+    $(".result-img").delay(400).css({"visibility" : "hidden", "opacity" : "0"});
+    res = '';
+    styleCode = '';
+    console.log("res: " + res + ", styleCode: " + styleCode);
+
 }
 
 
@@ -520,7 +530,13 @@ function zoomImgModal(){
     '<img class="img-responsive" data-dismiss="modal">');
 };
 
+
+// submit the for painting
 $('.submit').click(submitImg);
+
+// reset everything
+$('.restart').click(restart);
+
 
 // force removing scene: not usually called
 function removeScene(){

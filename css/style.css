@@ -942,5 +942,13 @@ li:hover .menu-underline{
 		right: -30px !important;
 	}
 
+	.page-btn{
+		font-size: 16px;
+	}
+
+	.page-btn .glyphicon{
+		font-size:  12px;
+	}
+
 }
 

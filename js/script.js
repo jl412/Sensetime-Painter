@@ -77,10 +77,7 @@ function showOutput() {
     $('.result-img').delay(600).css({"visibility":"visible"}).animate({opacity: "1"}, 700, "swing");
 }
 
-function restart(){
-     window.location.hash = "#page0";
-    $(".result-img").delay(400).css({"visibility" : "hidden", "opacity" : "0"});
-}
+
 
 $(window).on('hashchange', function(){
     // On every hash change the render function is called with the new hash.
@@ -97,7 +94,7 @@ $('.back-step').on('click', function(){
     movePage(-1);
 });
 
-$('.restart').click(restart);
+
 $('.back-step').click(showImg);
 $('.toggle-horizontal').click(function () {
     $(this).children('span').toggleClass('rotate');
