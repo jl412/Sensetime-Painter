@@ -20,6 +20,7 @@ var resultImg;
 Dropzone.options.uploadImage = { 
   acceptedFiles: "image/*",
   maxFiles: 1,
+  maxFilesize: 1000,
   thumbnailWidth: 250,
   thumbnailHeight: 250,
   init: function() {
@@ -27,7 +28,10 @@ Dropzone.options.uploadImage = {
           res = JSON.parse(response);
           console.log(response);
           console.log(res.id);
-        })
+        });
+        this.on("error", function(errorMessage){
+          alert("upload was unsuccessful");
+        });
     }
 };
 
