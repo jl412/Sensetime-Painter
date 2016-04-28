@@ -14,6 +14,7 @@ var carouselItemHeight = 150;
 var windowWidth = $(window).width();
 var windowHeight = $(window).height();
 var res;
+var resultImg;
 
 
 Dropzone.options.uploadImage = { 
@@ -96,6 +97,38 @@ $('#toggle-art-style').click(function () {
     });
 
 });
+
+
+
+function submitImg(){
+
+  if (typeof res === "undefined") {
+    alert("Please upload an image!");
+  }else if (typeof styleCode === "undefined") {
+    alert("Please choose an art style to continue");
+  }else{
+
+    var formdata = {
+      id: res.id,
+      style: styleCode,
+      ext: res.ext
+      
+    }
+
+    $.ajax({
+      url: "paint",
+      method: "post",
+      data:JSON.stringify(formdata),
+      success: function(imgStr){
+        resultImg = imgStr;
+        movePage(1);
+        $('.result-img').delay(600).css({"visibility":"visible"}).animate({opacity: "1"}, 700, "swing");
+        $('.result-img').css({"background-image" : "url(data:image/jpg;base64," +imgStr + ")"});
+        console.log(imgStr);
+      }
+    });
+  }
+};
 
 
 function setFrame(){
@@ -465,40 +498,12 @@ $('#show-frame .left').click(function(){
 });
 
 
-$('.submit').click(function(){
-
-  var formdata = {
-      id: res.id,
-      style: styleCode,
-      ext: res.ext
-  }
-
-  console.log(IsJsonString(JSON.stringify({formdata})));
-  $.ajax({
-    url: "paint",
-    method: "post",
-    data:JSON.stringify(formdata),
-    dataType: "json",
-    success: function(dir){
-      console.log(dir);
-    }
-  });
-});
-
-
-function IsJsonString(str) {
-    try {
-        JSON.parse(str);
-    } catch (e) {
-        return false;
-    }
-    return true;
-}
-
 function zoomImgModal(){
   $('#resultImgZoom').html(
     '<img src="/output/result.jpg" class="img-responsive" data-dismiss="modal">');
 };
+
+$('.submit').click(submitImg);
 
 // toggle scene
 $('.switch-to-scene').click(function(){
@@ -539,6 +544,7 @@ $('.switch-to-scene').click(function(){
     }
 });
 
+// toggle scene-carousel
 $(".toggle-scene-carousel span").click(function(){
   $(".toggle-scene-carousel span").toggleClass('rotate');
   $(".toggle-scene-carousel span").toggleClass('rotate2');
@@ -577,6 +583,7 @@ $(document).on('ready', function(){
 });
 
 
+// scene resize functions
 $(window).on('resize', function(){
   if ($(".switch-to-scene span").hasClass("rotate")){
     console.log($("#show-scene .active>div").attr("value"));
