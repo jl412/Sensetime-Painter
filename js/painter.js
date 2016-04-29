@@ -39,7 +39,7 @@ Dropzone.options.uploadImage = {
         this.on("error", function(errorMessage){
           alert("upload was unsuccessful");
         });
-        this.on("sending",function(file){
+        this.on("addedfile",function(file){
           res = false;
         });
   }
@@ -48,12 +48,12 @@ Dropzone.options.uploadImage = {
 
 function submitImg(){
 
-  if ((typeof res === "undefined") || res == '') {
+  if (res == false) {
+    alert("Image Uploading. Please wait.");
+  }else if ((typeof res === "undefined") || res == '')  {
     alert("Please upload an image!");
   }else if ((typeof styleCode === "undefined") || styleCode == '')  {
     alert("Please choose an art style to continue.");
-  }else if (res = false)  {
-    alert("Image Uploading. Please wait.");
   }else{
 
     $.ajax({

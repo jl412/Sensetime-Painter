@@ -874,8 +874,8 @@ li:hover .menu-underline{
 }
 
 .loading.initial{
-	background: #fff;
-	color: #000;
+	background: #EEE;
+	color: #777;
 }
 
 .loading.initial p{
