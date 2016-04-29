@@ -2,7 +2,7 @@
 
 html, body{
 	font-weight: 250;
-	font-family: "Segoe UI Light", "Segoe UI", "Century Gothic", "Microsoft YaHei","Heiti" ,"WenQuanYi Zen Hei" ,sans-serif;
+	font-family: "Segoe UI Light", "Segoe UI", "Century Gothic","微軟雅黑體" ,"Microsoft YaHei","Heiti" ,"文泉驛正黑" ,"WenQuanYi Zen Hei" ,sans-serif;
 	height: 100% !important;
 	color: #fff;
 	transition-timing-function: ease;
