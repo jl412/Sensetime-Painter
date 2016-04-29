@@ -117,8 +117,8 @@ function submitImg(){
       url: "queue",
       method: "get",
       success: function(qT){
-        queueTime = qT;
-        console.log(queueTime);
+        queueTime = JSON.parse(qT);
+        console.log("queue" + queueTime.sec);
         getResult();
       }
     });
@@ -140,8 +140,8 @@ function getResult(){
       data:JSON.stringify(formdata),
       beforeSend: function(){
         $('.loading.bar').show("fade", 250);
-        $('.loading.bar span').html((queueTime + 1) + "seconds");
-        $('.loading.bar .progress-bar').animate({width: "95%"}, (queueTime + 1) * 1000);
+        $('.loading.bar span').html((queueTime.sec + 1) + "seconds");
+        $('.loading.bar .progress-bar').animate({width: "95%"}, (queueTime.sec + 1) * 1000);
       },
       success: function(imgStr){
         resultImg = imgStr;
@@ -151,8 +151,9 @@ function getResult(){
         $('#resultImgZoom img').attr("src","data:image/jpg;base64," + imgStr);
       },
       complete: function(){
+        $('.loading.bar .progress-bar').stop(true, true);
         $('.loading.bar .progress-bar').animate({width: "100%"}, 150);
-        $('.loading.bar .progress-bar').delay(200).hide("fade", 250);
+        $('.loading.bar').delay(200).hide("fade", 250);
       }
   });
 }
