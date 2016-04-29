@@ -140,7 +140,7 @@ function getResult(){
       data:JSON.stringify(formdata),
       beforeSend: function(){
         $('.loading.bar').show("fade", 500);
-        $('.loading.bar span').html((queueTime.sec + 1) + "seconds");
+        $('.loading.bar span').html((queueTime.sec + 1)+ " ");
         $('.loading.bar .progress-bar').animate({width: "97%"}, (queueTime.sec + 1) * 1000);
       },
       success: function(imgStr){
@@ -149,7 +149,7 @@ function getResult(){
         $('.result-img').delay(600).css({"visibility":"visible"}).animate({opacity: "1"}, 700, "swing");
         $('.result-img').css({"background-image" : "url(data:image/jpg;base64," +imgStr + ")"});
         $('#resultImgZoom img').attr("src","data:image/jpg;base64," + imgStr);
-        rotateFrame();
+        // rotateFrame();
       },
       complete: function(){
         $('.loading.bar .progress-bar').stop(true, false);
