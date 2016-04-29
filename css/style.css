@@ -860,6 +860,72 @@ li:hover .menu-underline{
 	overflow: visible;
 }
 
+.loading{
+	z-index: 1000;
+	position: fixed;
+	top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+
+}
+
+.loading.initial{
+	background: #fff;
+
+}
+
+
+.loading .message{
+	font-size: 16px;
+	text-align: center;
+	width: 60%;
+	max-width: 600px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%); /* IE 9 */
+   	-webkit-transform: translate(-50%, -50%); /* Safari */
+    transform: translate(-50%, -50%); 
+
+}
+
+.progress {
+    overflow: hidden;
+    background-color: transparent;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    padding: 2px;
+    border: 2px solid #fff;
+}
+
+.progress-bar {
+    float: left;
+    width: 100%;
+    height: 100%;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 6px;
+    -webkit-transition: width .6s ease;
+    -o-transition: width .6s ease;
+    transition: width .6s ease;
+}
+
+.prgress-bar.ninetyfive{
+	width: 95%;
+}
+
+.progress-bar.full{
+	width: 100%;
+}
+
+
 /*.testEle{
 	position: absolute;
 	background-color: rgba(0,0,255, 0.6);

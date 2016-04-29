@@ -28,24 +28,12 @@ function render(url){
     var temp = url.split('/')[0];
     console.log($(currentPage).attr("value"));
     console.log($(temp).attr("value"));
-    // if (temp == ''){
-    //     $("#page0").show();
-    // }else if(temp.length && !currentPage.length){
-    //     $(temp).show();
-    // }else{
-    //     if ($(currentPage).attr("value") < $(temp).attr("value")){
-    //         $(currentPage).hide("slide", {direction: "left"}, 500);
-    //         $(temp).show("slide", {direction: "right"}, 500);
-    //     }else if ($(currentPage).attr("value") > $(temp).attr("value")) {
-    //         $(currentPage).hide("slide", {direction: "right"}, 500);
-    //         $(temp).show("slide", {direction: "left"}, 500);
-    //     }
-    // }
+
+    if (temp == ''){
+        temp = "#page0";
+    }
 
     if (currentPage.length) {
-        if (temp == ''){
-            temp = "#page0";
-        }
         if ($(currentPage).attr("value") < $(temp).attr("value")){
             $(currentPage).hide("slide", {direction: "left"}, 500);
             $(temp).show("slide", {direction: "right"}, 500);
@@ -53,8 +41,6 @@ function render(url){
             $(currentPage).hide("slide", {direction: "right"}, 500);
             $(temp).show("slide", {direction: "left"}, 500);
         }
-    }else if (temp == '') {
-        $("#page0").show();
     }else{
         $(temp).show();
     }
@@ -64,11 +50,7 @@ function render(url){
         removeScene();
     }
 
-    var url = decodeURI(window.location.hash);
-    currentPage = url.split('/')[0];
-    if (currentPage == '') {
-        currentPage = "#page0";
-    }
+    currentPage = temp;
 }
     
 function showImg() {
@@ -124,6 +106,8 @@ $('.toggle-horizontal').click(function () {
 
 snapContent();
 // showImg();
-
+$(document).on('ready', function(){
+    $('.loading.initial').hide("fade", 1500);
+});
 
 $( window ).resize(snapContent);

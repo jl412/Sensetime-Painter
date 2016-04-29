@@ -432,9 +432,7 @@ function setScene(){
           previewContent += '<div class="item" id="row' + Math.floor(i / itemInRow) + '">';
         };
         previewContent += '<div class="scene-thumb-wrapper"><div class="thumb" value="' + i + '" style="background-image: '+ data.items[i].sceneImg + '" data-target="#preview-scene" data-slide-to="'+ i +'"></div></div>';
-        if ( ( (i + 1) % itemInRow == 0) || ( (i + 1) ==  numOfFrame
-        
-) ) {
+        if ( ( (i + 1) % itemInRow == 0) || ( (i + 1) ==  numOfFrame) ) {
           previewContent += '</div>';
         };
 
