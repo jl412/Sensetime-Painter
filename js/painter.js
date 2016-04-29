@@ -5,6 +5,7 @@ var frames = [];
 var scenes = [];
 var sceneLocations = [];
 var conetentMaxWidth = Math.min($(window).width()* 0.55, 600);
+var conetentMaxWidth = Math.min($(window).width()* 0.55, 600);
 var frameHeight = 100000;
 var wrapperWidth = 0;
 var wrapperHeight = 0;
@@ -16,6 +17,7 @@ var windowHeight = $(window).height();
 var res;
 var queueTime;
 var resultImg;
+var frameOri = false;
 
 
 Dropzone.options.uploadImage = { 
@@ -26,16 +28,75 @@ Dropzone.options.uploadImage = {
   thumbnailHeight: 250,
   init: function() {
         this.on("success", function(file, response) {
+          var vertical = file.height > file.width;
+          if (vertical != frameOri) {
+            rotateFrame(vertical);
+            frameOri = vertical;
+          }
           res = JSON.parse(response);
-          console.log(response);
           console.log(res.id);
         });
         this.on("error", function(errorMessage){
           alert("upload was unsuccessful");
         });
-    }
+  }
 };
 
+
+function submitImg(){
+
+  if ((typeof res === "undefined") || res == '') {
+    alert("Please upload an image!");
+  }else if ((typeof styleCode === "undefined") || styleCode == '')  {
+    alert("Please choose an art style to continue");
+  }else{
+
+    $.ajax({
+      url: "queue",
+      method: "get",
+      success: function(qT){
+        queueTime = JSON.parse(qT);
+        console.log("queue" + queueTime.sec);
+        getResult();
+      }
+    });
+  }
+};
+
+function getResult(){
+
+  var formdata = {
+    id: res.id,
+    style: styleCode,
+    ext: res.ext
+      
+  }
+
+  $.ajax({
+      url: "paint",
+      method: "post",
+      data:JSON.stringify(formdata),
+      beforeSend: function(){
+        $('.loading.bar').show("fade", 500);
+        $('.loading.bar span').html((queueTime.sec + 1)+ " ");
+        $('.loading.bar .progress-bar').animate({width: "97%"}, (queueTime.sec + 1) * 1000);
+      },
+      success: function(imgStr){
+        resultImg = imgStr;
+        window.location.hash = "#page3";
+        $('.result-img').delay(600).css({"visibility":"visible"}).animate({opacity: "1"}, 700, "swing");
+        $('.result-img').css({"background-image" : "url(data:image/jpg;base64," +imgStr + ")"});
+        $('#resultImgZoom img').attr("src","data:image/jpg;base64," + imgStr);
+      },
+      complete: function(){
+        $('.loading.bar .progress-bar').stop(true, false);
+        $('.loading.bar .progress-bar').animate({width: "100%"}, 150);
+        $('.loading.bar').delay(150).hide("fade", 500, function(){
+          $('.loading.bar .progress-bar').css({width: "0"});
+        });
+      }
+  });
+}
 
 $('#toggle-art-style').click(function () {
 
@@ -100,66 +161,9 @@ $('#toggle-art-style').click(function () {
 
       }
     });
-
 });
 
 
-
-function submitImg(){
-
-  if ((typeof res === "undefined") || res == '') {
-    alert("Please upload an image!");
-  }else if ((typeof styleCode === "undefined") || styleCode == '')  {
-    alert("Please choose an art style to continue");
-  }else{
-
-    $.ajax({
-      url: "queue",
-      method: "get",
-      success: function(qT){
-        queueTime = JSON.parse(qT);
-        console.log("queue" + queueTime.sec);
-        getResult();
-      }
-    });
-  }
-};
-
-function getResult(){
-
-  var formdata = {
-    id: res.id,
-    style: styleCode,
-    ext: res.ext
-      
-  }
-
-  $.ajax({
-      url: "paint",
-      method: "post",
-      data:JSON.stringify(formdata),
-      beforeSend: function(){
-        $('.loading.bar').show("fade", 500);
-        $('.loading.bar span').html((queueTime.sec + 1)+ " ");
-        $('.loading.bar .progress-bar').animate({width: "97%"}, (queueTime.sec + 1) * 1000);
-      },
-      success: function(imgStr){
-        resultImg = imgStr;
-        window.location.hash = "#page3";
-        $('.result-img').delay(600).css({"visibility":"visible"}).animate({opacity: "1"}, 700, "swing");
-        $('.result-img').css({"background-image" : "url(data:image/jpg;base64," +imgStr + ")"});
-        $('#resultImgZoom img').attr("src","data:image/jpg;base64," + imgStr);
-        // rotateFrame();
-      },
-      complete: function(){
-        $('.loading.bar .progress-bar').stop(true, false);
-        $('.loading.bar .progress-bar').animate({width: "100%"}, 150);
-        $('.loading.bar').delay(150).hide("fade", 500, function(){
-          $('.loading.bar .progress-bar').css({width: "0"});
-        });
-      }
-  });
-}
 
 function setFrame(){
   var showFrame = $('#show-frame');
@@ -234,8 +238,19 @@ function setFrame(){
     });
 }
 
-function rotateFrame(){
+function rotateFrame(vertical){
+  // if (vertical) {
+  //       var proportion = conetentMaxWidth / (data.items[i].size.width - data.items[i].padding.left - data.items[i].padding.right); 
+  //       var contentHeight = (data.items[i].size.height - data.items[i].padding.top - data.items[i].padding.bottom)*proportion;
+  //       var displayPaddingLeft = data.items[i].padding.left*proportion;
+  //       var displayPaddingRight = data.items[i].padding.right*proportion;
+  //       var displayPaddingTop = data.items[i].padding.top*proportion;
+  //       var displayPaddingBottom = data.items[i].padding.bottom*proportion;
 
+
+  //       var displayWidth = conetentMaxWidth + displayPaddingLeft + displayPaddingRight;
+  //       var displayHeight = contentHeight + displayPaddingTop + displayPaddingBottom;
+  // }
 }
 
 function repositionFrame(){
