@@ -905,16 +905,16 @@ li:hover .menu-underline{
 
 .progress-bar {
     float: left;
-    width: 100%;
+    width: 0%;
     height: 100%;
     font-size: 12px;
     line-height: 20px;
     text-align: center;
     background-color: #fff;
     border-radius: 6px;
-    -webkit-transition: width .6s ease;
-    -o-transition: width .6s ease;
-    transition: width .6s ease;
+    -webkit-transition: initial;
+    -o-transition: initial;
+    transition: initial;
 }
 
 .prgress-bar.ninetyfive{

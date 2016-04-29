@@ -138,12 +138,19 @@ function getResult(){
       url: "paint",
       method: "post",
       data:JSON.stringify(formdata),
+      beforeSend: function(){
+        $('.loading.in').show("fade", 250);
+        $('.loading.in .progress-bar').animate({width: "95%"}, queueTime * 1000);
+      },
       success: function(imgStr){
         resultImg = imgStr;
         window.location.hash = "#page3";
         $('.result-img').delay(600).css({"visibility":"visible"}).animate({opacity: "1"}, 700, "swing");
         $('.result-img').css({"background-image" : "url(data:image/jpg;base64," +imgStr + ")"});
         $('#resultImgZoom img').attr("src","data:image/jpg;base64," + imgStr);
+      },
+      complete: function(){
+        $('.loading.in .progress-bar').animate({width: "100%"}, 150);
       }
   });
 }
