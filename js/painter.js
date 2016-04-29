@@ -139,9 +139,9 @@ function getResult(){
       method: "post",
       data:JSON.stringify(formdata),
       beforeSend: function(){
-        $('.loading.bar').show("fade", 250);
+        $('.loading.bar').show("fade", 500);
         $('.loading.bar span').html((queueTime.sec + 1) + "seconds");
-        $('.loading.bar .progress-bar').animate({width: "95%"}, (queueTime.sec + 1) * 1000);
+        $('.loading.bar .progress-bar').animate({width: "97%"}, (queueTime.sec + 1) * 1000);
       },
       success: function(imgStr){
         resultImg = imgStr;
@@ -149,11 +149,14 @@ function getResult(){
         $('.result-img').delay(600).css({"visibility":"visible"}).animate({opacity: "1"}, 700, "swing");
         $('.result-img').css({"background-image" : "url(data:image/jpg;base64," +imgStr + ")"});
         $('#resultImgZoom img').attr("src","data:image/jpg;base64," + imgStr);
+        rotateFrame();
       },
       complete: function(){
-        $('.loading.bar .progress-bar').stop(true, true);
+        $('.loading.bar .progress-bar').stop(true, false);
         $('.loading.bar .progress-bar').animate({width: "100%"}, 150);
-        $('.loading.bar').delay(200).hide("fade", 250);
+        $('.loading.bar').delay(150).hide("fade", 500, function(){
+          $('.loading.bar .progress-bar').css({width: "0"});
+        });
       }
   });
 }
@@ -229,6 +232,10 @@ function setFrame(){
 
 
     });
+}
+
+function rotateFrame(){
+
 }
 
 function repositionFrame(){
