@@ -39,9 +39,9 @@ Dropzone.options.uploadImage = {
         this.on("error", function(errorMessage){
           alert("upload was unsuccessful");
         });
-        this.on("addedfile"),function(file){
+        this.on("addedfile",function(file){
           res = false;
-        }
+        });
   }
 };
 

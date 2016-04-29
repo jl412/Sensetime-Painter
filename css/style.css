@@ -875,7 +875,12 @@ li:hover .menu-underline{
 
 .loading.initial{
 	background: #fff;
-	color: #fff;
+	color: #000;
+}
+
+.loading.initial p{
+	font-size: 12px;
+	margin-top: 30px;
 }
 
 .loading img{
