@@ -191,6 +191,9 @@ li:hover .menu-underline{
 	width: 100%;
 }
 
+.menu-underline.active{
+	width: 100%;
+}
 
 .valign-p {
 	position: relative;
