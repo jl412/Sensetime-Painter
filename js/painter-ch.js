@@ -27,6 +27,16 @@ Dropzone.options.uploadImage = {
   thumbnailWidth: 250,
   thumbnailHeight: 250,
   dictDefaultMessage: "浏览或者拖拽图片至此以上传",
+  dictFallbackMessage: "您的浏览器不支持拖拽上传",
+  dictFileTooBig: "您所上传的图片太大 ({{filesize}}MiB)。最大图片大小: {{maxFilesize}}MiB.",
+  dictInvalidFileType: "您不能上传这种类型的文件",
+  dictResponseError: "服务器回传 {{statusCode}} 错误代码",
+  dictCancelUpload: "取消上传",
+  dictCancelUploadConfirmation: "您确定要取消这个上传吗？",
+  dictRemoveFile: "移除文件",
+  dictRemoveFileConfirmation: null,
+  dictMaxFilesExceeded: "您不能上传更多文件了",
+
   init: function() {
         this.on("success", function(file, response) {
           var vertical = file.height > file.width;
@@ -172,6 +182,11 @@ $('#toggle-art-style').click(function () {
 
 
 function setFrame(){
+
+  if ($(".page-btn-wrapper").css("height") == "60px") {
+    conetentMaxHeight = Math.min($(window).height()* 0.25, 300);
+  }
+
   var showFrame = $('#show-frame');
 
   $.getJSON('data/frame.json', function (data) {

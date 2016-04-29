@@ -976,6 +976,10 @@ li:hover .menu-underline{
 	.frame-control .right{
 		right: -85px !important;
 	}
+
+	#art-lib-content{
+		height: 350px;
+	}
 }
 
 @media only screen and (max-device-width: 736px){
