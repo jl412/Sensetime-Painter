@@ -152,7 +152,10 @@ function getResult(){
       },
       complete: function(){
         $('.loading.bar .progress-bar').animate({width: "100%"}, 150);
-        $$('.loading.bar .progress-bar').delay(200).hide("fade", 250);
+        $('.loading.bar .progress-bar').delay(200).hide("fade", 250);
+      }
+  });
+}
 
 function setFrame(){
   var showFrame = $('#show-frame');
