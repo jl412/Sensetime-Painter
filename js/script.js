@@ -106,7 +106,7 @@ $('.toggle-horizontal').click(function () {
 
 snapContent();
 // showImg();
-$(document).on('ready', function(){
+$(window).load(function(){
     $('.loading.initial').hide("fade", 1500);
 });
 

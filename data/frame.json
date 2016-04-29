@@ -45,270 +45,33 @@
 		},
 		"description": ""
 	},
-		{
-		"name": "black",
-		"frameImg": "url('img/frames/01.png')",
+	{
+		"name": "modern",
+		"frameImg": "url('img/frames/04.png')",
 		"padding": {
-			"left": 56,
-			"right": 57,
-			"top": 65,
-			"bottom": 61
+			"left": 122,
+			"right": 127,
+			"top": 122,
+			"bottom": 121
 		},
 		"size":{
-			"width" : 710,
-			"height": 504
+			"width" : 537,
+			"height": 603
 		},
 		"description": ""
 	},
 	{
-		"name": "thick",
-		"frameImg": "url('img/frames/02.png')",
+		"name": "wood",
+		"frameImg": "url('img/frames/05.png')",
 		"padding": {
-			"left": 115,
-			"right": 118,
-			"top": 110,	
-			"bottom": 110
+			"left": 43,
+			"right": 43,
+			"top": 42,
+			"bottom": 43
 		},
 		"size":{
-			"width" : 986,
-			"height": 780
-		},
-		"description": ""
-	},
-	{
-		"name": "gold-thin",
-		"frameImg": "url('img/frames/03.png')",
-		"padding": {
-			"left": 104,
-			"right": 108,
-			"top": 108,
-			"bottom": 107
-		},
-		"size":{
-			"width" : 1020,
-			"height": 728
-		},
-		"description": ""
-	},
-		{
-		"name": "black",
-		"frameImg": "url('img/frames/01.png')",
-		"padding": {
-			"left": 56,
-			"right": 57,
-			"top": 65,
-			"bottom": 61
-		},
-		"size":{
-			"width" : 710,
-			"height": 504
-		},
-		"description": ""
-	},
-	{
-		"name": "thick",
-		"frameImg": "url('img/frames/02.png')",
-		"padding": {
-			"left": 115,
-			"right": 118,
-			"top": 110,	
-			"bottom": 110
-		},
-		"size":{
-			"width" : 986,
-			"height": 780
-		},
-		"description": ""
-	},
-	{
-		"name": "gold-thin",
-		"frameImg": "url('img/frames/03.png')",
-		"padding": {
-			"left": 104,
-			"right": 108,
-			"top": 108,
-			"bottom": 107
-		},
-		"size":{
-			"width" : 1020,
-			"height": 728
-		},
-		"description": ""
-	},
-		{
-		"name": "black",
-		"frameImg": "url('img/frames/01.png')",
-		"padding": {
-			"left": 56,
-			"right": 57,
-			"top": 65,
-			"bottom": 61
-		},
-		"size":{
-			"width" : 710,
-			"height": 504
-		},
-		"description": ""
-	},
-	{
-		"name": "thick",
-		"frameImg": "url('img/frames/02.png')",
-		"padding": {
-			"left": 115,
-			"right": 118,
-			"top": 110,	
-			"bottom": 110
-		},
-		"size":{
-			"width" : 986,
-			"height": 780
-		},
-		"description": ""
-	},
-	{
-		"name": "gold-thin",
-		"frameImg": "url('img/frames/03.png')",
-		"padding": {
-			"left": 104,
-			"right": 108,
-			"top": 108,
-			"bottom": 107
-		},
-		"size":{
-			"width" : 1020,
-			"height": 728
-		},
-		"description": ""
-	},	{
-		"name": "black",
-		"frameImg": "url('img/frames/01.png')",
-		"padding": {
-			"left": 56,
-			"right": 57,
-			"top": 65,
-			"bottom": 61
-		},
-		"size":{
-			"width" : 710,
-			"height": 504
-		},
-		"description": ""
-	},
-	{
-		"name": "thick",
-		"frameImg": "url('img/frames/02.png')",
-		"padding": {
-			"left": 115,
-			"right": 118,
-			"top": 110,	
-			"bottom": 110
-		},
-		"size":{
-			"width" : 986,
-			"height": 780
-		},
-		"description": ""
-	},
-	{
-		"name": "gold-thin",
-		"frameImg": "url('img/frames/03.png')",
-		"padding": {
-			"left": 104,
-			"right": 108,
-			"top": 108,
-			"bottom": 107
-		},
-		"size":{
-			"width" : 1020,
-			"height": 728
-		},
-		"description": ""
-	},	{
-		"name": "black",
-		"frameImg": "url('img/frames/01.png')",
-		"padding": {
-			"left": 56,
-			"right": 57,
-			"top": 65,
-			"bottom": 61
-		},
-		"size":{
-			"width" : 710,
-			"height": 504
-		},
-		"description": ""
-	},
-	{
-		"name": "thick",
-		"frameImg": "url('img/frames/02.png')",
-		"padding": {
-			"left": 115,
-			"right": 118,
-			"top": 110,	
-			"bottom": 110
-		},
-		"size":{
-			"width" : 986,
-			"height": 780
-		},
-		"description": ""
-	},
-	{
-		"name": "gold-thin",
-		"frameImg": "url('img/frames/03.png')",
-		"padding": {
-			"left": 104,
-			"right": 108,
-			"top": 108,
-			"bottom": 107
-		},
-		"size":{
-			"width" : 1020,
-			"height": 728
-		},
-		"description": ""
-	},	{
-		"name": "black",
-		"frameImg": "url('img/frames/01.png')",
-		"padding": {
-			"left": 56,
-			"right": 57,
-			"top": 65,
-			"bottom": 61
-		},
-		"size":{
-			"width" : 710,
-			"height": 504
-		},
-		"description": ""
-	},
-	{
-		"name": "thick",
-		"frameImg": "url('img/frames/02.png')",
-		"padding": {
-			"left": 115,
-			"right": 118,
-			"top": 110,	
-			"bottom": 110
-		},
-		"size":{
-			"width" : 986,
-			"height": 780
-		},
-		"description": ""
-	},
-	{
-		"name": "gold-thin",
-		"frameImg": "url('img/frames/03.png')",
-		"padding": {
-			"left": 104,
-			"right": 108,
-			"top": 108,
-			"bottom": 107
-		},
-		"size":{
-			"width" : 1020,
-			"height": 728
+			"width" : 358,
+			"height": 450
 		},
 		"description": ""
 	}

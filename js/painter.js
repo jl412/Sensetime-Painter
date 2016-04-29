@@ -5,7 +5,7 @@ var frames = [];
 var scenes = [];
 var sceneLocations = [];
 var conetentMaxWidth = Math.min($(window).width()* 0.55, 600);
-var conetentMaxWidth = Math.min($(window).width()* 0.55, 600);
+var conetentMaxHeight = Math.min($(window).height()* 0.55, 400);
 var frameHeight = 100000;
 var wrapperWidth = 0;
 var wrapperHeight = 0;
@@ -39,6 +39,9 @@ Dropzone.options.uploadImage = {
         this.on("error", function(errorMessage){
           alert("upload was unsuccessful");
         });
+        this.on("addedfile"),function(file){
+          res = false;
+        }
   }
 };
 
@@ -48,7 +51,9 @@ function submitImg(){
   if ((typeof res === "undefined") || res == '') {
     alert("Please upload an image!");
   }else if ((typeof styleCode === "undefined") || styleCode == '')  {
-    alert("Please choose an art style to continue");
+    alert("Please choose an art style to continue.");
+  }else if (res = false)  {
+    alert("Image Uploading. Please wait.");
   }else{
 
     $.ajax({
@@ -78,8 +83,8 @@ function getResult(){
       data:JSON.stringify(formdata),
       beforeSend: function(){
         $('.loading.bar').show("fade", 500);
-        $('.loading.bar span').html((queueTime.sec + 1)+ " ");
-        $('.loading.bar .progress-bar').animate({width: "97%"}, (queueTime.sec + 1) * 1000);
+        $('.loading.bar span').html(((queueTime.sec + 1) * 2)+ " ");
+        $('.loading.bar .progress-bar').animate({width: "97%"}, (queueTime.sec + 1) * 2000);
       },
       success: function(imgStr){
         resultImg = imgStr;
@@ -177,7 +182,21 @@ function setFrame(){
       var content = '';
       var previewContent = '';
       for (var i = 0; i < data.items.length; i++) {
+        if (data.items[i].size.height > data.items[i].size.width) {
+        var proportion = conetentMaxHeight / (data.items[i].size.height - data.items[i].padding.top - data.items[i].padding.bottom); 
+        var contentWidth = (data.items[i].size.width - data.items[i].padding.left - data.items[i].padding.right)*proportion;
+        var contentHeight = conetentMaxHeight;
+        var displayPaddingLeft = data.items[i].padding.left*proportion;
+        var displayPaddingRight = data.items[i].padding.right*proportion;
+        var displayPaddingTop = data.items[i].padding.top*proportion;
+        var displayPaddingBottom = data.items[i].padding.bottom*proportion;
+
+
+        var displayWidth = contentWidth + displayPaddingLeft + displayPaddingRight;
+        var displayHeight = conetentMaxHeight + displayPaddingTop + displayPaddingBottom;
+        }else{
         var proportion = conetentMaxWidth / (data.items[i].size.width - data.items[i].padding.left - data.items[i].padding.right); 
+        var contentWidth = conetentMaxWidth;
         var contentHeight = (data.items[i].size.height - data.items[i].padding.top - data.items[i].padding.bottom)*proportion;
         var displayPaddingLeft = data.items[i].padding.left*proportion;
         var displayPaddingRight = data.items[i].padding.right*proportion;
@@ -187,11 +206,12 @@ function setFrame(){
 
         var displayWidth = conetentMaxWidth + displayPaddingLeft + displayPaddingRight;
         var displayHeight = contentHeight + displayPaddingTop + displayPaddingBottom;
+        }
 
         frames[i] = {
           value: i, 
           contentHeight: contentHeight, 
-          contentWidth: conetentMaxWidth, 
+          contentWidth: contentWidth, 
           displayHeight: displayHeight, 
           displayWidth: displayWidth,
           resContentWidth: data.items[i].size.width - data.items[i].padding.left - data.items[i].padding.right,
@@ -199,7 +219,10 @@ function setFrame(){
           resHeight: data.items[i].size.height, 
           resWidth: data.items[i].size.width, 
           paddingTop: data.items[i].padding.top, 
-          paddingLeft: data.items[i].padding.left};
+          paddingLeft: data.items[i].padding.left,
+          paddingBottom: data.items[i].padding.bottom,
+          paddingRight: data.items[i].padding.right
+        };
         
 
         if (displayHeight > wrapperHeight) {
@@ -210,7 +233,7 @@ function setFrame(){
           wrapperWidth = displayWidth;
         }
 
-        content += '<div class="frame-item-container nodisplay" id="frame' + i + '"><div class="frame-item" style="width:' + displayWidth  + 'px; height:' + displayHeight + 'px; background-image: '+ data.items[i].frameImg + '"></div><div class="framebase" style="width:' + (conetentMaxWidth + 6) + 'px; height:' + (contentHeight + 6) + 'px;"></div></div>';
+        content += '<div class="frame-item-container nodisplay" id="frame' + i + '"><div class="frame-item" style="width:' + displayWidth  + 'px; height:' + displayHeight + 'px; background-image: '+ data.items[i].frameImg + '"></div><div class="framebase" style="width:' + (frames[i].contentWidth + 6) + 'px; height:' + (frames[i].contentHeight + 6) + 'px;"></div></div>';
         if (i % itemInRow == 0) {
           previewContent += '<div class="item" id="row' + Math.floor(i / itemInRow) + '">';
         };
@@ -221,7 +244,7 @@ function setFrame(){
       
       }
 
-      content += '<div class="result-img zoom" style="width:' + (conetentMaxWidth+2) +'px; height:' + (frames[currentFrame].contentHeight+2) +'px"></div><div class="toggle-result-img" style="width:' + (conetentMaxWidth+2) +'px; height:' + (frames[currentFrame].contentHeight+2) +'px" data-toggle="modal" data-target="#resultImgZoom"></div></div>';
+      content += '<div class="result-img zoom" style="width:' + (frames[currentFrame].contentWidth+2) +'px; height:' + (frames[currentFrame].contentHeight+2) +'px"></div><div class="toggle-result-img" style="width:' + (frames[currentFrame].contentWidth+2) +'px; height:' + (frames[currentFrame].contentHeight+2) +'px" data-toggle="modal" data-target="#resultImgZoom"></div></div>';
 
       showFrame.css({"height": wrapperHeight + "px"});
       $(".frame-control").css({"width": wrapperWidth + "px"});
@@ -240,16 +263,43 @@ function setFrame(){
 
 function rotateFrame(vertical){
   // if (vertical) {
-  //       var proportion = conetentMaxWidth / (data.items[i].size.width - data.items[i].padding.left - data.items[i].padding.right); 
-  //       var contentHeight = (data.items[i].size.height - data.items[i].padding.top - data.items[i].padding.bottom)*proportion;
-  //       var displayPaddingLeft = data.items[i].padding.left*proportion;
-  //       var displayPaddingRight = data.items[i].padding.right*proportion;
-  //       var displayPaddingTop = data.items[i].padding.top*proportion;
-  //       var displayPaddingBottom = data.items[i].padding.bottom*proportion;
+  //   for (var i = 0; i < frames.length; i++) {
+  //       var proportion = conetentMaxHeight / (frames[i].resWidth - frames[i].paddingLeft - frames[i].paddingRight); 
+  //       var contentHeight =  (frames[i].resHeight - frames[i].paddingTop - frames[i].paddingBottom)*proportion;
+  //       var displayPaddingLeft = frames[i].padding.left*proportion;
+  //       var displayPaddingRight = frames[i].padding.right*proportion;
+  //       var displayPaddingTop = frames[i].padding.top*proportion;
+  //       var displayPaddingBottom = frames[i].padding.bottom*proportion;
 
 
-  //       var displayWidth = conetentMaxWidth + displayPaddingLeft + displayPaddingRight;
+  //       var displayWidth = conetentMaxHeight + displayPaddingLeft + displayPaddingRight;
   //       var displayHeight = contentHeight + displayPaddingTop + displayPaddingBottom;
+
+  //       frames[i].contentHeight = conetentMaxHeight;
+  //       frames[i].contentWidth = contentWidth;
+  //       frames[i].displayHeight = displayHeight;
+  //       frames[i].displayWidth = displayWidth;
+        
+  //       wrapperHeight = 0;
+  //       wrapperWidth = 0;
+
+  //       if (displayWidth > wrapperHeight) {
+  //         wrapperHeight = displayWidth;
+  //       }
+
+  //       if (displayHeight > wrapperWidth) {
+  //         wrapperWidth = displayHeight;
+  //       }
+
+  //       $("#frame" + i +" .frame-item").css({ 
+  //         width: frames[i].displayWidth + "px", 
+  //         height: frames[i].displayHeight + "px"});
+
+
+  //       $("#frame" + i +" .framebase").css({
+  //         "width": (frames[i].contentWidth + 2) + "px", 
+  //         "height": (frames[i].contentHeight + 2) + "px"});   
+  //   }
   // }
 }
 
@@ -327,7 +377,7 @@ function locateFrame(sceneLocation, frame){
     displayWidth = proportion*frame.resWidth;
     displayHeight = sceneLocation.sceneContentHeight;
     extraMarginTop = 0;
-    extraMarginLeft = (sceneLocation.sceneContentWidth - frame.displayWidth) / 2;
+    extraMarginLeft = (sceneLocation.sceneContentWidth - displayWidth) / 2;
   }
   contentWidth = proportion*frame.resContentWidth;
   contentHeight = proportion*frame.resContentHeight;
@@ -657,10 +707,8 @@ $(document).on('ready', function(){
   });
 
   $(".frame-wrapper").on("mouseenter", ".in-scene", function(){
-    console.log("entered");
     $(".frame-wrapper .carousel-control").toggleClass('transparent');
   }).on("mouseleave", ".in-scene", function(){
-    console.log("leaved");
     $(".frame-wrapper .carousel-control").toggleClass('transparent');
   });
     
