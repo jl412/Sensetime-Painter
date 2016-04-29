@@ -139,8 +139,9 @@ function getResult(){
       method: "post",
       data:JSON.stringify(formdata),
       beforeSend: function(){
-        $('.loading.in').show("fade", 250);
-        $('.loading.in .progress-bar').animate({width: "95%"}, queueTime * 1000);
+        $('.loading.bar').show("fade", 250);
+        $('.loading.bar span').html((queueTime + 1) + "seconds");
+        $('.loading.bar .progress-bar').animate({width: "95%"}, (queueTime + 1) * 1000);
       },
       success: function(imgStr){
         resultImg = imgStr;
@@ -150,7 +151,7 @@ function getResult(){
         $('#resultImgZoom img').attr("src","data:image/jpg;base64," + imgStr);
       },
       complete: function(){
-        $('.loading.in .progress-bar').animate({width: "100%"}, 150);
+        $('.loading.bar .progress-bar').animate({width: "100%"}, 150);
       }
   });
 }
