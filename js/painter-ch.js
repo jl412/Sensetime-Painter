@@ -31,7 +31,7 @@ Dropzone.options.uploadImage = {
   maxFilesize: 8,
   thumbnailWidth: uploadThumbSize,
   thumbnailHeight: uploadThumbSize,
-  dictDefaultMessage: "浏览或者拖拽图片至此以上传",
+  dictDefaultMessage: "<div class=\"dz-default dz-message\"><span>浏览或者拖拽图片至此以上传</span><div class=\"browse-btn\"><span>浏览</span></div></div>",
   dictFallbackMessage: "您的浏览器不支持拖拽上传",
   dictFileTooBig: "您所上传的图片太大 ({{filesize}}MiB)。最大图片大小: {{maxFilesize}}MiB.",
   dictInvalidFileType: "您不能上传这种类型的文件",
