@@ -617,7 +617,7 @@ function restart(){
     Dropzone.forElement("#upload-image").removeAllFiles(true);
     res = '';
     styleCode = '';
-    $("#toggle-art-style").html('<div class="dz-message"><img src="img/art-styles.jpg" class="zone-img"><br/><span>Choose an art style from our library</span><div class="browse-btn"><span>browse</span></div></div>');
+    $("#toggle-art-style").html('<div class="dz-message"><img src="img/art-styles.jpg" class="zone-img"><br/><span>从我们的风格库中选择一种艺术风格</span><div class="browse-btn"><span>浏览</span></div></div>');
     console.log("res: " + res + ", styleCode: " + styleCode);
 
 }
