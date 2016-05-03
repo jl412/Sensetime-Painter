@@ -38,7 +38,7 @@ Dropzone.options.uploadImage = {
   dictResponseError: "服务器回传 {{statusCode}} 错误代码",
   dictCancelUpload: "取消上传",
   dictCancelUploadConfirmation: "您确定要取消这个上传吗？",
-  dictRemoveFile: "移除文件",
+  dictRemoveFile: "重新选择",
   dictRemoveFileConfirmation: null,
   dictMaxFilesExceeded: "您不能上传更多文件了",
   addRemoveLinks: true,
@@ -52,8 +52,8 @@ Dropzone.options.uploadImage = {
           res = JSON.parse(response);
           console.log(res.id);
           if(window.location.hash == '#page1'){
-            $.delay(750).queue(function(){
-              window.location.hash == '#page2'
+            $（window）.delay(750).queue(function(){
+              window.location.hash = '#page2';
             });
           };
         });
