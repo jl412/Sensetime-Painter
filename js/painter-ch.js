@@ -19,13 +19,18 @@ var queueTime;
 var resultImg;
 var frameOri = false;
 
+if ($(".headline").css("margin-top") == "90px") {
+  var uploadThumbSize = 206;
+} else{
+  var uploadThumbSize = 250;
+}
 
 Dropzone.options.uploadImage = { 
   acceptedFiles: "image/*",
   maxFiles: 1,
   maxFilesize: 8,
-  thumbnailWidth: 250,
-  thumbnailHeight: 250,
+  thumbnailWidth: uploadThumbSize,
+  thumbnailHeight: uploadThumbSize,
   dictDefaultMessage: "浏览或者拖拽图片至此以上传",
   dictFallbackMessage: "您的浏览器不支持拖拽上传",
   dictFileTooBig: "您所上传的图片太大 ({{filesize}}MiB)。最大图片大小: {{maxFilesize}}MiB.",
@@ -36,7 +41,7 @@ Dropzone.options.uploadImage = {
   dictRemoveFile: "移除文件",
   dictRemoveFileConfirmation: null,
   dictMaxFilesExceeded: "您不能上传更多文件了",
-
+  addRemoveLinks: true,
   init: function() {
         this.on("success", function(file, response) {
           var vertical = file.height > file.width;
@@ -46,6 +51,11 @@ Dropzone.options.uploadImage = {
           }
           res = JSON.parse(response);
           console.log(res.id);
+          if(window.location.hash == '#page1'){
+            $.delay(750).queue(function(){
+              window.location.hash == '#page2'
+            });
+          };
         });
         this.on("error", function(errorMessage){
           alert("上传不成功，请重试。");
@@ -57,14 +67,17 @@ Dropzone.options.uploadImage = {
 };
 
 
+
+
+
 function submitImg(){
 
-  if (res == false) {
-    alert("图片上传中，请稍等");
-  }else if ((typeof res === "undefined") || res == '')  {
+  if ((typeof res === "undefined") || res == '') {
     alert("请上传一张图片！");
+  }else if (res == false)  {
+    alert("图片上传中，请稍等");
   }else if ((typeof styleCode === "undefined") || styleCode == '')  {
-    alert("请选择一张图片以继续");
+    alert("请选择一种美术风格以继续");
   }else{
 
     $.ajax({
@@ -653,6 +666,13 @@ function removeScene(){
 
   repositionFrame();
 }
+
+// bounce the toggle button
+$(window).on('hashchange', function(){
+  if(window.location.hash == '#page3'){
+    $('.switch-to-scene').delay(500).effect( "bounce", {distance: 50, times:4}, 1200);
+  };
+});
 
 
 // toggle scene

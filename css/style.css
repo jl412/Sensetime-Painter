@@ -421,7 +421,18 @@ li:hover .menu-underline{
 	margin-right: auto;
 }
 
-.browse-btn span{
+.dz-remove{
+	padding: 7px;
+	width: 60%;
+	background-color: rgba(255,255,255, 0.7);
+	border-radius: 15px;
+	margin-top: 15px;
+	margin-left: auto;
+	margin-right: auto;
+	color: #000 !important;
+}
+
+.dz-remove span{
 	text-transform: uppercase;
 	color: #000 !important;
 }
@@ -877,7 +888,8 @@ li:hover .menu-underline{
 }
 
 .loading.initial{
-	background: #EEE;
+	background: #F7F7F7;
+	background: rgba(252, 252, 252, 0.95)
 	color: #777;
 }
 
@@ -1035,6 +1047,11 @@ li:hover .menu-underline{
 
 	.page-btn .glyphicon{
 		font-size:  12px;
+	}
+
+	.navbar-brand img{
+		height: 15px;
+		width: auto;
 	}
 
 }
