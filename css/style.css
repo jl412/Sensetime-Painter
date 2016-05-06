@@ -900,7 +900,7 @@ li:hover .menu-underline{
 
 .loading.initial{
 	background: #F7F7F7;
-	background: rgba(252, 252, 252, 0.95);
+	background: rgba(252, 252, 252, 1);
 	color: #777;
 }
 

@@ -43,6 +43,7 @@ Dropzone.options.uploadImage = {
   dictMaxFilesExceeded: "您不能上传更多文件了",
   addRemoveLinks: true,
   init: function() {
+
         this.on("success", function(file, response) {
           var vertical = file.height > file.width;
           if (vertical != frameOri) {
@@ -54,18 +55,26 @@ Dropzone.options.uploadImage = {
           if(window.location.hash == '#page1'){
             setTimeout(function(){
               window.location.hash = '#page2'
-            }, 750);
+            }, 500);
           };
         });
-        this.on("error", function(errorMessage){
-          alert("上传不成功，请重试。");
-        });
+
         this.on("addedfile",function(file){
-          res = false;
+          console.log("addedfile");
+          res = 'false';
+        });
+
+        this.on("canceled",function(file){
+          console.log("canceled");
+          res = '';
+        });
+
+        this.on("removedfile",function(file){
+          console.log("removedfile");
+          res = '';
         });
   }
 };
-
 
 
 
@@ -74,7 +83,7 @@ function submitImg(){
 
   if ((typeof res === "undefined") || res == '') {
     alert("请上传一张图片！");
-  }else if (res == false)  {
+  }else if (res == 'false')  {
     alert("图片上传中，请稍等");
   }else if ((typeof styleCode === "undefined") || styleCode == '')  {
     alert("请选择一种美术风格以继续");
@@ -675,7 +684,7 @@ function restart(){
     Dropzone.forElement("#upload-image").removeAllFiles(true);
     res = '';
     styleCode = '';
-    $("#toggle-art-style").html('<div class="dz-message"><img src="img/art-styles.jpg" class="zone-img"><br/><span>从我们的风格库中选择一种艺术风格</span><div class="browse-btn"><span>浏览</span></div></div>');
+    $(".style-item").removeClass("ui-selected");
     console.log("res: " + res + ", styleCode: " + styleCode);
 
 }
@@ -745,7 +754,7 @@ $(window).on('hashchange', function(){
   };
 
   if(window.location.hash == '#page2'){
-    
+
     $(".style-item:first-child").css({"margin-top": (($("#show-style").height() - $(".style-item:eq(2)").innerHeight()) / 2) + "px"});
     $(".style-item:last-child").css({"margin-bottom": (($("#show-style").height() - $(".style-item:eq(2)").innerHeight()) / 2) + "px"});
     if ($(".style-item").index($(".ui-selected")) == -1) {
