@@ -10,7 +10,10 @@
 
 	<link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/slider.css">
+  <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
+  <script src="js/jquery-1.12.3.min.js"></script>
 	<script src="js/dropzone.js"></script>
+  <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -160,7 +163,21 @@
 
   		<!-- page 2 -->
   		<div class="page nodisplay" role="page" id="page2" value="2">
-  			<div class="valign-p">
+        <div class="valign-p">
+          <div class="valign-c page-padding contaier-fluid">
+            <div class="centered-md content-wrapper">
+              <div class="row dz-container">
+                <div class="dz-header">
+                  <p>艺术风格</p>
+                </div>
+                <form  class="clickable zone" id="show-style">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+<!--   			<div class="valign-p">
   				<div class="valign-c page-padding contaier-fluid">
   					<div class="centered-md content-wrapper">
   						<div class="row dz-container">
@@ -168,7 +185,7 @@
   								<p>艺术风格</p>
   							</div>
   							<form  class="clickable zone"  data-toggle = "modal" data-target = "#art-style-modal" id="toggle-art-style">
-  								<div class="dz-message">
+  								<div class="  -message">
   									<img src="img/art-styles.jpg" class="zone-img">
   									<br/>
   									<span>从我们的风格库中选择一种艺术风格</span>
@@ -179,7 +196,8 @@
   					</div>
   				</div>
   			</div>
-  			<!-- Modal -->
+
+
   			<div class = "modal fade" id = "art-style-modal" tabindex = "-1" role = "dialog" 
   			aria-labelledby = "art-style-modalLabel" aria-hidden = "true">
 
@@ -208,10 +226,10 @@
   							选择
   						</button>
   					</div>
-  				</div><!-- /.modal-content -->
-  			</div><!-- /.modal-dialog -->
+  				</div>
+  			</div>
+  		</div> -->
 
-  		</div><!-- /.modal -->
   			<div class="page-btn-wrapper">
   				<div class="centered-md">
   					<div class="row">
@@ -323,7 +341,6 @@
   	</div>
 
     <!-- JQuery -->
-  <script src="js/jquery-1.12.3.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js" integrity="sha256-WyjlLy3rvVSitHOXMctYkMCOU6GAletPg+qniNKLCQM=" crossorigin="anonymous"></script>
   <script src="js/script.js"></script>
   <script src="js/painter-ch.js"></script>

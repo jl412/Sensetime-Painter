@@ -31,7 +31,7 @@ Dropzone.options.uploadImage = {
   maxFilesize: 8,
   thumbnailWidth: uploadThumbSize,
   thumbnailHeight: uploadThumbSize,
-  dictDefaultMessage: "<div class=\"dz-default dz-message\"><span>浏览或者拖拽图片至此以上传</span><div class=\"browse-btn\"><span>浏览</span></div></div>",
+  dictDefaultMessage: "<div class=\"dz-default dz-message\"><span>浏览或者拖拽图片至此以上传</br>或者</span><div class=\"browse-btn\"><span>浏览</span></div></div>",
   dictFallbackMessage: "您的浏览器不支持拖拽上传",
   dictFileTooBig: "您所上传的图片太大 ({{filesize}}MiB)。最大图片大小: {{maxFilesize}}MiB.",
   dictInvalidFileType: "您不能上传这种类型的文件",
@@ -52,9 +52,9 @@ Dropzone.options.uploadImage = {
           res = JSON.parse(response);
           console.log(res.id);
           if(window.location.hash == '#page1'){
-            $（window）.delay(750).queue(function(){
-              window.location.hash = '#page2';
-            });
+            setTimeout(function(){
+              window.location.hash = '#page2'
+            }, 750);
           };
         });
         this.on("error", function(errorMessage){
@@ -127,7 +127,72 @@ function getResult(){
   });
 }
 
-$('#toggle-art-style').click(function () {
+// $('#toggle-art-style').click(function () {
+
+//     var showStyle = $('#show-style');
+//     var styles;
+
+//     $.getJSON('data/art-style.json', function (data) {
+
+//       console.log(data);
+
+//       styles = data.items;
+//       var content = data.items.map(function (item){
+//         return '<div class="style-item ui-widget-content" value = "' + item.value + '"><div class="style-thumbnail img-thumbnail" style="background-image:' 
+//         + item.thumbnail 
+//         + ';"></div><p>' 
+//         + item.nameCh
+//         +'</p></div>';
+//       });
+
+//       showStyle.empty();
+
+//       if (content.length) {
+//         showStyle.html(content);
+//       }
+
+//     });
+
+//     showStyle.text('Loading the JSON file.'); 
+
+//     $(function() {
+//       $( "#show-style" ).selectable({
+//         selected: function() {
+//           $("#apply-style").removeClass("disabled");
+//         },
+//         unselected: function() {
+//           $("#apply-style").addClass("disabled");
+//         },
+//         selecting: function(event, ui){
+//           if( $(".ui-selected, .ui-selecting").length > 1){
+//             $(ui.selecting).removeClass("ui-selecting");
+//           }
+//         }
+//       });
+//     });
+
+//     $("#apply-style").click(function(){
+//       if (!$(this).hasClass("disabled")) {
+//         styleCode = $(".ui-selected").attr("value");
+  
+
+//         $("#art-style-modal").modal('hide');
+//         for (var i = 0; i < styles.length; i++) {
+          
+//           if (styles[i].value == styleCode) {
+//             $("#page2 .dz-message").html('<div class="zone-img style-thumbnail img-thumbnail" style="background-image:' 
+//         + styles[i].thumbnail 
+//         + ';"></div><p>' 
+//         + styles[i].nameCh
+//         +'</p>');
+//           }
+//         }
+
+//       }
+//     });
+// });
+
+function setArtstlye() {
 
     var showStyle = $('#show-style');
     var styles;
@@ -137,11 +202,14 @@ $('#toggle-art-style').click(function () {
       console.log(data);
 
       styles = data.items;
+      // for (var i = 0; i < styles.length; i++) {
+      //   styles[i]
+      // }
       var content = data.items.map(function (item){
         return '<div class="style-item ui-widget-content" value = "' + item.value + '"><div class="style-thumbnail img-thumbnail" style="background-image:' 
         + item.thumbnail 
         + ';"></div><p>' 
-        + item.name 
+        + item.nameCh
         +'</p></div>';
       });
 
@@ -149,27 +217,15 @@ $('#toggle-art-style').click(function () {
 
       if (content.length) {
         showStyle.html(content);
+        $(".style-item:first-child").css({"margin-top": (($("#show-style").height() - $(".style-item:eq(2)").innerHeight()) / 2) + "px"});
+        $(".style-item:last-child").css({"margin-bottom": (($("#show-style").height() - $(".style-item:eq(2)").innerHeight()) / 2) + "px"});
       }
+
 
     });
 
     showStyle.text('Loading the JSON file.'); 
 
-    $(function() {
-      $( "#show-style" ).selectable({
-        selected: function() {
-          $("#apply-style").removeClass("disabled");
-        },
-        unselected: function() {
-          $("#apply-style").addClass("disabled");
-        },
-        selecting: function(event, ui){
-          if( $(".ui-selected, .ui-selecting").length > 1){
-            $(ui.selecting).removeClass("ui-selecting");
-          }
-        }
-      });
-    });
 
     $("#apply-style").click(function(){
       if (!$(this).hasClass("disabled")) {
@@ -183,14 +239,16 @@ $('#toggle-art-style').click(function () {
             $("#page2 .dz-message").html('<div class="zone-img style-thumbnail img-thumbnail" style="background-image:' 
         + styles[i].thumbnail 
         + ';"></div><p>' 
-        + styles[i].name 
-        +'</p>')
+        + styles[i].nameCh
+        +'</p>');
           }
         }
 
       }
     });
-});
+};
+
+
 
 
 
@@ -612,7 +670,7 @@ function modDecrease(dividend, divisor){
 }
 
 function restart(){
-     window.location.hash = "#page0";
+     window.location.hash = "#page1";
     $(".result-img").delay(400).css({"visibility" : "hidden", "opacity" : "0"});
     Dropzone.forElement("#upload-image").removeAllFiles(true);
     res = '';
@@ -667,10 +725,34 @@ function removeScene(){
   repositionFrame();
 }
 
+function fadeScroll(){
+  var nth = 0;
+  var itemOutHeight = $(".style-item:eq(2)").innerHeight();
+
+
+  $(".style-item").each(function(){
+    var scrollPos = $("#show-style .mCSB_container").position();
+    $(this).css("opacity", 1 -  Math.abs((scrollPos.top * -1) - itemOutHeight * nth ) / (itemOutHeight * 1.2));
+    nth++;
+  });
+  // $(".style-item").css("opacity", 1 - $("#show-style").scrollTop() / $(this).innerHeight(true));
+};
+
 // bounce the toggle button
 $(window).on('hashchange', function(){
   if(window.location.hash == '#page3'){
-    $('.switch-to-scene').delay(500).effect( "bounce", {distance: 50, times:4}, 1200);
+    $('.switch-to-scene').delay(500).effect( "bounce", {distance: 70, times:4}, 1200);
+  };
+
+  if(window.location.hash == '#page2'){
+    
+    $(".style-item:first-child").css({"margin-top": (($("#show-style").height() - $(".style-item:eq(2)").innerHeight()) / 2) + "px"});
+    $(".style-item:last-child").css({"margin-bottom": (($("#show-style").height() - $(".style-item:eq(2)").innerHeight()) / 2) + "px"});
+    if ($(".style-item").index($(".ui-selected")) == -1) {
+    }else{
+      $("#show-style .mCSB_container").css({top: $(".style-item:eq(2)").innerHeight() * $(".style-item").index($(".ui-selected")) + "px" });
+    }
+    fadeScroll();
   };
 });
 
@@ -747,7 +829,40 @@ $(document).on('ready', function(){
   }).on("mouseleave", ".in-scene", function(){
     $(".frame-wrapper .carousel-control").toggleClass('transparent');
   });
-    
+  
+
+  // Custom scroll bar
+});
+
+$(window).load(function(){
+
+  $("#show-style").mCustomScrollbar({
+    theme: "minimal",
+    autoHideScrollbar: false,
+    callbacks:{
+      whileScrolling: function(){
+        fadeScroll();
+      }
+    }
+  });
+
+  $( "#show-style .mCSB_container" ).selectable({
+    selected: function(event, ui) {
+      $("#show-style").mCustomScrollbar('scrollTo',  $(".style-item:eq(2)").innerHeight() * $(".style-item").index(ui.selected));
+      styleCode = $(ui.selected).attr("value");
+    },
+    unselected: function() {
+      styleCode = '';
+    },
+    selecting: function(event, ui){
+      if( $(".ui-selected, .ui-selecting").length > 1){
+        $(ui.selecting).removeClass("ui-selecting");
+      }
+    }
+  });
+
+  fadeScroll();
+
 });
 
 
@@ -774,3 +889,4 @@ $(window).on('resize', function(){
 zoomImgModal();
 setScene();
 setFrame();
+setArtstlye();

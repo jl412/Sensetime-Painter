@@ -2,6 +2,7 @@
 	"items": [
 	{
 		"name": "Oil Paint",
+		"nameCh": "油画",
 		"thumbnail": "url('img/Art-Styles/oil-paint.jpg')",
 		"value": 102,
 		"description": ""
@@ -9,6 +10,7 @@
 
 	{
 		"name": "Gouache Paint",
+		"nameCh": "水粉画",
 		"thumbnail": "url('img/Art-Styles/gouache-paint.jpg')",
 		"value": 301,
 		"description": ""
@@ -16,6 +18,7 @@
 
 	{
 		"name": "Line Watercolor",
+		"nameCh": "带线条水彩",
 		"thumbnail": "url('img/Art-Styles/line-water.jpg')",
 		"value": 305,
 		"description": ""
@@ -23,6 +26,7 @@
 
 	{
 		"name": "Pure Watercolor",
+		"nameCh": "无线条水彩",
 		"thumbnail": "url('img/Art-Styles/pure-water.jpg')",
 		"value": 306,
 		"description": ""
@@ -30,6 +34,7 @@
 
 	{
 		"name": "Black & White Silouette",
+		"nameCh": "黑白剪影",
 		"thumbnail": "url('img/Art-Styles/b&w.jpg')",
 		"value": 501,
 		"description": ""
@@ -37,6 +42,7 @@
 
 	{
 		"name": "Ad Poster",
+		"nameCh": "海报风格画",
 		"thumbnail": "url('img/Art-Styles/ad-poster.jpg')",
 		"value": 601,
 		"description": ""

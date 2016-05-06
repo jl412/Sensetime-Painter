@@ -18,16 +18,16 @@ function movePage(direction) {
  
     window.location.hash = pageToShow;
 
-    console.log(currentPage);
-    console.log(pageToShow);
+    // console.log(currentPage);
+    // console.log(pageToShow);
 }
 
 
 function render(url){
     console.log("render");
     var temp = url.split('/')[0];
-    console.log($(currentPage).attr("value"));
-    console.log($(temp).attr("value"));
+    // console.log($(currentPage).attr("value"));
+    // console.log($(temp).attr("value"));
 
     if (temp == ''){
         temp = "#page0";
