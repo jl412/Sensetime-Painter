@@ -225,7 +225,7 @@ function setArtstlye() {
       showStyle.empty();
 
       if (content.length) {
-        showStyle.html(content);
+        showStyle.append(content);
         $(".style-item:first-child").css({"margin-top": (($("#show-style").height() - $(".style-item:eq(2)").innerHeight()) / 2) + "px"});
         $(".style-item:last-child").css({"margin-bottom": (($("#show-style").height() - $(".style-item:eq(2)").innerHeight()) / 2) + "px"});
       }
