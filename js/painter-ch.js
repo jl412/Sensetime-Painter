@@ -25,7 +25,8 @@ if ($(".headline").css("margin-top") == "90px") {
   var uploadThumbSize = 250;
 }
 
-Dropzone.options.uploadImage = { 
+Dropzone.options.uploadImage = {
+  url: "painter/upload",
   acceptedFiles: "image/*",
   maxFiles: 1,
   maxFilesize: 8,
@@ -111,7 +112,7 @@ function getResult(){
   }
 
   $.ajax({
-      url: "paint",
+      url: "painter/paint",
       method: "post",
       data:JSON.stringify(formdata),
       beforeSend: function(){
@@ -136,70 +137,7 @@ function getResult(){
   });
 }
 
-// $('#toggle-art-style').click(function () {
 
-//     var showStyle = $('#show-style');
-//     var styles;
-
-//     $.getJSON('data/art-style.json', function (data) {
-
-//       console.log(data);
-
-//       styles = data.items;
-//       var content = data.items.map(function (item){
-//         return '<div class="style-item ui-widget-content" value = "' + item.value + '"><div class="style-thumbnail img-thumbnail" style="background-image:' 
-//         + item.thumbnail 
-//         + ';"></div><p>' 
-//         + item.nameCh
-//         +'</p></div>';
-//       });
-
-//       showStyle.empty();
-
-//       if (content.length) {
-//         showStyle.html(content);
-//       }
-
-//     });
-
-//     showStyle.text('Loading the JSON file.'); 
-
-//     $(function() {
-//       $( "#show-style" ).selectable({
-//         selected: function() {
-//           $("#apply-style").removeClass("disabled");
-//         },
-//         unselected: function() {
-//           $("#apply-style").addClass("disabled");
-//         },
-//         selecting: function(event, ui){
-//           if( $(".ui-selected, .ui-selecting").length > 1){
-//             $(ui.selecting).removeClass("ui-selecting");
-//           }
-//         }
-//       });
-//     });
-
-//     $("#apply-style").click(function(){
-//       if (!$(this).hasClass("disabled")) {
-//         styleCode = $(".ui-selected").attr("value");
-  
-
-//         $("#art-style-modal").modal('hide');
-//         for (var i = 0; i < styles.length; i++) {
-          
-//           if (styles[i].value == styleCode) {
-//             $("#page2 .dz-message").html('<div class="zone-img style-thumbnail img-thumbnail" style="background-image:' 
-//         + styles[i].thumbnail 
-//         + ';"></div><p>' 
-//         + styles[i].nameCh
-//         +'</p>');
-//           }
-//         }
-
-//       }
-//     });
-// });
 
 function setArtstlye() {
 
@@ -225,7 +163,7 @@ function setArtstlye() {
       showStyle.empty();
 
       if (content.length) {
-        showStyle.append(content);
+        showStyle.append    (content);
         $(".style-item:first-child").css({"margin-top": (($("#show-style").height() - $(".style-item:eq(2)").innerHeight()) / 2) + "px"});
         $(".style-item:last-child").css({"margin-bottom": (($("#show-style").height() - $(".style-item:eq(2)").innerHeight()) / 2) + "px"});
       }
@@ -274,7 +212,7 @@ function setFrame(){
       console.log(data);
 
       numOfFrame =  data.items.length;
-
+      
       var content = '';
       var previewContent = '';
       for (var i = 0; i < data.items.length; i++) {
