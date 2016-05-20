@@ -23,7 +23,7 @@ $(document).ready(function () {
                 type : 'post',
                 data : {
                     username: username,
-                    password: hex_md5(password + APP.pwd_secret)
+                    password: hex_md5(password)
                 },
                 dataType : 'json',
                 success : function(result) {
@@ -66,7 +66,7 @@ $(document).ready(function () {
                 type : 'post',
                 data : {
                     username: username,
-                    password: hex_md5(password + APP.pwd_secret)
+                    password: hex_md5(password)
                 },
                 dataType : 'json',
                 success : function(result) {
