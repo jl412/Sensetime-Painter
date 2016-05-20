@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="utf-8">
+	<title>创作属于自己的艺术画 - 画廊</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="css/dropzone.css">
+
+	<link rel="stylesheet" href="css/blueimp-gallery.min.css">
+	<link rel="stylesheet" href="css/bootstrap-image-gallery.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/gallery.css">
+  	<link rel="stylesheet" href="css/slider.css">
+  	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+	<script src="js/dropzone.js"></script>
+	<script src="js/hex_md5.js"></script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+
+
+<body>
+  <div class="loading initial">
+    <div class="message">
+        <img src="img/logo-sweep effect.gif"/>
+    </div>
+  </div>
+
+	<div class="container-fluid" id="bg-wrapper">
+
+		<!-- Background Slides -->
+
+		<!-- Nav Bar -->
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-item" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">
+						<img alt="Brand" src="http://sensetime-website.oss-cn-hangzhou.aliyuncs.com/homepage/sensetime-logo.png">
+					</a>
+				</div>	
+				<div class="collapse navbar-collapse" id="collapse-item">
+					<ul class="nav navbar-nav navbar-right">
+						<li><div class="menu-underline"></div><a href="home.html">创作</a></li>
+						<li><div class="menu-underline active"></div><a href="#">画廊</a></li>
+						<li><div class="menu-underline"></div><a href="#" type="button" data-toggle="modal" data-target="#loginModal">Log in | Sign Up</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Log in Modal -->
+		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Sign In</h4>
+					</div>
+					<div class="modal-body">
+						<form class="simple_form ">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Account ID" name="username" id="user_login">
+							</div>
+							<div class="form-group">
+								<input type="password" class="form-control" placeholder="Password" name="password" id="user_password">
+							</div>
+
+
+							<div class="form-group">
+								<a id="login-btn" class="btn btn-primary btn-block">Sign In</a>
+							</div>
+
+							<div class="form-group" style="display:none;" id="tip">
+								<div class="alert alert-danger"></div>
+							</div>
+						</form>
+                    </div>
+					<div class="modal-footer">
+						<p style="text-align:center">Do not have an account yet? Click <a data-dismiss="modal" data-toggle="modal" data-target="#signupModal" style="color:blue, font-weight:bold">here</a> to register</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- sign up Modal -->
+		<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Sign Up</h4>
+					</div>
+					<div class="modal-body">
+						<form class="simple_form ">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Account ID" name="username" id="user_login">
+							</div>
+							<div class="form-group">
+								<input type="password" class="form-control" placeholder="Password" name="password" id="user_password">
+							</div>
+
+
+							<div class="form-group">
+								<a id="signup-btn" class="btn btn-primary btn-block">Sign Up</a>
+							</div>
+
+							<div class="form-group" style="display:none;" id="tip">
+								<div class="alert alert-danger"></div>
+							</div>
+						</form>
+                    </div>
+                    <div class="modal-footer">
+						<p style="text-align:center">Already have an account? Click <a data-dismiss="modal" data-toggle="modal" data-target="#loginModal" style="color:blue, font-weight:bold">here</a> to sign in</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- main content -->
+		<div class="container">
+		<div class="hide-scroll-p">
+			<div class="hide-scroll-c">
+			<h1>画廊</h1>
+			<h2>来欣赏一下我们的“名画"吧</h2>
+			<div class="gallery-control-wrapper">
+				<label for="sortby" class="gallery-control"></label>
+				<select id="sortby" class="gallery-control">
+					<option value="latest" selected>最新</option>
+					<option value="stlye">风格</option>
+					<option value="rating">评价</option>
+<!-- 					<option value="popular">点击率</option> -->
+				</select>
+			</div>
+					<div id="links">
+
+					</div>
+			</div>
+			</div>
+		</div> 
+
+
+
+
+
+
+
+	</div>
+
+		<!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+		<div id="blueimp-gallery" class="blueimp-gallery" data-use-bootstrap-modal="false">
+			<!-- The container for the modal slides -->
+			<div class="slides"></div>
+			<!-- Controls for the borderless lightbox -->
+			<h3 class="title"></h3>
+			<a class="prev">‹</a>
+			<a class="next">›</a>
+			<a class="close">×</a>
+			<a class="play-pause"></a>
+			<ol class="indicator"></ol>
+			<!-- The modal dialog, which will be used to wrap the lightbox content -->
+			<div class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" aria-hidden="true">&times;</button>
+							<h4 class="modal-title"></h4>
+						</div>
+						<div class="modal-body next"></div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default pull-left prev">
+								<i class="glyphicon glyphicon-chevron-left"></i>
+								Previous
+							</button>
+							<button type="button" class="btn btn-primary next">
+								Next
+								<i class="glyphicon glyphicon-chevron-right"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+	    <!-- JQuery -->
+  <script src="js/jquery-1.12.3.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/accounts.js"></script>
+  <script src="js/script.js"></script>
+
+
+  <script src="/js/jquery.blueimp-gallery.min.js"></script>
+  <script src="js/bootstrap-image-gallery.min.js"></script>
+
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="js/bootstrap.min.js"></script>
+</body>
+
+
+
+</html>
