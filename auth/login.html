@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="utf-8">
+	<title>创作属于自己的艺术画 - 画廊</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+
+	<link rel="stylesheet" href="../css/blueimp-gallery.min.css">
+	<link rel="stylesheet" href="../css/bootstrap-image-gallery.min.css">
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/login.css">
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+	<script src="js/hex_md5.js"></script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+
+<body>
+	<div class="container-fluid" id="bg-wrapper">
+
+		<!-- Background Slides -->
+		<div id="background-slide" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<!-- <ol class="carousel-indicators hidden-xs">
+				<li data-target="#background-slide" data-slide-to="0" class="active"></li>
+				<li data-target="#background-slide" data-slide-to="1"></li>
+				<li data-target="#background-slide" data-slide-to="2"></li>
+				<li data-target="#background-slide" data-slide-to="3"></li>
+				<li data-target="#background-slide" data-slide-to="4"></li>
+			</ol> -->
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+				<div id="bg1" class="item active"></div>
+				<div id="bg2" class="item"></div>
+				<div id="bg3" class="item"></div>
+				<div id="bg4" class="item"></div>
+				<div id="bg5" class="item"></div>
+				<div id="bg6" class="item"></div>
+				<div id="bg7" class="item"></div>
+				<div id="bg8" class="item"></div>
+				<div id="bg9" class="item"></div>
+				<div id="bg10" class="item"></div>
+				<div id="bg11" class="item"></div>
+
+			</div>
+		</div>
+
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-item" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">
+						<img alt="Brand" src="http://sensetime-website.oss-cn-hangzhou.aliyuncs.com/homepage/sensetime-logo.png">
+					</a>
+				</div>	
+				<div class="collapse navbar-collapse" id="collapse-item">
+					<ul class="nav navbar-nav navbar-right">
+						<li><div class="menu-underline"></div><a href="home.html">创作</a></li>
+						<li><div class="menu-underline active"></div><a href="#">画廊</a></li>
+						<li><div class="menu-underline"></div><a href="#" type="button" data-toggle="modal" data-target="#loginModal" id="user-login">Log in | Sign Up</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="page" role="page" id="login" value="1">
+			<div class="valign-p">
+				<div class="valign-c">
+					<div class="container centered-md" >
+						<div class="auth-form-body zone">
+							<h2>Sign In</h2>
+							<label for="login_field">
+								Username
+							</label>
+							<input autocapitalize="off" autocorrect="off" autofocus="autofocus" class="form-control" name="username" id="user_login">
+
+							<label for="password">
+								Password
+							</label>
+							<input class="form-control" name="password" id="user_password" type="password">
+
+							<input class="page-btn btn-primary btn-block" id="login-btn" data-disable-with="Signing in…" name="commit" tabindex="3" type="submit" value="Sign in">
+						</div>
+						<div class="auth-form-body tip">
+							<p style="text-align:center">Do not have an account yet? Click <a style="font-weight:bold">here</a> to register</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="page nodisplay" role="page" id="signup" value="1">
+			<div class="valign-p">
+				<div class="valign-c">
+					<div class="container centered-md">
+						<div class="auth-form-body zone">
+							<h2>Register</h2>
+							<label for="login_field">
+								Username
+							</label>
+							<input autocapitalize="off" autocorrect="off" autofocus="autofocus" class="form-control" name="username" id="user_login">
+
+							<label for="password">
+								Password
+							</label>
+							<input class="form-control" name="password" id="user_password" type="password">
+
+							<input class="page-btn btn-primary btn-block" id="login-btn" data-disable-with="Signing in…" name="commit" tabindex="3" type="submit" value="Sign up">
+						</div>
+						<div class="auth-form-body tip">
+							<p style="text-align:center">Already have an account? Click <a style="font-weight:bold">here</a> to sign in</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<script src="../js/jquery-1.12.3.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/login.js"></script>
+	<script src="../js/ajax.js"></script>
+	<script src="../js/script.js"></script>
+
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="../js/bootstrap.min.js"></script>
+
+</body>

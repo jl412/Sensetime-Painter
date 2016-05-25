@@ -1,0 +1,27 @@
+.auth-form-body{
+	margin-bottom: 30px;
+/*	border-radius: 5px;
+	background-color: rgba(0,0,0,0.7);*/
+	cursor: auto;
+	padding: 30px;
+}
+
+.auth-form-body.tip{
+	font-size: 18px;
+	border-radius: 5px;
+	background-color: rgba(0,0,0,0.7);
+	padding: 20px;
+}
+
+.auth-form-body.tip a{
+	color: ;
+}
+
+.auth-form-body h2{
+	margin-bottom: 30px;
+}
+
+.auth-form-body .page-btn{
+	margin-top: 30px;
+	padding: 5px;
+}

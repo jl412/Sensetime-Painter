@@ -58,6 +58,11 @@ a{
 	margin-right: auto;
 }
 
+.block-lg{
+	height: 200px;
+	width: 100%；
+}
+
 
 #bg-wrapper{
 	position: relative;

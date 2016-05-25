@@ -209,6 +209,10 @@ function reOrder(sortMethod){
 
 }
 
+function render(url){
+	
+}
+
 
 loadGallery();
 

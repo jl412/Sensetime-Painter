@@ -1,3 +1,9 @@
+#bg-wrapper{
+	background: url(../img/gallery-bg.jpg);
+	background-repeat: repeat;
+	overflow: auto;
+}
+
 #links{
 }
 

@@ -1,7 +1,3 @@
-var currentPage = '';
-// var hideScrollC = $('.hide-scroll-c');
-// hideScrollC.style.paddingRight = hideScrollC.offsetWidth - hideScrollC.clientWidth + "px";
-
 
 
 function snapContent() {
@@ -12,71 +8,6 @@ function snapContent() {
     }
 }
 
-function movePage(direction) {
-
-    var pageToShow = "#page" + (parseInt($(currentPage).attr("value")) + direction);
- 
-    window.location.hash = pageToShow;
-
-    // console.log(currentPage);
-    // console.log(pageToShow);
-}
-
-
-function render(url){
-    console.log("render");
-    var temp = url.split('/')[0];
-    // console.log($(currentPage).attr("value"));
-    // console.log($(temp).attr("value"));
-
-    if (temp == ''){
-        temp = "#page0";
-    }
-
-    if (currentPage.length) {
-        if ($(currentPage).attr("value") < $(temp).attr("value")){
-            $(currentPage).hide("slide", {direction: "left"}, 500);
-            $(temp).show("slide", {direction: "right"}, 500);
-        }else if ($(currentPage).attr("value") > $(temp).attr("value")) {
-            $(currentPage).hide("slide", {direction: "right"}, 500);
-            $(temp).show("slide", {direction: "left"}, 500);
-        }
-    }else{
-        $(temp).show();
-    }
-
-    showImg();
-    if(currentPage == '#page3'){
-        removeScene();
-    }
-
-    currentPage = temp;
-}
-    
-function showImg() {
-    if($('#page0').is(':visible')) {
-            var time = 0;
-            $('.fadeChain').each(function() {
-                $(this)
-                    .delay(time)
-                    .css({"visibility":"visible"})
-                    .animate({opacity: "1", top: "0"}, 500, "swing");
-                time += 300;
-            });
-    }
-}
-
-function showOutput() {
-    // Hide to left / show from left
-    $(this).parents(".page:first").hide("slide", {direction: "left"}, 500);
-
-    // Show from right / hide to right
-    $("#page3").show("slide", {direction: "right"}, 500);
-
-    $('.result-img').delay(600).css({"visibility":"visible"}).animate({opacity: "1"}, 700, "swing");
-}
-
-
 
 $(window).on('hashchange', function(){
     // On every hash change the render function is called with the new hash.
@@ -86,15 +17,7 @@ $(window).on('hashchange', function(){
 
 $(window).trigger('hashchange');
 
-$('.next-step').on('click', function(){
-    movePage(1);
-});
-$('.back-step').on('click', function(){
-    movePage(-1);
-});
 
-
-$('.back-step').click(showImg);
 $('.toggle-horizontal').click(function () {
     $(this).children('span').toggleClass('rotate');
     $(this).children('span').toggleClass('rotate2');
@@ -103,6 +26,7 @@ $('.toggle-horizontal').click(function () {
     $(this).parents('.snap:first').toggleClass('expand');
     $("#page3 #scene-carousel").toggleClass("nomargin");
 });
+
 
 snapContent();
 // showImg();
