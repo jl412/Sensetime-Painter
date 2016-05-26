@@ -93,12 +93,12 @@ function getUserInfo(){
       method: "get",
       contentType: "application/json",
       success: function(uInfo){
-        var uResponse = JSON.parse(uInfo);
+        var uResponse = uInfo;
         if (uResponse.status == "fail"){
             alert(uResponse.msg);
         }else{
             username = uResponse.username;
-            $("#user-login").removeAttr("data-toggle").removedAttr("data-target").html(username);
+            $("#user-login").removeAttr("data-toggle").removeAttr("data-target").html(username);
             console.log(username);
         }
       },
