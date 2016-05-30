@@ -2,6 +2,7 @@
 	background: url(../img/gallery-bg.jpg);
 	background-repeat: repeat;
 	overflow: auto;
+	height: auto;
 }
 
 #links{

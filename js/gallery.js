@@ -104,21 +104,21 @@ function loadGallery() {
 function sizeImage(){
 	var framei = 0;
 	for (var i = 0; i < galleryItems.length; i++) {
-		var iWidth = $(".gallery-thumb:eq("+ i +")").find("img").width();
-		var iHeight = $(".gallery-thumb:eq("+ i +")").find("img").height();
+		var iWidth = $("#links > a:eq("+ i +")").find("img").width();
+		var iHeight = $("#links > a:eq("+ i +")").find("img").height();
 		var proportion = iWidth  / frames[framei].size.width;
 		var paddingTop = frames[framei].padding.top * proportion;
 		var paddingLeft = frames[framei].padding.left * proportion;
 		var paddingBottom = frames[framei].padding.bottom * proportion;
 		var paddingRight = frames[framei].padding.right * proportion;
-		$(".gallery-thumb:eq("+ i +")").find(".frame-inner").css({width: iWidth + 'px', height: iHeight + 'px', "padding-top": paddingTop + 'px', "padding-top": paddingTop + 'px', "padding-bottom": paddingBottom + 'px', "padding-left": paddingLeft + 'px', "padding-right": paddingRight + 'px'});
+		$("#links > a:eq("+ i +")").find(".frame-inner").css({width: iWidth + 'px', height: iHeight + 'px', "padding-top": paddingTop + 'px', "padding-top": paddingTop + 'px', "padding-bottom": paddingBottom + 'px', "padding-left": paddingLeft + 'px', "padding-right": paddingRight + 'px'});
 
 		framei = (framei + 1) % frames.length;
 	}
 }
 
 // function makeItem(item, field) {
-// 	if (field == "rating") {
+	// 	if (field == "rating") {
 // 		return '<a href="'+ item.sourceImg + '" title="' + item.name + '" data-gallery><div class="gallery-thumb" style="background-image: url(' + item.thumbImg + ');" ><div><p>' + item.name + '</p><p>' + styleName(item.style) + '</p>' + 
 //         '<div class="stars">' + 
 //         	'<form action="">' +
@@ -143,7 +143,7 @@ function sizeImage(){
 // }
 
 function makeItem(item, framei) {
-	return '<div class="gallery-thumb"><div class="frame-inner" ><div style="background-image: url('+ item.thumbImg +');"></div></div><img src="' + frames[framei].frameImg + '"/></div>';
+	return '<a href="'+ item.sourceImg + '" title="' + item.name + '" data-gallery><div class="gallery-thumb"><div class="frame-inner" ><div style="background-image: url('+ item.thumbImg +');"></div></div><img src="' + frames[framei].frameImg + '"/></div></a>';
 }
 
 function attachRating(){
@@ -312,3 +312,8 @@ $('#sortby').change(function(){
 	console.log($(this).find('option:selected').val());
 	reOrder($(this).find('option:selected').val());	
 });
+
+
+$(window).resize(function(){
+	sizeImage();
+})
