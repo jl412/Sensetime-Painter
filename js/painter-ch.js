@@ -97,7 +97,7 @@ function submitImg(){
   }else{
 
     $.ajax({
-      url: "queue",
+      url: "painter/queue",
       method: "get",
       success: function(qT){
         queueTime = JSON.parse(qT);
