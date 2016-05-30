@@ -110,7 +110,7 @@ function submitImg(){
 
 function getResult(){
 
-  console.log("username: " + username);
+  console.log("username::" + username);
 
   if (username.length) {
     var formdata = {
