@@ -1,57 +1,149 @@
 var numOfImage;
 var galleryItems;
+var frames = [];
 
 function loadGallery() {
 
     var showGallery = $('#links');
 
-    $.getJSON('data/gallery.json', function (data) {
+    // $.getJSON('data/gallery.json', function (data) {
 
-      console.log(data);
+    //   console.log(data);
 
-      galleryItems = data.items;
+    //   galleryItems = data.items;
 
-      var content = data.items.map(function (item){
-        return makeItem(item, "rating");
-      });
+    //   var content = data.items.map(function (item){
+    //     return makeItem(item, "rating");
+    //   });
 
-      showGallery.empty();
+    //   showGallery.empty();
 
-      if (content.length) {
-        showGallery.html(content);
-      }
+    //   if (content.length) {
+    //     showGallery.html(content);
+    //   attachRating();
+    //   }
 
-      attachRating();
 
-    });
+    // });
 
     showGallery.text('Loading the JSON file.'); 
 
+    $.getJSON('data/frame.json', function(data){
+
+    	console.log(data);
+
+
+    	frames = data.items;
+
+    	console.log(frames.length);
+
+
+    	$.getJSON('data/gallery.json', function (data2){
+
+    		var content = '';
+    		var framei = -1;
+
+    		galleryItems = data2.items;
+
+
+    		var content = data2.items.map(function (item){
+
+
+    			framei = (framei + 1) % frames.length;
+    			return makeItem(item, framei);
+
+    		});
+
+    		showGallery.empty();
+
+    		if (content.length) {
+    			showGallery.html(content);
+    		}
+
+    		sizeImage();
+    	});
+    });
+
+
+    	
+
+    	// for (var i = 0; i < data.items.length; i++) {
+    		
+    	// 		var proportion = conetentMaxWidth / (data.items[i].size.width - data.items[i].padding.left - data.items[i].padding.right); 
+    	// 		var contentWidth = conetentMaxWidth;
+    	// 		var contentHeight = (data.items[i].size.height - data.items[i].padding.top - data.items[i].padding.bottom)*proportion;
+    	// 		var displayPaddingLeft = data.items[i].padding.left*proportion;
+    	// 		var displayPaddingRight = data.items[i].padding.right*proportion;
+    	// 		var displayPaddingTop = data.items[i].padding.top*proportion;
+    	// 		var displayPaddingBottom = data.items[i].padding.bottom*proportion;
+
+
+    	// 		var displayWidth = conetentMaxWidth + displayPaddingLeft + displayPaddingRight;
+    	// 		var displayHeight = contentHeight + displayPaddingTop + displayPaddingBottom;
+
+
+    	// 	frames[i] = {
+    	// 		value: i, 
+    	// 		contentHeight: contentHeight, 
+    	// 		contentWidth: contentWidth, 
+    	// 		displayHeight: displayHeight, 
+    	// 		displayWidth: displayWidth,
+    	// 		resContentWidth: data.items[i].size.width - data.items[i].padding.left - data.items[i].padding.right,
+    	// 		resContentHeight: data.items[i].size.height - data.items[i].padding.top - data.items[i].padding.bottom,
+    	// 		resHeight: data.items[i].size.height, 
+    	// 		resWidth: data.items[i].size.width, 
+    	// 		paddingTop: data.items[i].padding.top, 
+    	// 		paddingLeft: data.items[i].padding.left,
+    	// 		paddingBottom: data.items[i].padding.bottom,
+    	// 		paddingRight: data.items[i].padding.right
+    	// 	};
+    	// }
+
 }
 
-function makeItem(item, field) {
-	if (field == "rating") {
-		return '<a href="'+ item.sourceImg + '" title="' + item.name + '" data-gallery><div class="gallery-thumb" style="background-image: url(' + item.thumbImg + ');" ><div><p>' + item.name + '</p><p>' + styleName(item.style) + '</p>' + 
-        '<div class="stars">' + 
-        	'<form action="">' +
-        		'<input class="star star-5" id="star-5" type="radio" value="5" name="star"/>' +
-        		'<label class="star star-5" for="star-5"></label>' +
-        		'<input class="star star-4" id="star-4" type="radio" value="4" name="star"/>' +
-        		'<label class="star star-4" for="star-4"></label>' +
-        		'<input class="star star-3" id="star-3" type="radio" value="3" name="star"/>' +
-        		'<label class="star star-3" for="star-3"></label>' +
-        		'<input class="star star-2" id="star-2" type="radio" value="2" name="star"/>' +
-        		'<label class="star star-2" for="star-2"></label>' +
-        		'<input class="star star-1" id="star-1" type="radio" value="1" name="star"/>' +
-        		'<label class="star star-1" for="star-1"></label>' +
-        	'</form>' +
-        '</div>' +
-        '</div><img src="' + item.thumbImg + '" alt="' + item.name + '"></div></a>';
-	}else if (field == "popular") {
-		return '<a href="'+ item.sourceImg + '" title="' + item.name + '" data-gallery><div class="gallery-thumb" style="background-image: url(' + item.thumbImg + ');" ><div><p>' + item.name + '</p><p>' + styleName(item.style) + '</p>' + 
-        	'<p> Veiwed by ' + item.views + ' people</p>' +
-        '</div><img src="' + item.thumbImg + '" alt="' + item.name + '"></div></a>';
+function sizeImage(){
+	var framei = 0;
+	for (var i = 0; i < galleryItems.length; i++) {
+		var iWidth = $(".gallery-thumb:eq("+ i +")").find("img").width();
+		var iHeight = $(".gallery-thumb:eq("+ i +")").find("img").height();
+		var proportion = iWidth  / frames[framei].size.width;
+		var paddingTop = frames[framei].padding.top * proportion;
+		var paddingLeft = frames[framei].padding.left * proportion;
+		var paddingBottom = frames[framei].padding.bottom * proportion;
+		var paddingRight = frames[framei].padding.right * proportion;
+		$(".gallery-thumb:eq("+ i +")").find(".frame-inner").css({width: iWidth + 'px', height: iHeight + 'px', "padding-top": paddingTop + 'px', "padding-top": paddingTop + 'px', "padding-bottom": paddingBottom + 'px', "padding-left": paddingLeft + 'px', "padding-right": paddingRight + 'px'});
+
+		framei = (framei + 1) % frames.length;
 	}
+}
+
+// function makeItem(item, field) {
+// 	if (field == "rating") {
+// 		return '<a href="'+ item.sourceImg + '" title="' + item.name + '" data-gallery><div class="gallery-thumb" style="background-image: url(' + item.thumbImg + ');" ><div><p>' + item.name + '</p><p>' + styleName(item.style) + '</p>' + 
+//         '<div class="stars">' + 
+//         	'<form action="">' +
+//         		'<input class="star star-5" id="star-5" type="radio" value="5" name="star"/>' +
+//         		'<label class="star star-5" for="star-5"></label>' +
+//         		'<input class="star star-4" id="star-4" type="radio" value="4" name="star"/>' +
+//         		'<label class="star star-4" for="star-4"></label>' +
+//         		'<input class="star star-3" id="star-3" type="radio" value="3" name="star"/>' +
+//         		'<label class="star star-3" for="star-3"></label>' +
+//         		'<input class="star star-2" id="star-2" type="radio" value="2" name="star"/>' +
+//         		'<label class="star star-2" for="star-2"></label>' +
+//         		'<input class="star star-1" id="star-1" type="radio" value="1" name="star"/>' +
+//         		'<label class="star star-1" for="star-1"></label>' +
+//         	'</form>' +
+//         '</div>' +
+//         '</div><img src="' + item.thumbImg + '" alt="' + item.name + '"></div></a>';
+// 	}else if (field == "popular") {
+// 		return '<a href="'+ item.sourceImg + '" title="' + item.name + '" data-gallery><div class="gallery-thumb" style="background-image: url(' + item.thumbImg + ');" ><div><p>' + item.name + '</p><p>' + styleName(item.style) + '</p>' + 
+//         	'<p> Veiwed by ' + item.views + ' people</p>' +
+//         '</div><img src="' + item.thumbImg + '" alt="' + item.name + '"></div></a>';
+// 	}
+// }
+
+function makeItem(item, framei) {
+	return '<div class="gallery-thumb"><div class="frame-inner" ><div style="background-image: url('+ item.thumbImg +');"></div></div><img src="' + frames[framei].frameImg + '"/></div>';
 }
 
 function attachRating(){

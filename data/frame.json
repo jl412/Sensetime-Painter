@@ -2,7 +2,7 @@
 	"items": [
 	{
 		"name": "black",
-		"frameImg": "url('img/frames/01.png')",
+		"frameImg": "img/frames/01.png",
 		"padding": {
 			"left": 56,
 			"right": 57,
@@ -17,7 +17,7 @@
 	},
 	{
 		"name": "thick",
-		"frameImg": "url('img/frames/02.png')",
+		"frameImg": "img/frames/02.png",
 		"padding": {
 			"left": 115,
 			"right": 118,
@@ -32,7 +32,7 @@
 	},
 	{
 		"name": "gold-thin",
-		"frameImg": "url('img/frames/03.png')",
+		"frameImg": "img/frames/03.png",
 		"padding": {
 			"left": 104,
 			"right": 108,
@@ -47,7 +47,7 @@
 	},
 	{
 		"name": "modern",
-		"frameImg": "url('img/frames/04.png')",
+		"frameImg": "img/frames/04.png",
 		"padding": {
 			"left": 122,
 			"right": 127,
@@ -62,7 +62,7 @@
 	},
 	{
 		"name": "wood",
-		"frameImg": "url('img/frames/05.png')",
+		"frameImg": "img/frames/05.png",
 		"padding": {
 			"left": 43,
 			"right": 43,

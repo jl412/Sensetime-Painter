@@ -21,27 +21,59 @@
 .gallery-thumb{
 	position: relative;
 	display: inline-block;
-	height: 12em;
+	height: 30em;
 	margin-top: 1em;
 	margin-bottom: 1em;
 	margin-left: 1%;  
 	margin-right: 1%;
-	width: 23%;
+	width: 48%;
 	overflow: hidden;
 	background-size: cover;
 	background-position: center;
-	-webkit-box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.4);
+/*	-webkit-box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.4);
 	-moz-box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.4);
-	box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.4);
+	box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.4);*/
 }
 
-.gallery-thumb img{
+/*.gallery-thumb img{
 	visibility: hidden;
 	height: auto;
 	width: auto;
+}*/
+
+.gallery-thumb > img{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: auto;
+	height: auto;
+	max-width: 100%;
+	max-height: 100%;
 }
 
-.gallery-thumb > div{
+.frame-inner{
+	position: absolute;
+	top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.frame-inner > div{
+	height: 100%;
+	width: 100%;
+	background-size: cover;
+	background-position: center;
+}
+
+
+
+
+/*.gallery-thumb > div{
 	position: absolute;
 	height: 80%;
 	width: 100%;
@@ -54,15 +86,15 @@
 
 .gallery-thumb > div p:first-child{
 	font-size: 18px;
-}
+}*/
 
 /*.gallery-thumb > div p:last-child{
 	text-align: right;
 }
 */
-.gallery-thumb:hover > div{
+/*.gallery-thumb:hover > div{
 	bottom: 0;
-}
+}*/
 
 .gallery-control-wrapper:after{
 	content: "";
