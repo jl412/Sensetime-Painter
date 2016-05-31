@@ -14,6 +14,7 @@ var carouselItemHeight = 150;
 var windowWidth = $(window).width();
 var windowHeight = $(window).height();
 var frameOri = false;
+var painterUsername = username;
 
 
 //painter functions---------------------------------------------------
@@ -110,9 +111,9 @@ function submitImg(){
 
 function getResult(){
 
-  console.log("username::" + username);
+  console.log("username::" + painterUsername);
 
-  if (username.length) {
+  if (painterUsername.length) {
     var formdata = {
       id: res.id,
       style: styleCode,
@@ -121,7 +122,7 @@ function getResult(){
   }else{
     var formdata = {
       id: res.id,
-      username:username,
+      username:painterUsername,
       style: styleCode,
       ext: res.ext
     }
@@ -247,6 +248,8 @@ function setArtstlye() {
 
 
 function setFrame(){
+
+  console.log("username::" + username);
 
   if ($(".page-btn-wrapper").css("height") == "60px") {
     conetentMaxHeight = Math.min($(window).height()* 0.25, 300);
