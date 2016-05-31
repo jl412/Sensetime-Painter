@@ -13,6 +13,14 @@ a{
 	cursor: pointer;
 }
 
+.container-horizontal{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 6000px;
+}
+
 .modal-dialog{
 	color: #000;
 }

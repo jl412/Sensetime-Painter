@@ -101,7 +101,7 @@ $("#signup-btn").click(function(){
 function getUserInfo(){
 
     $.ajax({
-      url: "/user/account/	info",
+      url: "/user/account/info",
       method: "get",
       contentType: "application/json",
       success: function(uInfo){

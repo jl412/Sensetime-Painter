@@ -183,12 +183,38 @@ function setArtstlye() {
       showStyle.empty();
 
       if (content.length) {
-        showStyle.append    (content);
+        showStyle.append(content);
         $(".style-item:first-child").css({"margin-top": (($("#show-style").height() - $(".style-item:eq(2)").innerHeight()) / 2) + "px"});
         $(".style-item:last-child").css({"margin-bottom": (($("#show-style").height() - $(".style-item:eq(2)").innerHeight()) / 2) + "px"});
       }
 
 
+      $("#show-style").mCustomScrollbar({
+        theme: "minimal",
+        autoHideScrollbar: false,
+        callbacks:{
+          whileScrolling: function(){
+            fadeScroll();
+          }
+        }
+      });
+
+      $( "#show-style .mCSB_container" ).selectable({
+        selected: function(event, ui) {
+          $("#show-style").mCustomScrollbar('scrollTo',  $(".style-item:eq(2)").innerHeight() * $(".style-item").index(ui.selected));
+          styleCode = $(ui.selected).attr("value");
+        },
+        unselected: function() {
+          styleCode = '';
+        },
+        selecting: function(event, ui){
+          if( $(".ui-selected, .ui-selecting").length > 1){
+            $(ui.selecting).removeClass("ui-selecting");
+          }
+        }
+      });
+
+      fadeScroll();
     });
 
     showStyle.text('Loading the JSON file.'); 
@@ -889,33 +915,6 @@ $(document).on('ready', function(){
 });
 
 $(window).load(function(){
-
-  $("#show-style").mCustomScrollbar({
-    theme: "minimal",
-    autoHideScrollbar: false,
-    callbacks:{
-      whileScrolling: function(){
-        fadeScroll();
-      }
-    }
-  });
-
-  $( "#show-style .mCSB_container" ).selectable({
-    selected: function(event, ui) {
-      $("#show-style").mCustomScrollbar('scrollTo',  $(".style-item:eq(2)").innerHeight() * $(".style-item").index(ui.selected));
-      styleCode = $(ui.selected).attr("value");
-    },
-    unselected: function() {
-      styleCode = '';
-    },
-    selecting: function(event, ui){
-      if( $(".ui-selected, .ui-selecting").length > 1){
-        $(ui.selecting).removeClass("ui-selecting");
-      }
-    }
-  });
-
-  fadeScroll();
 
 });
 
