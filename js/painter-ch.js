@@ -80,7 +80,7 @@ Dropzone.options.uploadImage = {
           console.log("removedfile");
           res = '';
         });
-  }
+  } 
 };
 
 
