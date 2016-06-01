@@ -138,7 +138,8 @@ function getResult(){
         $('.loading.bar .progress-bar').animate({width: "97%"}, (queueTime.sec + 1) * 2000);
       },
       success: function(paintedResponse){
-        resultImg = paintedResponse.sourceImg;
+
+        resultImg = JSON.parse(paintedResponse).sourceImg;
         window.location.hash = "#page3";
         $('.result-img').delay(600).css({"visibility":"visible"}).animate({opacity: "1"}, 700, "swing");
         $('.result-img').css({"background-image" : "url(" + resultImg + ")"});

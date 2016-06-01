@@ -26,7 +26,7 @@ function loadGallery() {
 
     // });
 
-    showGallery.text('Loading the JSON file.'); 
+    // showGallery.text('Loading the JSON file.'); 
 
     $.getJSON('data/frame.json', function(data){
 
@@ -54,10 +54,10 @@ function loadGallery() {
 
     		});
 
-    		showGallery.empty();
+    		// showGallery.empty();
 
     		if (content.length) {
-    			showGallery.html(content);
+    			showGallery.append(content);
     		}
 
     		sizeImage();

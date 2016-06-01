@@ -105,10 +105,11 @@ function getUserInfo(){
       method: "get",
       contentType: "application/json",
       success: function(uInfo){
-        var uResponse = uInfo;
+        var uResponse = JSON.parse(uInfo);
         if (uResponse.status == "fail"){
             alert(uResponse.msg);
         }else{
+        	console.log(uResponse.status);
             username = uResponse.username;
             $("#user-login").removeAttr("data-toggle").removeAttr("data-target").html(username);
             console.log(username);
