@@ -1,5 +1,35 @@
+    
+$(".nav-container").load("nav.html", function(){
+    activePage();
+    $("#user-login").removeAttr("data-target").html(username).attr({"data-toggle":"dropdown", "aria-haspopup":"true", "aria-expanded":"false"}).addClass("dropdown-toggle");
+    $("#user-login").parent().addClass("dropdown"); 
 
-getUserInfo();
+    // ADD SLIDEDOWN ANIMATION TO DROPDOWN //
+    $('.dropdown').on('show.bs.dropdown', function(e){
+        $(this).find('.dropdown-menu').first().stop(true, true).slideDown(150);
+    });
+
+    // ADD SLIDEUP ANIMATION TO DROPDOWN //
+    $('.dropdown').on('hide.bs.dropdown', function(e){
+        $(this).find('.dropdown-menu').first().stop(true, true).slideUp(150);
+    });
+
+    getUserInfo();
+
+
+    $("#login-btn").click(function(){
+        login();
+    });
+
+    $("#signup-btn").click(function(){
+        signup();
+    });
+
+    $("#logout").click(function(){
+        logout();
+    })
+
+});
 
 function snapContent() {
     if ($('.page-btn-wrapper').css("content") == "") {
@@ -26,6 +56,7 @@ $('.toggle-horizontal').click(function () {
     $(this).parents('.snap:first').toggleClass('shrink');
     $(this).parents('.snap:first').toggleClass('expand');
     $("#page3 #scene-carousel").toggleClass("nomargin");
+    $("#viewport #display").toggleClass("nomargin");
 });
 
 

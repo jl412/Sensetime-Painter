@@ -10,11 +10,9 @@ var wrapperWidth = 0;
 var wrapperHeight = 0;
 var currentFrame = 0;
 var itemInRow = 4;
-var carouselItemHeight = 150;
 var windowWidth = $(window).width();
 var windowHeight = $(window).height();
 var frameOri = false;
-var painterUsername = username;
 
 
 //painter functions---------------------------------------------------
@@ -58,7 +56,7 @@ Dropzone.options.uploadImage = {
             rotateFrame(vertical);
             frameOri = vertical;
           }
-          res = JSON.parse(response);
+          res = response;
           console.log(res.id);
           if(window.location.hash == '#page1'){
             setTimeout(function(){
@@ -101,7 +99,7 @@ function submitImg(){
       url: "painter/queue",
       method: "get",
       success: function(qT){
-        queueTime = JSON.parse(qT);
+        queueTime = qT;
         console.log("queue" + queueTime.sec);
         getResult();
       }
@@ -111,9 +109,9 @@ function submitImg(){
 
 function getResult(){
 
-  console.log("username::" + painterUsername);
+  console.log("username::" + username);
 
-  if (painterUsername.length) {
+  if (username.length) {
     var formdata = {
       id: res.id,
       style: styleCode,
@@ -122,7 +120,7 @@ function getResult(){
   }else{
     var formdata = {
       id: res.id,
-      username:painterUsername,
+      username:username,
       style: styleCode,
       ext: res.ext
     }
@@ -139,7 +137,7 @@ function getResult(){
       },
       success: function(paintedResponse){
 
-        resultImg = JSON.parse(paintedResponse).sourceImg;
+        resultImg = paintedResponse.sourceImg;
         window.location.hash = "#page3";
         $('.result-img').delay(600).css({"visibility":"visible"}).animate({opacity: "1"}, 700, "swing");
         $('.result-img').css({"background-image" : "url(" + resultImg + ")"});
@@ -256,7 +254,7 @@ function setFrame(){
     conetentMaxHeight = Math.min($(window).height()* 0.25, 300);
   }
 
-  var showFrame = $('#show-frame');
+  var showFrame = $('#show-frame'); 
 
   $.getJSON('data/frame.json', function (data) {
 
@@ -349,7 +347,7 @@ function setFrame(){
 function rotateFrame(vertical){
   // if (vertical) {
   //   for (var i = 0; i < frames.length; i++) {
-  //       var proportion = conetentMaxHeight / (frames[i].resWidth - frames[i].paddingLeft - frames[i].paddingRight); 
+  //       var proportion = conetentMaxHeight / (frames[i].resWidth - frames[i].paddingLeft - frames[i].paddingRight);
   //       var contentHeight =  (frames[i].resHeight - frames[i].paddingTop - frames[i].paddingBottom)*proportion;
   //       var displayPaddingLeft = frames[i].padding.left*proportion;
   //       var displayPaddingRight = frames[i].padding.right*proportion;
@@ -716,7 +714,7 @@ function removeScene(){
 
   $(".frame-wrapper .toggle-result-img, .frame-wrapper .carousel-control").removeClass('in-scene');
   $("#page3 .snap-right, #page3 .toggle-horizontal").removeClass("nomargin");
-  $("#bg-wrapper>.navbar").show("slide", {direction: "up"}, 300);
+  $("#bg-wrapper > .nav-container").show("slide", {direction: "up"}, 300);
 
   repositionFrame();
 }
@@ -867,7 +865,7 @@ $('.switch-to-scene').click(function(){
 
     $(".frame-wrapper .toggle-result-img, .frame-wrapper .carousel-control").toggleClass('in-scene');
     $("#page3 .snap-right, #page3 .toggle-horizontal").toggleClass("nomargin");
-    $("#bg-wrapper>.navbar").toggle("slide", {direction: "up"}, 300);
+    $("#bg-wrapper > .nav-container").toggle("slide", {direction: "up"}, 300);
 
     //transform scene
     if ($(".switch-to-scene span").hasClass("rotate")){
@@ -941,6 +939,10 @@ $(window).on('resize', function(){
     windowWidth = $(window).width();
   }
 });
+
+function activePage(){
+  $(".nav li:eq(0) .menu-underline").addClass("active");
+}
 
 
 zoomImgModal();

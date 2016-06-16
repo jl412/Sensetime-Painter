@@ -2,19 +2,17 @@
 <html lang="zh-Hans">
 <head>
 	<meta charset="utf-8">
-	<title>创作属于自己的艺术画 - 画廊</title>
+	<title>创作属于自己的艺术画 - 我的主页</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 	<link rel="stylesheet" href="css/dropzone.css">
 
-	<link rel="stylesheet" href="css/blueimp-gallery.min.css">
 	<link rel="stylesheet" href="css/bootstrap-image-gallery.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/gallery.css">
 	<link rel="stylesheet" href="css/slider.css">
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
 
 	<script src="js/hex_md5.js"></script>
 	<script src="js/jquery-1.12.3.min.js"></script>
@@ -34,7 +32,9 @@
 
 	<div class="container-fluid" id="bg-wrapper">
 
+		<!-- Background Slides -->
 
+		<!-- Nav Bar -->
 		<div class="nav-container"></div>
 
 		<!-- main content -->
@@ -49,10 +49,9 @@
 					<option value="rating">评价</option>
 					<!-- 					<option value="popular">点击率</option> -->
 				</select>
-			</div>
-			
+			</div>	
 			<div id="links">
-				<h1 class="title-vert">画廊</h1>
+				<h1></h1>
 			</div>
 		</div> 
 
@@ -64,50 +63,65 @@
 
 	</div>
 
-	<!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
-	<div id="blueimp-gallery" class="blueimp-gallery" data-use-bootstrap-modal="false">
-		<!-- The container for the modal slides -->
-		<div class="slides"></div>
-		<!-- Controls for the borderless lightbox -->
-		<h3 class="title"></h3>
-		<a class="prev">‹</a>
-		<a class="next">›</a>
-		<a class="close">×</a>
-		<a class="play-pause"></a>
-		<ol class="indicator"></ol>
-		<!-- The modal dialog, which will be used to wrap the lightbox content -->
-		<div class="modal fade">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" aria-hidden="true">&times;</button>
-						<h4 class="modal-title"></h4>
-					</div>
-					<div class="modal-body next"></div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default pull-left prev">
-							<i class="glyphicon glyphicon-chevron-left"></i>
-							Previous
-						</button>
-						<button type="button" class="btn btn-primary next">
-							Next
-							<i class="glyphicon glyphicon-chevron-right"></i>
-						</button>
+
+	<div id=viewport class="nodisplay">
+		<div id="display">
+			<div class="valign-p">
+				<div class="valign-c page-padding contaier-fluid">
+					<div class="row">
+						<div class="frame-wrapper" id="show-frame">
+							<div class="frame-control">
+								<a class="left carousel-control transparent" role="button">
+									<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+									<span class="sr-only">Previous</span>
+								</a>
+								<a class="right carousel-control transparent" role="button">
+									<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+									<span class="sr-only">Next</span>
+								</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
+			<a class="close"><span class="glyphicon glyphicon-remove"></span></a>
+		</div>
+		<div class="row visible-lg-block">
+			<div class="content-text snap snap-right expand">
+				<div id="frame-carousel" class="carousel slide vertical" data-interval="false">
+					<div class="toggle-horizontal" role="button">
+						<span class="glyphicon glyphicon-arrow-right rotate2"></span>
+					</div>
+					<a class="carousel-control" href="#frame-carousel" role="button" data-slide="prev">
+						<span class="glyphicon glyphicon-menu-up"></span>
+					</a>
+					<div class="carousel-inner">
+
+					</div>
+					<a class="carousel-control" href="#frame-carousel" role="button" data-slide="next">
+						<span class="glyphicon glyphicon-menu-down"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div id="setting">
+			<div class="container">
+				<form>
+					<div class="col-xs-4">Frames:</div>
+					<div class="col-xs-4">Publicity: <label class="checkbox-inline"><input type="checkbox" value="">Display in Gallery</label></div>
+					<div class="col-xs-4"><a><div class="page-btn" id="save-changes">Save Changes</div></a></div>
+				</form>
+			</div>
 		</div>
 	</div>
+	
 
 
 
 	<!-- JQuery -->
 	<script src="js/ajax.js"></script>
-	<script src="js/gallery.js"></script>
+	<script src="js/userpage.js"></script>
 	<script src="js/script.js"></script>
-
-	<script src="js/jquery.blueimp-gallery.min.js"></script>
-	<script src="js/bootstrap-image-gallery.min.js"></script>
 
 
 	<!-- Latest compiled and minified JavaScript -->

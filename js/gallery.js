@@ -27,6 +27,8 @@ function loadGallery() {
     // });
 
     // showGallery.text('Loading the JSON file.'); 
+    
+
 
     $.getJSON('data/frame.json', function(data){
 
@@ -37,69 +39,65 @@ function loadGallery() {
 
     	console.log(frames.length);
 
+    	$.ajax({
+    		url: "gallery/imglist",
+    		method: "get",
+    		contentType: "application/json",
+    		success: function(galleryResponse){
+    			galleryItems = galleryResponse.painted;
 
-    	$.getJSON('data/gallery.json', function (data2){
-
-    		var content = '';
-    		var framei = -1;
-
-    		galleryItems = data2.items;
+    			var content = '';
+    			var framei = -1;
 
 
-    		var content = data2.items.map(function (item){
+    			var content = galleryItems.map(function (item){
 
+    				return makeItem(item);
 
-    			framei = (framei + 1) % frames.length;
-    			return makeItem(item, framei);
+    			});
 
-    		});
+    			// showGallery.empty();
 
-    		// showGallery.empty();
+    			if (content.length) {
+    				showGallery.append(content);
+    				sizeImage();	
+    			}
 
-    		if (content.length) {
-    			showGallery.append(content);
+    		},
+    		error: function(){
+    			console.log("fail to get gallery data");
     		}
-
-    		sizeImage();
     	});
+
+
+    	// $.getJSON('data/gallery.json', function (data2){
+
+    	// 	var content = '';
+    	// 	var framei = -1;
+
+    	// 	galleryItems = data2.items;
+
+
+    	// 	var content = data2.items.map(function (item){
+
+
+    	// 		framei = (framei + 1) % frames.length;
+    	// 		return makeItem(item, framei);
+
+    	// 	});
+
+    	// 	// showGallery.empty();
+
+    	// 	if (content.length) {
+    	// 		showGallery.append(content);
+    	// 		sizeImage();	
+    	// 	}
+
+    	// });
     });
 
-
-    	
-
-    	// for (var i = 0; i < data.items.length; i++) {
-    		
-    	// 		var proportion = conetentMaxWidth / (data.items[i].size.width - data.items[i].padding.left - data.items[i].padding.right); 
-    	// 		var contentWidth = conetentMaxWidth;
-    	// 		var contentHeight = (data.items[i].size.height - data.items[i].padding.top - data.items[i].padding.bottom)*proportion;
-    	// 		var displayPaddingLeft = data.items[i].padding.left*proportion;
-    	// 		var displayPaddingRight = data.items[i].padding.right*proportion;
-    	// 		var displayPaddingTop = data.items[i].padding.top*proportion;
-    	// 		var displayPaddingBottom = data.items[i].padding.bottom*proportion;
-
-
-    	// 		var displayWidth = conetentMaxWidth + displayPaddingLeft + displayPaddingRight;
-    	// 		var displayHeight = contentHeight + displayPaddingTop + displayPaddingBottom;
-
-
-    	// 	frames[i] = {
-    	// 		value: i, 
-    	// 		contentHeight: contentHeight, 
-    	// 		contentWidth: contentWidth, 
-    	// 		displayHeight: displayHeight, 
-    	// 		displayWidth: displayWidth,
-    	// 		resContentWidth: data.items[i].size.width - data.items[i].padding.left - data.items[i].padding.right,
-    	// 		resContentHeight: data.items[i].size.height - data.items[i].padding.top - data.items[i].padding.bottom,
-    	// 		resHeight: data.items[i].size.height, 
-    	// 		resWidth: data.items[i].size.width, 
-    	// 		paddingTop: data.items[i].padding.top, 
-    	// 		paddingLeft: data.items[i].padding.left,
-    	// 		paddingBottom: data.items[i].padding.bottom,
-    	// 		paddingRight: data.items[i].padding.right
-    	// 	};
-    	// }
-
 }
+
 
 function sizeImage(){
 	var framei = 0;
@@ -142,8 +140,13 @@ function sizeImage(){
 // 	}
 // }
 
-function makeItem(item, framei) {
-	return '<a href="'+ item.sourceImg + '" title="' + item.name + '" data-gallery><div class="gallery-thumb"><div class="frame-inner" ><div style="background-image: url('+ item.thumbImg +');"></div></div><img src="' + frames[framei].frameImg + '"/></div></a>';
+function makeItem(item) {
+	return '<a href="'+ item.sourceImg + '" title="' + item.name + '" data-gallery>'+ 
+		'<div class="gallery-thumb"><div class="frame-inner" >' + 
+		'<div style="background-image: url('+ item.thumbImg +');">' + 
+		'<div></div></div></div>' + 
+		'<img src="' + frames[item.frame].frameImg + '"/><div class="info-tag"><p>Author: '+ item.username + '</p><p>Style: '+ styleName(item.style) + '</p></div></div>' + 
+		'</a>';
 }
 
 function attachRating(){
@@ -305,6 +308,10 @@ function render(url){
 	
 }
 
+function activePage(){
+	$(".nav li:eq(1) .menu-underline").addClass("active");
+}
+
 
 loadGallery();
 
@@ -316,4 +323,5 @@ $('#sortby').change(function(){
 
 $(window).resize(function(){
 	sizeImage();
-})
+});
+ 

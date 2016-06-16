@@ -1,10 +1,11 @@
-var username = '';
+var username = 'Steven';
 
 // login and sign up------------------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------------------
-$("#login-btn").click(function(){
+
+function login(){
 	console.log("log in");
-	var username =$("input[name=username]").val();
+	var username = $("input[name=username]").val();
 	var password = $("input[name=password]").val();
 
 
@@ -32,10 +33,9 @@ $("#login-btn").click(function(){
 			$(".tip").show();
 		}
 	});
-});
+};
 
-
-$("#signup-btn").click(function(){
+function signup(){
 	console.log("sign up");
 	var username =$("input[name=username]").val();
 	var password = $("input[name=password]").val();
@@ -91,8 +91,18 @@ $("#signup-btn").click(function(){
     		$(".tip").show();
     	}
     });
-});
+};
 
+function logout(){
+
+	$.ajax({
+		url:"/auth/logout",
+		method: "get",
+		error: function(){
+			console.log("fail to log out");
+		}
+	});
+}
 
 
 //get user info ---------------------------------------------------
@@ -105,13 +115,14 @@ function getUserInfo(){
       method: "get",
       contentType: "application/json",
       success: function(uInfo){
-        var uResponse = JSON.parse(uInfo);
+        var uResponse = uInfo;
         if (uResponse.status == "fail"){
             alert(uResponse.msg);
         }else{
         	console.log(uResponse.status);
             username = uResponse.username;
-            $("#user-login").removeAttr("data-toggle").removeAttr("data-target").html(username);
+            $("#user-login").removeAttr("data-target").html(username).attr({"data-toggle":"dropdown", "aria-haspopup":"true", "aria-expanded":"false"}).addClass("dropdown-toggle");
+            $("#user-login").parent().addClass("dropdown");	
             console.log(username);
         }
       },
@@ -121,8 +132,8 @@ function getUserInfo(){
     });
 }
 
-
-getUserInfo();
 console.log("username: " + username);
 
-	
+// $(".nav-container").click(function(){
+// 	username = 'Michael';
+// })

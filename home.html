@@ -12,7 +12,9 @@
   <link rel="stylesheet" href="css/slider.css">
   <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
   <script src="js/jquery-1.12.3.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js" integrity="sha256-WyjlLy3rvVSitHOXMctYkMCOU6GAletPg+qniNKLCQM=" crossorigin="anonymous"></script>
 	<script src="js/dropzone.js"></script>
+  <script src="js/hex_md5.js"></script>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -30,14 +32,6 @@
 
 		<!-- Background Slides -->
 		<div id="background-slide" class="carousel slide" data-ride="carousel">
-			<!-- Indicators -->
-			<!-- <ol class="carousel-indicators hidden-xs">
-				<li data-target="#background-slide" data-slide-to="0" class="active"></li>
-				<li data-target="#background-slide" data-slide-to="1"></li>
-				<li data-target="#background-slide" data-slide-to="2"></li>
-				<li data-target="#background-slide" data-slide-to="3"></li>
-				<li data-target="#background-slide" data-slide-to="4"></li>
-			</ol> -->
 
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner" role="listbox">
@@ -62,99 +56,7 @@
     </div>
 
 		<!-- Nav Bar -->
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-item" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">
-            <img alt="Brand" src="http://sensetime-website.oss-cn-hangzhou.aliyuncs.com/homepage/sensetime-logo.png">
-          </a>
-        </div>  
-        <div class="collapse navbar-collapse" id="collapse-item">
-          <ul class="nav navbar-nav navbar-right">
-            <li><div class="menu-underline active"></div><a>创作</a></li>
-            <li><div class="menu-underline"></div><a href="art-gallery.html">画廊</a></li>
-            <li><div class="menu-underline"></div><a href="#" type="button" data-toggle="modal" data-target="#loginModal"  id="user-login">Log in | Sign Up</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Log in Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
-      <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Sign In</h4>
-          </div>
-          <div class="modal-body">
-            <form class="simple_form ">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Account ID" name="username">
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" name="password" id="user_password">
-              </div>
-
-
-              <div class="form-group">
-                <a id="login-btn" class="btn btn-primary btn-block">Sign In</a>
-              </div>
-
-              <div class="form-group tip" style="display:none;">
-                <div class="alert alert-danger"></div>
-              </div>
-            </form>
-                    </div>
-          <div class="modal-footer">
-            <p style="text-align:center">Do not have an account yet? Click <a data-dismiss="modal" data-toggle="modal" data-target="#signupModal" style="color:blue, font-weight:bold">here</a> to register</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- sign up Modal -->
-    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel">
-      <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
-          </div>
-          <div class="modal-body">
-            <form class="simple_form ">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Account ID" name="username">
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" name="password" id="user_password">
-              </div>
-
-              <div class="form-group">
-                  <input class="form-control" placeholder="confirm password" type="password" name="password_confirm">
-              </div>
-
-              <div class="form-group">
-                <a id="signup-btn" class="btn btn-primary btn-block">Sign Up</a>
-              </div>
-
-              <div class="form-group tip" style="display:none;">
-                <div class="alert alert-danger"></div>
-              </div>
-            </form>
-                    </div>
-                    <div class="modal-footer">
-            <p style="text-align:center">Already have an account? Click <a data-dismiss="modal" data-toggle="modal" data-target="#loginModal" style="color:blue, font-weight:bold">here</a> to sign in</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="nav-container"></div>
 
 
   		<!-- main content -->
@@ -343,7 +245,7 @@
         </div>
 
         <div class="row visible-lg-block">
-          <div class="content-text snap snap-right expand">
+          <div class="snap snap-right expand">
             <div id="frame-carousel" class="carousel slide vertical" data-interval="false">
             <div class="toggle-horizontal" role="button">
               <span class="glyphicon glyphicon-arrow-right rotate2"></span>
@@ -412,7 +314,6 @@
   	</div>
 
     <!-- JQuery -->
-  <script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js" integrity="sha256-WyjlLy3rvVSitHOXMctYkMCOU6GAletPg+qniNKLCQM=" crossorigin="anonymous"></script>
   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
   <script src="js/ajax.js"></script>
   <script src="js/painter-ch.js"></script>

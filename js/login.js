@@ -32,3 +32,6 @@ function render(url){
 
     currentPage = temp;
 }
+
+function activePage(){
+}
