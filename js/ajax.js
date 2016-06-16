@@ -1,4 +1,4 @@
-var username = 'Steven';
+var username = '';
 
 // login and sign up------------------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------------------
@@ -124,6 +124,14 @@ function getUserInfo(){
             $("#user-login").removeAttr("data-target").html(username).attr({"data-toggle":"dropdown", "aria-haspopup":"true", "aria-expanded":"false"}).addClass("dropdown-toggle");
             $("#user-login").parent().addClass("dropdown");	
             console.log(username);
+
+            $('.dropdown').on('show.bs.dropdown', function(e){
+            	$(this).find('.dropdown-menu').first().stop(true, true).slideDown(150);
+            });
+
+            $('.dropdown').on('hide.bs.dropdown', function(e){
+            	$(this).find('.dropdown-menu').first().stop(true, true).slideUp(150);
+            });
         }
       },
       error: function(){

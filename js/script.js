@@ -1,8 +1,8 @@
     
 $(".nav-container").load("nav.html", function(){
     activePage();
-    $("#user-login").removeAttr("data-target").html(username).attr({"data-toggle":"dropdown", "aria-haspopup":"true", "aria-expanded":"false"}).addClass("dropdown-toggle");
-    $("#user-login").parent().addClass("dropdown"); 
+    // $("#user-login").removeAttr("data-target").html(username).attr({"data-toggle":"dropdown", "aria-haspopup":"true", "aria-expanded":"false"}).addClass("dropdown-toggle");
+    // $("#user-login").parent().addClass("dropdown"); 
 
     // ADD SLIDEDOWN ANIMATION TO DROPDOWN //
     $('.dropdown').on('show.bs.dropdown', function(e){
