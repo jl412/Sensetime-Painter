@@ -44,6 +44,9 @@ function loadGallery() {
     		method: "get",
     		contentType: "application/json",
     		success: function(galleryResponse){
+
+    			console.log(galleryResponse);
+
     			galleryItems = galleryResponse.painted;
 
     			var content = '';
