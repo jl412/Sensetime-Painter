@@ -62,7 +62,7 @@ function loadGallery() {
 
     	// 		if (content.length) {
     	// 			showGallery.append(content);
-    	// 			sizeImage();	
+    	// 			setTimeout(sizeImages(false), 50);	
     	// 		}
 
     	// 	},
@@ -93,33 +93,38 @@ function loadGallery() {
 
     		if (content.length) {
     			showGallery.append(content);
-    			sizeImage();	
+    			setTimeout(sizeImages(false), 50);	
     		}
 
     	});
     });
 
 }
-
-
-function sizeImage(){
-	var framei = 0;
+function sizeImages(animate){
 	for (var i = 0; i < galleryItems.length; i++) {
-		var iWidth = $("#links > a:eq("+ i +")").find("img").width();
-		var iHeight = $("#links > a:eq("+ i +")").find("img").height();
-		var proportion = iWidth  / frames[framei].size.width;
-		var paddingTop = frames[framei].padding.top * proportion;
-		var paddingLeft = frames[framei].padding.left * proportion;
-		var paddingBottom = frames[framei].padding.bottom * proportion;
-		var paddingRight = frames[framei].padding.right * proportion;
-		$("#links > a:eq("+ i +")").find(".frame-inner").css({width: iWidth + 'px', height: iHeight + 'px', "padding-top": paddingTop + 'px', "padding-bottom": paddingBottom + 'px', "padding-left": paddingLeft + 'px', "padding-right": paddingRight + 'px'});
-
-		console.log("current frame width is " + iWidth + ", scale proportion is " + proportion + ".");
-		console.log("frame's original padding: Top: " + frames[framei].padding.top + "; Bottom: " + frames[framei].padding.bottom + "; Left: " + frames[framei].padding.left + "; Right: " + frames[framei].padding.right);
-		console.log("item" + i + "'s calculated padding: Top: " + paddingTop + "; Bottom: " + paddingBottom + "; Left: " + paddingLeft + "; Right: " + paddingRight);
-
-		framei = (framei + 1) % frames.length;
+		console.log(frames[galleryItems[i].frame]);
+		sizeImage(frames[galleryItems[i].frame], i, animate);
 	}
+}
+
+function sizeImage(frame, galleryItem, animate){
+	var iWidth = $("#links .gallery-thumb:eq("+ galleryItem +")").find("img").width();
+	var iHeight = $("#links .gallery-thumb:eq("+ galleryItem +")").find("img").height();
+	var proportion = iWidth  / frame.size.width;
+	var paddingTop = frame.padding.top* proportion;
+	var paddingLeft = frame.padding.bottom * proportion;
+	var paddingBottom = frame.padding.left * proportion;
+	var paddingRight = frame.padding.right * proportion;
+	if (animate) {
+		$("#links .gallery-thumb:eq("+ galleryItem +")").find(".frame-inner").animate({width: iWidth + 'px', height: iHeight + 'px', "padding-top": paddingTop + 'px', "padding-top": paddingTop + 'px', "padding-bottom": paddingBottom + 'px', "padding-left": paddingLeft + 'px', "padding-right": paddingRight + 'px'}, 300);			
+	}else{
+		$("#links .gallery-thumb:eq("+ galleryItem +")").find(".frame-inner").css({width: iWidth + 'px', height: iHeight + 'px', "padding-top": paddingTop + 'px', "padding-top": paddingTop + 'px', "padding-bottom": paddingBottom + 'px', "padding-left": paddingLeft + 'px', "padding-right": paddingRight + 'px'});			
+	}
+
+	console.log("current frame width is " + iWidth + ", scale proportion is " + proportion + ".");
+	console.log("frame's original padding: Top: " + frame.padding.top + "; Bottom: " + frame.padding.bottom + "; Left: " + frame.padding.left + "; Right: " + frame.padding.right);
+	console.log("current item" + "'s calculated padding: Top: " + paddingTop + "; Bottom: " + paddingBottom + "; Left: " + paddingLeft + "; Right: " + paddingRight);
+
 }
 
 // function makeItem(item, field) {
@@ -329,6 +334,6 @@ $('#sortby').change(function(){
 
 
 $(window).resize(function(){
-	sizeImage();
+	sizeImages(false);
 });
  
