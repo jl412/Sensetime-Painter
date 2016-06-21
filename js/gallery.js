@@ -39,64 +39,64 @@ function loadGallery() {
 
     	console.log(frames.length);
 
-    	$.ajax({
-    		url: "gallery/imglist/0",
-    		method: "get",
-    		contentType: "application/json",
-    		success: function(galleryResponse){
+    	// $.ajax({
+    	// 	url: "gallery/imglist/0",
+    	// 	method: "get",
+    	// 	contentType: "application/json",
+    	// 	success: function(galleryResponse){
 
-    			console.log(galleryResponse);
+    	// 		console.log(galleryResponse);
 
-    			galleryItems = galleryResponse.painted;
+    	// 		galleryItems = galleryResponse.painted;
 
-    			var content = '';
-    			var framei = -1;
-
-
-    			var content = galleryItems.map(function (item){
-
-    				return makeItem(item);
-
-    			});
+    	// 		var content = '';
+    	// 		var framei = -1;
 
 
-    			if (content.length) {
-    				showGallery.append(content);
-    				sizeImage();	
-    			}
+    	// 		var content = galleryItems.map(function (item){
 
-    		},
-    		error: function(){
-    			console.log("fail to get gallery data");
-    		}
-    	});
+    	// 			return makeItem(item);
+
+    	// 		});
 
 
-    	// $.getJSON('data/gallery.json', function (data2){
+    	// 		if (content.length) {
+    	// 			showGallery.append(content);
+    	// 			sizeImage();	
+    	// 		}
 
-    	// 	var content = '';
-    	// 	var framei = -1;
-
-    	// 	galleryItems = data2.items;
-
-
-    	// 	var content = data2.items.map(function (item){
-
-
-    	// 		framei = (framei + 1) % frames.length;
-    	// 		item.frame = framei;
-    	// 		return makeItem(item, framei);
-
-    	// 	});
-
-    	// 	// showGallery.empty();
-
-    	// 	if (content.length) {
-    	// 		showGallery.append(content);
-    	// 		sizeImage();	
+    	// 	},
+    	// 	error: function(){
+    	// 		console.log("fail to get gallery data");
     	// 	}
-
     	// });
+
+
+    	$.getJSON('data/gallery.json', function (data2){
+
+    		var content = '';
+    		var framei = -1;
+
+    		galleryItems = data2.items;
+
+
+    		var content = data2.items.map(function (item){
+
+
+    			framei = (framei + 1) % frames.length;
+    			item.frame = framei;
+    			return makeItem(item, framei);
+
+    		});
+
+    		// showGallery.empty();
+
+    		if (content.length) {
+    			showGallery.append(content);
+    			sizeImage();	
+    		}
+
+    	});
     });
 
 }
@@ -112,7 +112,11 @@ function sizeImage(){
 		var paddingLeft = frames[framei].padding.left * proportion;
 		var paddingBottom = frames[framei].padding.bottom * proportion;
 		var paddingRight = frames[framei].padding.right * proportion;
-		$("#links > a:eq("+ i +")").find(".frame-inner").css({width: iWidth + 'px', height: iHeight + 'px', "padding-top": paddingTop + 'px', "padding-top": paddingTop + 'px', "padding-bottom": paddingBottom + 'px', "padding-left": paddingLeft + 'px', "padding-right": paddingRight + 'px'});
+		$("#links > a:eq("+ i +")").find(".frame-inner").css({width: iWidth + 'px', height: iHeight + 'px', "padding-top": paddingTop + 'px', "padding-bottom": paddingBottom + 'px', "padding-left": paddingLeft + 'px', "padding-right": paddingRight + 'px'});
+
+		console.log("current frame width is " + iWidth + ", scale proportion is " + proportion + ".");
+		console.log("frame's original padding: Top: " + frames[framei].padding.top + "; Bottom: " + frames[framei].padding.bottom + "; Left: " + frames[framei].padding.left + "; Right: " + frames[framei].padding.right);
+		console.log("item" + i + "'s calculated padding: Top: " + paddingTop + "; Bottom: " + paddingBottom + "; Left: " + paddingLeft + "; Right: " + paddingRight);
 
 		framei = (framei + 1) % frames.length;
 	}
