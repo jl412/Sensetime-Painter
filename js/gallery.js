@@ -40,7 +40,7 @@ function loadGallery() {
     	console.log(frames.length);
 
     	$.ajax({
-    		url: "gallery/imglist",
+    		url: "gallery/imglist/0",
     		method: "get",
     		contentType: "application/json",
     		success: function(galleryResponse){
@@ -56,7 +56,6 @@ function loadGallery() {
 
     			});
 
-    			// showGallery.empty();
 
     			if (content.length) {
     				showGallery.append(content);
@@ -82,6 +81,7 @@ function loadGallery() {
 
 
     	// 		framei = (framei + 1) % frames.length;
+    	// 		item.frame = framei;
     	// 		return makeItem(item, framei);
 
     	// 	});
