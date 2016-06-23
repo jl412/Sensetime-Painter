@@ -111,7 +111,7 @@ function getResult(){
 
   console.log("username::" + username);
 
-  if (username.length) {
+  if (!username.length) {
     var formdata = {
       id: res.id,
       style: styleCode,
@@ -169,7 +169,7 @@ function setArtstlye() {
       console.log(data);
 
       styles = data.items;
-      // for (var i = 0; i < styles.length; i++) {
+      // for (var i = 0; i < styles.length; i++) {  
       //   styles[i]
       // }
       var content = data.items.map(function (item){
@@ -186,16 +186,16 @@ function setArtstlye() {
         showStyle.append(content);
         $(".style-item:first-child").css({"margin-top": (($("#show-style").height() - $(".style-item:eq(2)").innerHeight()) / 2) + "px"});
         $(".style-item:last-child").css({"margin-bottom": (($("#show-style").height() - $(".style-item:eq(2)").innerHeight()) / 2) + "px"});
-      }
+      } 
 
 
       $("#show-style").mCustomScrollbar({
         theme: "minimal",
         autoHideScrollbar: false,
         callbacks:{
-          whileScrolling: function(){
+          whileScrolling: function(){ 
             fadeScroll();
-          }
+          }     
         }
       });
 
