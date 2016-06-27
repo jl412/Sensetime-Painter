@@ -1004,6 +1004,19 @@ li:hover .menu-underline{
 }
 
 
+#page3 .save-changes {
+	cursor: pointer;
+	position: absolute;
+	font-size: 48px;
+	right: -50px;
+	bottom: 100px;
+	opacity: 0.7;
+}
+
+#page .save-changes:hover {
+	opacity: 1;
+}
+
 /*.testEle{
 	position: absolute;
 	background-color: rgba(0,0,255, 0.6);
@@ -1108,12 +1121,14 @@ li:hover .menu-underline{
 	}
 
 	.page-btn{
+
+		
 		font-size: 16px;
 	}
 
 	.page-btn .glyphicon{
 		font-size:  12px;
-	}
+	} 
 
 	.navbar-brand img{
 		height: 15px;

@@ -39,64 +39,64 @@ function loadGallery() {
 
     	console.log(frames.length);
 
-    	// $.ajax({
-    	// 	url: "gallery/imglist/0",
-    	// 	method: "get",
-    	// 	contentType: "application/json",
-    	// 	success: function(galleryResponse){
+    	$.ajax({
+    		url: "gallery/imglist/0",
+    		method: "get",
+    		contentType: "application/json",
+    		success: function(galleryResponse){
 
-    	// 		console.log(galleryResponse);
+    			console.log(galleryResponse);
 
-    	// 		galleryItems = galleryResponse.painted;
+    			galleryItems = galleryResponse.painted;
 
-    	// 		var content = '';
-    	// 		var framei = -1;
-
-
-    	// 		var content = galleryItems.map(function (item){
-
-    	// 			return makeItem(item);
-
-    	// 		});
+    			var content = '';
+    			var framei = -1;
 
 
-    	// 		if (content.length) {
-    	// 			showGallery.append(content);
-    	// 			setTimeout(sizeImages(false), 50);	
-    	// 		}
+    			var content = galleryItems.map(function (item){
 
-    	// 	},
-    	// 	error: function(){
-    	// 		console.log("fail to get gallery data");
-    	// 	}
-    	// });
+    				return makeItem(item);
+
+    			});
 
 
-    	$.getJSON('data/gallery.json', function (data2){
+    			if (content.length) {
+    				showGallery.append(content);
+    				setTimeout(sizeImages(false), 50);	
+    			}
 
-    		var content = '';
-    		var framei = -1;
-
-    		galleryItems = data2.items;
-
-
-    		var content = data2.items.map(function (item){
-
-
-    			framei = (framei + 1) % frames.length;
-    			item.frame = framei;
-    			return makeItem(item, framei);
-
-    		});
-
-    		// showGallery.empty();
-
-    		if (content.length) {
-    			showGallery.append(content);
-    			setTimeout(sizeImages(false), 50);	
+    		},
+    		error: function(){
+    			console.log("fail to get gallery data");
     		}
-
     	});
+
+
+    	// $.getJSON('data/gallery.json', function (data2){
+
+    	// 	var content = '';
+    	// 	var framei = -1;
+
+    	// 	galleryItems = data2.items;
+
+
+    	// 	var content = data2.items.map(function (item){
+
+
+    	// 		framei = (framei + 1) % frames.length;
+    	// 		item.frame = framei;
+    	// 		return makeItem(item, framei);
+
+    	// 	});
+
+    	// 	// showGallery.empty();
+
+    	// 	if (content.length) {
+    	// 		showGallery.append(content);
+    	// 		setTimeout(sizeImages(false), 50);	
+    	// 	}
+
+    	// });
     });
 
 }
@@ -304,7 +304,7 @@ function reOrder(sortMethod){
 		300, 
 		function() { 
 			$("#links a").detach();
-			$("#links").html(content);
+			$("#links").html(content);	
 			$("#links a").css({"opacity":0});
 			attachRating();
 		});
@@ -317,13 +317,12 @@ function reOrder(sortMethod){
 }
 
 function render(url){
-	
+		
 }
 
 function activePage(){
 	$(".nav li:eq(1) .menu-underline").addClass("active");
 }
-
 
 loadGallery();
 

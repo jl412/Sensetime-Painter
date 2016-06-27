@@ -29,7 +29,7 @@ function loadGallery() {
 
     //   if (content.length) {
     //     showGallery.html(content);
-    //   attachRating();
+    //   attachRating();　
     //   }
 
 
@@ -208,8 +208,8 @@ function loadGallery() {
     	// 	}
 
 
-    	// 	showGallery.find("h1").html(username);
-    	// });	
+    		showGallery.find("h1").html(username);
+    	});	
     });
 }
 
@@ -307,19 +307,19 @@ function sizeImages(animate){
 
 function sizeImage(frame, galleryItem, animate){
 	var iWidth = $("#links .gallery-thumb:eq("+ galleryItem +")").find("img").width();
-		var iHeight = $("#links .gallery-thumb:eq("+ galleryItem +")").find("img").height();
-		var proportion = iWidth  / frame.resWidth;
-		var paddingTop = frame.paddingTop* proportion;
-		var paddingLeft = frame.paddingLeft * proportion;
-		var paddingBottom = frame.paddingBottom * proportion;
-		var paddingRight = frame.paddingRight * proportion;
-		if (animate) {
-			$("#links .gallery-thumb:eq("+ galleryItem +")").find(".frame-inner").animate({width: iWidth + 'px', height: iHeight + 'px', "padding-top": paddingTop + 'px', "padding-top": paddingTop + 'px', "padding-bottom": paddingBottom + 'px', "padding-left": paddingLeft + 'px', "padding-right": paddingRight + 'px'}, 300);			
-		}else{
-			$("#links .gallery-thumb:eq("+ galleryItem +")").find(".frame-inner").css({width: iWidth + 'px', height: iHeight + 'px', "padding-top": paddingTop + 'px', "padding-top": paddingTop + 'px', "padding-bottom": paddingBottom + 'px', "padding-left": paddingLeft + 'px', "padding-right": paddingRight + 'px'});			
+	var iHeight = $("#links .gallery-thumb:eq("+ galleryItem +")").find("img").height();
+	var proportion = iWidth  / frame.resWidth;
+	var paddingTop = frame.paddingTop* proportion;
+	var paddingLeft = frame.paddingLeft * proportion;
+	var paddingBottom = frame.paddingBottom * proportion;
+	var paddingRight = frame.paddingRight * proportion;
+	if (animate) {
+		$("#links .gallery-thumb:eq("+ galleryItem +")").find(".frame-inner").animate({width: iWidth + 'px', height: iHeight + 'px', "padding-top": paddingTop + 'px', "padding-top": paddingTop + 'px', "padding-bottom": paddingBottom + 'px', "padding-left": paddingLeft + 'px', "padding-right": paddingRight + 'px'}, 300);			
+	}else{
+		$("#links .gallery-thumb:eq("+ galleryItem +")").find(".frame-inner").css({width: iWidth + 'px', height: iHeight + 'px', "padding-top": paddingTop + 'px', "padding-top": paddingTop + 'px', "padding-bottom": paddingBottom + 'px', "padding-left": paddingLeft + 'px', "padding-right": paddingRight + 'px'});			
 	}
 }
-
+	
 
 
 
