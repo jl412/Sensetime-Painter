@@ -141,16 +141,62 @@ function getResult(){
         window.location.hash = "#page3";
         $('.result-img').delay(600).css({"visibility":"visible"}).animate({opacity: "1"}, 700, "swing");
         $('.result-img').css({"background-image" : "url(" + resultImg + ")"});
-        $('#resultImgZoom img').attr("src", resultImg);
+        $('#resultImgZoom img').attr("src", resultImg); 
       },
       complete: function(){
         $('.loading.bar .progress-bar').stop(true, false);
-        $('.loading.bar .progress-bar').animate({width: "100%"}, 150);
+        $('.loading.bar .progress-bar').animate({width: "100%"}, 150);  
         $('.loading.bar').delay(150).hide("fade", 500, function(){
           $('.loading.bar .progress-bar').css({width: "0"});
         });
+      } 
+  }); 
+}
+
+function submitChanges(){ 
+    if ($("input[name=saveChanges]:checked").val() == "save") {
+      var formdata = {
+        "username": username,
+        "origin_id": res.id,
+        "style": styleCode,
+        "publicity": ($("input[name=saveChanges]:checked").val() === true)? 1:0,
+        "frame": currentFrame
       }
-  });
+
+      $.ajax({
+        url: "user/picmanage/publicity",
+        method: "post",
+        data:JSON.stringify(formdata),
+        success: function(response){
+          console.log(response.msg);
+        },
+        error: function(){
+          console.log("fail to modify");
+        }
+      });
+    }else{
+
+        var formdata = {
+          "username": username,
+          "origin_id": res.id,
+          "type":"painted",
+          "style": styleCode,
+          "publicity": ($("input[name=saveChanges]:checked").val() === true)? 1:0
+        };
+
+        $.ajax({
+          url: "user/picmanage/delete",
+          method: "post",
+          data:JSON.stringify(formdata),
+          success: function(response){
+            console.log(response.msg);
+            removeAnimation(item);
+          },
+          error: function(){
+            console.log("fail to remove");
+          }
+        });
+    }
 }
 
 
@@ -775,6 +821,7 @@ function render(url){
     // console.log($(currentPage).attr("value"));
     // console.log($(temp).attr("value"));
 
+    // if ((temp == '') || (temp == '#page3' && (typeof resultImg === "undefined")) ){
     if (temp == ''){
         temp = "#page0";
     }
@@ -785,10 +832,10 @@ function render(url){
             $(temp).show("slide", {direction: "right"}, 500);
         }else if ($(currentPage).attr("value") > $(temp).attr("value")) {
             $(currentPage).hide("slide", {direction: "right"}, 500);
-            $(temp).show("slide", {direction: "left"}, 500);
+            $(temp).show("slide", {direction: "left"}, 500); 
         }
     }else{
-        $(temp).show();
+      $(temp).show();
     }
 
     showImg();

@@ -171,6 +171,14 @@ a{
 	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/11.jpg");
 }
 
+.sub-form{
+	padding: 15px;
+}
+
+.sub-form label{
+	font-weight: 100;
+}
+
 .navbar{
 	position: absolute;
 	top: 0;
@@ -484,6 +492,7 @@ li:hover .menu-underline{
 }
 
 .dz-header{
+	position: relative;
 	height: 40px;
 	margin-top: -40px;
 }
@@ -1005,18 +1014,36 @@ li:hover .menu-underline{
 
 
 #page3 .save-changes {
-	cursor: pointer;
 	position: absolute;
-	font-size: 48px;
-	right: -50px;
-	bottom: 100px;
-	opacity: 0.7;
+	right: 30%;
+	top: 0;
+	cursor: pointer;
+	padding: 7px;
+	background-color: rgba(255,255,255, 0.7);
+	border-radius: 15px;
+	border: 2px solid rgba(255,255,255,0);
+/*	font-size: 36px;*/
+	z-index: 999;
+	color: #000;
+	transition: .3s;
+	-webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
 }
 
-#page .save-changes:hover {
-	opacity: 1;
+#page3 .save-changes:hover {
+	background: none;
+	border: 2px solid #fff;
+	color: #fff;
 }
 
+
+.userContent{
+	display: none;
+}
 /*.testEle{
 	position: absolute;
 	background-color: rgba(0,0,255, 0.6);
@@ -1118,11 +1145,9 @@ li:hover .menu-underline{
 
 	.frame-control .right{
 		right: -30px !important;
-	}
+	}	
 
-	.page-btn{
-
-		
+	.page-btn{	 	
 		font-size: 16px;
 	}
 
@@ -1137,6 +1162,15 @@ li:hover .menu-underline{
 
 	.style-thumbnail{
 		height: 90px;
+	}
+
+	#page3 .save-changes {
+		right: 10%;
+	}
+
+	#page3 .save-changes{
+		right: 10%;
+		font-size: 24px;
 	}
 
 }

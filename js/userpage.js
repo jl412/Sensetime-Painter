@@ -139,7 +139,7 @@ function loadGallery() {
       });
 
       $.ajax({
-    		url: "/user/picmanage/imglist",
+    		url: "user/picmanage/imglist",
     		method: "get",
     		contentType: "application/json",
     		success: function(galleryResponse){
@@ -208,8 +208,8 @@ function loadGallery() {
     	// 	}
 
 
-    		showGallery.find("h1").html(username);
-    	});	
+    	// 	showGallery.find("h1").html(username);
+    	// });	
     });
 }
 
@@ -239,22 +239,17 @@ function setGalleryClickEvent(){
 function removeUpload(item){
 	console.log("username::" + username);
 
-	var formdata = [{
+	var formdata = {
 		"username": username,
 		"origin_id": galleryItems[item.index(".gallery-thumb")].origin_id,
 		"type":"painted",
 		"style": galleryItems[item.index(".gallery-thumb")].style,
 		"publicity": galleryItems[item.index(".gallery-thumb")].public? 1:0
-	},{
-		"username":username,
-		"_id":galleryItems[item.index(".gallery-thumb")]._id,
-		"type":"origin",
-		"style":""
-	}];
+	};
     
 
   $.ajax({
-      url: "painter/paint",
+      url: "user/picmanage/delete",
       method: "post",
       data:JSON.stringify(formdata),
       success: function(response){
@@ -278,7 +273,7 @@ function removeAnimation(item){
     	
 function changeItemSetting(item){
 
-	formdata = {
+	var formdata = {
 		"username": username,
 		"origin_id": galleryItems[item.index(".gallery-thumb")].origin_id,
 		"style": galleryItems[item.index(".gallery-thumb")].style,
@@ -287,16 +282,16 @@ function changeItemSetting(item){
 	}
 
 	$.ajax({
-      url: "painter/paint",
+      url: "user/picmanage/publicity",
       method: "post",
       data:JSON.stringify(formdata),
       success: function(response){
       	console.log(response.msg);
       },
       error: function(){
-    	console.log("fail to remove");
+    	console.log("fail to modify");
       }
-  });
+  	});
 }
 
 function sizeImages(animate){

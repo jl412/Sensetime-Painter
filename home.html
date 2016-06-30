@@ -224,7 +224,7 @@
           <div class="valign-c page-padding contaier-fluid">
               <div class="row">
                 <div class="dz-header">
-                  <p>选择画框</p>
+                  <p>选择画框</p> <div class="save-changes userContent"  data-toggle = "modal" data-target = "#saveChangeModel" id="saveChangeToggle">保存 / 刪除</div>
                 </div>
                 <div class="frame-wrapper" id="show-frame">
                   <div class="frame-control">
@@ -236,12 +236,10 @@
                       <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                       <span class="sr-only">Next</span>
                     </a>
-                    <div class="save-changes"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span></div>
                   </div>
                 </div>
                 
               </div>
-
             </div>
         </div>
 
@@ -277,7 +275,37 @@
           </div>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="resultImgZoom" tabindex="-1" role="dialog" aria-labelledby="resultImageLebal">
+        <div class="modal fade userContent" id="resultImgZoom" tabindex="-1" role="dialog" aria-labelledby="resultImageLebal">
+        </div>
+
+        <div class="modal fade" id="saveChangeModel" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
+          <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+
+              <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>  
+                <div class="clearfloat"></div>
+                <div class="container-fluid">
+                  <div class="row">
+                    <label class="col-xs-6" style="border-right: 1px solid #e5e5e5">
+                      <input name="saveChanges" type="radio" value="save" checked/>保存設定
+                      <form class="sub-form">
+                        <label><input type="radio" name="publicity" value="true" checked>公開</label><br/>
+                        <label><input type="radio" name="publicity" value="false">非公開</label>
+                      </form>
+                    </label>
+                    <label class="col-xs-6">
+                      <input name="saveChanges" type="radio" value="delete"/>刪除
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <a id="save-btn" class="btn btn-primary btn-block" data-dismiss = "modal">保存修改</a>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="switch-to-scene hidden-xs hidden-sm" role="button">
@@ -297,7 +325,7 @@
               <a class="right carousel-control" href="#scene-carousel" role="button" data-slide="next">
                 <span class="glyphicon glyphicon-chevron-right"></span>
               </a>
-            </div><!-- /carousel-inner -->
+            </div><!-- /carousel-inner -->  
             
           </div>
         </div>
@@ -314,7 +342,7 @@
 
   	</div>
 
-    <!-- JQuery -->
+    <!-- JQuery --> 
   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
   <script src="js/ajax.js"></script>
   <script src="js/painter-ch.js"></script>
