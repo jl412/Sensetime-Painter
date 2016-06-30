@@ -992,6 +992,10 @@ function activePage(){
 }
 
 
+$("#save-btn").click(function(){
+  submitChanges();
+});
+
 zoomImgModal();
 setScene();
 setFrame();
