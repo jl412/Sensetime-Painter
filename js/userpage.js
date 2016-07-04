@@ -44,7 +44,7 @@ function loadGallery() {
 
   var showFrame = $('#show-frame');
 
-  $.getJSON('data/frame.json', function (data) {
+  $.getJSON('../data/frame.json', function (data) {
 
       console.log(data);
 
@@ -93,7 +93,7 @@ function loadGallery() {
           paddingLeft: data.items[i].padding.left,
           paddingBottom: data.items[i].padding.bottom,
           paddingRight: data.items[i].padding.right,
-          frameImg: data.items[i].frameImg
+          frameImg: trimUrl(data.items[i].frameImg) 
         };
         
 
@@ -105,11 +105,11 @@ function loadGallery() {
           wrapperWidth = displayWidth;
         }
 
-        content += '<div class="frame-item-container nodisplay" id="frame' + i + '"><div class="frame-item" style="width:' + displayWidth  + 'px; height:' + displayHeight + 'px; background-image: url(\''+ data.items[i].frameImg + '\')"></div><div class="framebase" style="width:' + (frames[i].contentWidth + 6) + 'px; height:' + (frames[i].contentHeight + 6) + 'px;"></div></div>';
+        content += '<div class="frame-item-container nodisplay" id="frame' + i + '"><div class="frame-item" style="width:' + displayWidth  + 'px; height:' + displayHeight + 'px; background-image: url(\''+ frames[i].frameImg + '\')"></div><div class="framebase" style="width:' + (frames[i].contentWidth + 6) + 'px; height:' + (frames[i].contentHeight + 6) + 'px;"></div></div>';
         if (i % itemInRow == 0) {
           previewContent += '<div class="item" id="row' + Math.floor(i / itemInRow) + '">';
         };
-        previewContent += '<div class="frame-thumb-wrapper"><div class="thumb" value="' + i + '" style="background-image: url(\''+ data.items[i].frameImg + '\')"></div></div>';
+        previewContent += '<div class="frame-thumb-wrapper"><div class="thumb" value="' + i + '" style="background-image: url(\''+ frames[i].frameImg + '\')"></div></div>';
         if ( ( (i + 1) % itemInRow == 0) || ( (i + 1) ==  numOfFrame) ) {
           previewContent += '</div>';
         };
@@ -175,7 +175,7 @@ function loadGallery() {
     		}
     	});
 
-    	// $.getJSON('data/gallery.json', function (data2){
+    	// $.getJSON('../data/gallery.json', function (data2){
 
     	// 	var content = '';
     	// 	var framei = -1;
@@ -189,6 +189,8 @@ function loadGallery() {
     	// 		framei = (framei + 1) % frames.length;
     	// 		item.frame = framei;
     	// 		item.public = true;
+    	// 		item.thumbImg = trimUrl(item.thumbImg);
+    	// 		item.sourceImg = trimUrl(item.sourceImg);
     	// 		return makeItem(item);
 
     	// 	});
@@ -208,8 +210,8 @@ function loadGallery() {
     	// 	}
 
 
-    	// 	showGallery.find("h1").html(username);
-    	// });	
+    		showGallery.find("h1").html(username);
+    	});	
     });
 }
 
@@ -520,6 +522,10 @@ function moveFrameRight(frameToShow){
   currentFrame = frameToShow; 
 }
 
+function trimUrl(url){
+	return '../' + url;
+}
+
 
 $('#show-frame .right').click(function(event){
 	event.stopPropagation();
@@ -568,6 +574,30 @@ $('#sortby').change(function(){
 $("#links h1").click(function(){
 	console.log("username-test:" + username);
 })
+
+$(".nav-container").load("../nav.html", function(){
+    activePage();
+    // $("#user-login").removeAttr("data-target").html(username).attr({"data-toggle":"dropdown", "aria-haspopup":"true", "aria-expanded":"false"}).addClass("dropdown-toggle");
+    // $("#user-login").parent().addClass("dropdown"); 
+
+    // ADD SLIDEDOWN ANIMATION TO DROPDOWN //
+
+    getUserInfo();
+
+
+    $("#login-btn").click(function(){
+        login();
+    });
+
+    $("#signup-btn").click(function(){
+        signup();
+    });
+
+    $("#logout").click(function(){
+        logout();
+    })
+
+});
 
 $(window).resize(function(){
 	sizeImages(false);
