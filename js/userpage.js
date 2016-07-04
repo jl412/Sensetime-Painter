@@ -210,8 +210,8 @@ function loadGallery() {
     	// 	}
 
 
-    		showGallery.find("h1").html(username);
-    	});	
+    	// 	showGallery.find("h1").html(username);
+    	// });	
     });
 }
 
